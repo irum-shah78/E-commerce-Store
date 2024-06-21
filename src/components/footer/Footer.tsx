@@ -1,11 +1,26 @@
 import React from 'react';
-import "../../styles/Footer.css";
+import "../../custom.d.ts"
+import "../../styles/Footer.css"
+import share from "../../assets/icons/share.svg"
+import headphone from "../../assets/icons/headphone.svg"
 
 const Footer = () => {
   return (
     <>
       <footer className="bg-white footer-main">
-        <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div className="px-14 py-4 p-6">
+          <div className='bg-white mt-4 flex items-center justify-around h-36 w-90 rounded-xl'>
+            <h2 className='footer-heading font-bold text-2xl'>Subscribe newsletter</h2>
+            <div className='flex items-center'>
+                <input type="email" className='rounded-xl relative px-8 py-3 text-white font-sm' placeholder='Email address' />
+                <img src={share} alt="email" className='absolute px-6 py-3 cursor-pointer translate-x-52' />
+            </div>
+            <div className='flex items-center text-xs font-semibold contact'>
+            <img src={headphone} alt='headphone' />
+            <p className='ms-4'>Call us 24/7:<br/> (+62) 0123 567 789</p>
+            </div>
+          </div>
+
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <a href="https://flowbite.com/" className="flex items-center">
