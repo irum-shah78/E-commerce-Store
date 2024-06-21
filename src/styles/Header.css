@@ -1,0 +1,18 @@
+.header-nav{
+  background-color: rgba(0, 63, 98, 1);
+}
+button{
+  background: rgba(237, 164, 21, 1);
+}
+input[type="search"]:focus {
+  border-color: rgba(237, 164, 21, 1);
+  outline: none;
+}
+input[type="search"]::placeholder {
+  color: black;
+}
+.circle-dot{
+  background: rgba(237, 164, 21, 1);
+  height: 15px;
+  width: 15px;
+}
