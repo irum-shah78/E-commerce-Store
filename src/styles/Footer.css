@@ -1,7 +1,7 @@
 .footer-main{
   background: rgba(226, 244, 255, 1);
 }
-.footer-heading{
+ p, li, h2, .footer-heading{
   color: rgba(0, 63, 98, 1);
 }
 input[type="email"]{
@@ -14,4 +14,7 @@ input[type="email"]::placeholder {
 }
 .contact{
   color: rgba(96, 96, 96, 1);
+}
+li::marker {
+  color: rgba(217, 217, 217, 1);
 }
