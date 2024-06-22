@@ -1,11 +1,9 @@
-import Footer from "./components/footer/Footer.tsx";
-import Header from "./components/header/Header.tsx";
+import HomePage from "./pages/home/HomePage.tsx";
 
 function App() {
   return (
     <>
-    <Header/>
-    <Footer />
+   <HomePage />
     </>
   );
 }

@@ -1,7 +1,7 @@
 .header-nav{
   background-color: rgba(0, 63, 98, 1);
 }
-button{
+.search-btn{
   background: rgba(237, 164, 21, 1);
 }
 input[type="search"]:focus {

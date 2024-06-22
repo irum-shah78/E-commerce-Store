@@ -1,0 +1,43 @@
+p{
+  color: rgba(0, 63, 98, 1);
+}
+.shop-now-btn{
+  background: rgba(237, 164, 21, 1);
+}
+.view-more-btn{
+  color: rgba(0, 63, 98, 1);
+  border: 1px solid rgba(0, 63, 98, 1);
+}
+.ellipse-1{
+  background-color: rgba(237, 164, 21, 1);
+}
+.ellipse-2, .ellipse-3{
+  border: 1px solid rgba(173, 173, 173, 1);
+  background-color: transparent;
+}
+.canon-price{
+  background-color: rgba(237, 164, 21, 1);
+}
+.card{
+  border: 1px solid rgba(165, 165, 165, 1);
+}
+.arrow{
+  background-color: rgba(234, 234, 234, 1);
+}
+.product-btn-1{
+  color: rgba(27, 90, 125, 1);
+  border: 1px solid rgba(27, 90, 125, 1);
+}
+.product-btn{
+  color: rgba(27, 90, 125, 1);
+  border: 1px solid rgba(173, 173, 173, 1);
+}
+.product-card{
+  border: 1px solid rgba(182, 182, 182, 1);
+}
+.favorite-product{
+  background-color: rgba(179, 212, 229, 1);
+}
+.favorite-icon{
+  color: rgba(41, 45, 50, 1);
+}

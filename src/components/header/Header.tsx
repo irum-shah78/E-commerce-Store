@@ -11,9 +11,9 @@ import cart from "../../assets/icons/shopping-cart.svg";
 const Header = () => {
   return (
     <header className='text-sm'>
-      <div className='flex justify-between px-14 py-4'>
+      <div className='flex flex-row justify-between px-14 py-4'>
         <p>Need help? Call us: (+98) 0234 456 789</p>
-        <div className='flex cursor-pointer'>
+        <div className='flex cursor-pointer md:justify-end'>
           <img className="px-3 w-10" src={location} alt="logo" />
           Our store
           <img className="px-3 w-10" alt="track" src={track} />
@@ -27,7 +27,7 @@ const Header = () => {
           <div className='flex'>
             <div className='relative'>
               <input type="search" placeholder='Search anything' className='relative rounded-xl p-3 pl-6 w-80' />
-              <button className='absolute text-white font-semibold rounded-xl px-6 py-3 focus:outline-none right-0'>Search</button>
+              <button className='absolute text-white font-semibold rounded-xl px-6 py-3 focus:outline-none right-0 search-btn'>Search</button>
             </div>
           </div>
 
