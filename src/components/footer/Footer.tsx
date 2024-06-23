@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-white footer-main">
-        <div className="px-14 py-4 p-6">
+        <div className="px-32 py-4 p-6">
           <div className='bg-white mt-4 flex items-center justify-around h-36 w-90 rounded-xl'>
             <p className='footer-heading font-bold text-2xl'>Subscribe newsletter</p>
 

@@ -11,7 +11,7 @@ import cart from "../../assets/icons/shopping-cart.svg";
 const Header = () => {
   return (
     <header className='text-sm'>
-      <div className='flex flex-row justify-between px-14 py-4'>
+      <div className='flex flex-row justify-between px-32 py-4'>
         <p>Need help? Call us: (+98) 0234 456 789</p>
         <div className='flex cursor-pointer md:justify-end'>
           <img className="px-3 w-10" src={location} alt="logo" />
@@ -22,7 +22,7 @@ const Header = () => {
       </div>
 
       <nav>
-        <div className='header-nav flex items-center justify-between px-14 py-6'>
+        <div className='header-nav flex items-center justify-between px-32 py-6'>
           <img alt='logo' src={logo} />
           <div className='flex'>
             <div className='relative'>
@@ -52,7 +52,7 @@ const Header = () => {
 
 
       <nav className="bg-gray-200 border-none">
-        <div className="flex items-center justify-between px-14">
+        <div className="flex items-center justify-between px-32">
           <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" className="text-white bg-yellow-500 focus:outline-none font-semibold text-sm p-4 text-center inline-flex items-center dark:hover:bg-yellow-500" type="button">
             Browse Categories
             <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">

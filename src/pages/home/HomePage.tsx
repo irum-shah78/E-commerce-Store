@@ -10,15 +10,19 @@ import laptop from "../../assets/images/laptop.png"
 import dslr from "../../assets/images/dslr.png"
 import rightArrow from "../../assets/icons/arrow-right.svg"
 import camera from "../../assets/images/camera.png"
-// import headphone from "../../assets/images/wireless-headphones.png"
-// import playGame from "../../assets/images/play-games.png"
-import heart from "../../assets/icons/heart.svg"
+import headphone from "../../assets/images/wireless-headphones.png"
+import playGame from "../../assets/images/play-games.png"
+import heart from "../../assets/icons/heart.png"
+import cart from "../../assets/icons/shopping-cart.svg"
+import eye from "../../assets/icons/eye.svg"
+import vector from "../../assets/icons/Vector.svg"
+import sale from "../../assets/images/sale.png"
 
 const HomePage = () => {
   return (
     <>
       <Header />
-      <div className="px-20 py-4 p-6">
+      <div className="px-32 py-4 p-6">
         <section>
           <div className="flex items-center justify-around mt-4">
             <div>
@@ -77,9 +81,9 @@ const HomePage = () => {
           </div>
         </section>
 
-        <section className="mt-8">
+        <section className="mt-16">
           <div className="flex justify-between items-center">
-            <p className="font-bold text-xl">Popular products</p>
+            <p className="font-bold text-2xl">Popular products</p>
             <div className="flex items-center gap-4">
               <button className="rounded-2xl px-6 py-2 font-semibold text-sm product-btn-1">Cameras</button>
               <button className="rounded-2xl px-6 py-2 font-semibold text-sm product-btn">Laptops</button>
@@ -89,14 +93,169 @@ const HomePage = () => {
           </div>
         </section>
 
-        <section>
-          <div className="flex items-center">
-            <div className="rounded-2xl w-80 h-80 product-card">
-              <img className="w-36 h-30" src={camera} alt="camera" />
-              <div className="rounded-full w-4 h-4 favorite-product"><img src={heart} alt="heart" className="favorite-icon" /></div>
+        <section className="mt-10">
+          <div className="flex items-center justify-between cursor-pointer">
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={camera} alt="camera" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="flex justify-between mt-7">
+                <div className=" flex justify-between gap-4 rounded-xl ms-2 px-5 py-3 cursor-pointer add-to-cart">
+                  <p className="text-black font-semibold">Add to cart</p>
+                  <div className="cart-btn h-6 w-6 rounded-full p-0.5 text-center">
+                    <button><img alt="cart" src={cart} className="w-4 h-4" /></button>
+                  </div>
+                </div>
+                <div className="rounded-xl eye-icon px-4 py-2 mr-2 p-0.5 text-center cursor-pointer"><img src={eye} alt="eye" /></div>
+              </div>
             </div>
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={headphone} alt="headphone" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Wireless headphones</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={playGame} alt="playGame" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Play game</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={laptop} alt="laptop" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Tablet as a aptop</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
+
+        <section className="mt-6">
+          <div className="flex items-center justify-between cursor-pointer">
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={headphone} alt="headphone" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Wireless headphones</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={playGame} alt="playGame" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Play game</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={laptop} alt="laptop" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Tablet as a aptop</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={playGame} alt="playGame" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Play game</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <div className="flex justify-center gap-2 mt-10 items-center">
+          <div className="rounded-full w-4 h-4 ellipse-1"></div>
+          <div className="rounded-full w-4 h-4 ellipse-2"></div>
+          <div className="rounded-full w-4 h-4 ellipse-3"></div>
+        </div>
+
+        <div>
+          <img src={sale} alt="sale" />
+        </div>
 
       </div>
 
