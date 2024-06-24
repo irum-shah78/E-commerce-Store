@@ -254,7 +254,13 @@ const HomePage = () => {
         </div>
 
         <div>
-          <img src={sale} alt="sale" />
+          <img src={sale} alt="sale" className="mb-12 realtive"/>
+          <div className="absolute">
+          <button className="rounded-xl text-white text-xs px-6 py-4 shop-now-btn">Shop now</button>
+          <p>Sale upto 50% off</p>
+          <p>12 inch hd display</p>
+          <button className="rounded-xl text-white text-xs px-6 py-4 shop-now-btn">Shop now</button>
+          </div>
         </div>
 
       </div>
