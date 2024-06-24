@@ -17,12 +17,15 @@ import cart from "../../assets/icons/shopping-cart.svg"
 import eye from "../../assets/icons/eye.svg"
 import vector from "../../assets/icons/Vector.svg"
 import sale from "../../assets/images/sale.png"
+import speakers from "../../assets/images/speakers.png"
 
 const HomePage = () => {
   return (
     <>
       <Header />
       <div className="px-32 py-4 p-6">
+
+        {/* HERO SECTION */}
         <section>
           <div className="flex items-center justify-around mt-4">
             <div>
@@ -34,9 +37,9 @@ const HomePage = () => {
               </div>
 
               <div className="flex justify-center gap-2 mt-8 items-center">
-                <div className="rounded-full w-4 h-4 ellipse-1"></div>
-                <div className="rounded-full w-4 h-4 ellipse-2"></div>
-                <div className="rounded-full w-4 h-4 ellipse-3"></div>
+                <div className="rounded-full w-4 h-4 ellipse-1 cursor-pointer"></div>
+                <div className="rounded-full w-4 h-4 ellipse-2 cursor-pointer"></div>
+                <div className="rounded-full w-4 h-4 ellipse-3 cursor-pointer"></div>
               </div>
             </div>
 
@@ -45,7 +48,10 @@ const HomePage = () => {
               <div className="canon-price text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $89</div>
             </div>
           </div>
+        </section>
 
+        {/* PRODUCTS SECTION */}
+        <section>
           <div className="flex justify-around items-center mt-6">
             <div className="flex items-center justify-around rounded-xl w-80 h-32 card relative">
               <div className="rounded-full w-8 h-8 text-center p-1 cursor-pointer arrow absolute -inset-x-4">
@@ -81,6 +87,7 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* POPULAR PRODUCTS - HEADING*/}
         <section className="mt-16">
           <div className="flex justify-between items-center">
             <p className="font-bold text-2xl">Popular products</p>
@@ -93,6 +100,7 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* POPULAR PRODUCTS */}
         <section className="mt-10">
           <div className="flex items-center justify-between cursor-pointer">
 
@@ -247,21 +255,101 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* ELLIPSES */}
         <div className="flex justify-center gap-2 mt-10 items-center">
-          <div className="rounded-full w-4 h-4 ellipse-1"></div>
-          <div className="rounded-full w-4 h-4 ellipse-2"></div>
-          <div className="rounded-full w-4 h-4 ellipse-3"></div>
+          <div className="rounded-full w-4 h-4 ellipse-1 cursor-pointer"></div>
+          <div className="rounded-full w-4 h-4 ellipse-2 cursor-pointer"></div>
+          <div className="rounded-full w-4 h-4 ellipse-3 cursor-pointer"></div>
         </div>
 
-        <div>
-          <img src={sale} alt="sale" className="mb-12 realtive"/>
-          <div className="absolute">
-          <button className="rounded-xl text-white text-xs px-6 py-4 shop-now-btn">Shop now</button>
-          <p>Sale upto 50% off</p>
-          <p>12 inch hd display</p>
-          <button className="rounded-xl text-white text-xs px-6 py-4 shop-now-btn">Shop now</button>
+        {/* SALES SECTION */}
+        <section>
+          <div className="relative mt-12 mb-12">
+            <img src={sale} alt="sale" className="object-cover w-full h-full" />
+            <div className="absolute inset-y-0 right-0 flex flex-col items-center justify-center space-y-4 p-4 pr-28">
+              <button className="rounded-2xl text-white text-xs px-4 py-2 shop-now-btn">New laptop</button>
+              <p className="text-4xl font-bold" style={{ color: 'rgba(46, 143, 197, 1)' }}>Sale up to 50% off</p>
+              <p className="text-white">12 inch hd display</p>
+              <button className="rounded-2xl text-white text-xs px-4 py-2 shop-now-btn">Shop now</button>
+            </div>
           </div>
-        </div>
+        </section>
+
+        {/* PRODUCTS */}
+        <section className="flex justify-between mt-12">
+          <div className="rounded-2xl product-card">
+            <div className="flex justify-around items-center ">
+              <img className="object-cover" src={speakers} alt="speakers" />
+              <div className="p-4 leading-normal">
+                <p className="font-semibold text-lg">JBL bar 2.1 deep bass</p>
+                <p className="font-semibold text-gray-600 mt-4">$11,70</p>
+                <div className="flex gap-2 mt-4">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+                <div className="flex mt-6 gap-2">
+                  <button className="rounded-full h-14 w-14 font-semibold size-btn">57</button>
+                  <button className="rounded-full h-14 w-14 font-semibold size-btn">11</button>
+                  <button className="rounded-full h-14 w-14 font-semibold size-btn">33</button>
+                  <button className="rounded-full h-14 w-14 font-semibold size-btn">59</button>
+                </div>
+                <div className="flex justify-between items-center mt-7">
+                  <div className=" flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer add-to-cart">
+                    <p className="text-black font-semibold">Add to cart</p>
+                    <div className="cart-btn h-6 w-6 rounded-full p-0.5 text-center">
+                      <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
+                    </div>
+                  </div>
+                  <div className="rounded-2xl eye-icon px-5 py-3 mr-2 text-center cursor-pointer"><img src={eye} alt="eye" /></div>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center gap-2 items-center pb-6">
+              <div className="rounded-full w-4 h-4 ellipse-1 cursor-pointer"></div>
+              <div className="rounded-full w-4 h-4 ellipse-2 cursor-pointer"></div>
+            </div>
+          </div>
+
+          <div className="">
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex justify-around items-center mt-6">
+                <img className="w-36 h-30" src={playGame} alt="playGame" />
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Play game</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl w-64 h-64 product-card">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-36 h-30" src={laptop} alt="laptop" />
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm">Tablet as a aptop</p>
+                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
 
       </div>
 
