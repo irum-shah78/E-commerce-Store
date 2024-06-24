@@ -38,16 +38,21 @@ p{
 .favorite-product{
   background-color: rgba(179, 212, 229, 1);
 }
-.add-to-cart{
+.add-to-cart,
+.eye-icon{
   background-color: rgba(135, 188, 217, 1);
 }
 .cart-btn{
   background-color: rgba(237, 164, 21, 1);
 }
-.eye-icon{
-  background-color: rgba(135, 188, 217, 1);
-}
 .size-btn{
   color: rgba(237, 164, 21, 1);
   background-color: rgba(226, 244, 255, 1);
+}
+.features,
+.review-text{
+  background-color: rgba(226, 244, 255, 1);
+}
+.review-pic{
+  border-color: rgba(237, 164, 21, 1);
 }
