@@ -462,40 +462,38 @@ const HomePage = () => {
             <p>View all</p>
           </div>
 
-          <div className="rounded-2xl product-card">
-            <div className="flex justify-around items-center ">
-              <img className="object-cover" src={blogOne} alt="speakers" />
-              <div className="p-4 leading-normal">
-                <p className="font-semibold text-lg">JBL bar 2.1 deep bass</p>
-                <p className="font-semibold text-gray-600 mt-4">$11,70</p>
-                <div className="flex gap-2 mt-4">
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                </div>
-                <div className="flex mt-6 gap-2">
-                  <button className="rounded-full h-14 w-14 font-semibold size-btn">57</button>
-                  <button className="rounded-full h-14 w-14 font-semibold size-btn">11</button>
-                  <button className="rounded-full h-14 w-14 font-semibold size-btn">33</button>
-                  <button className="rounded-full h-14 w-14 font-semibold size-btn">59</button>
-                </div>
-                <div className="flex justify-between items-center mt-7">
-                  <div className=" flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer add-to-cart">
-                    <p className="text-black font-semibold">Add to cart</p>
-                    <div className="cart-btn h-6 w-6 rounded-full p-0.5 text-center">
-                      <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
-                    </div>
-                  </div>
-                  <div className="rounded-2xl eye-icon px-5 py-3 mr-2 text-center cursor-pointer"><img src={eye} alt="eye" /></div>
+          <div className="flex justify-between gap-6 mt-12">
+            <div className="rounded-2xl p-8 product-card">
+              <div className="flex justify-between items-center gap-6">
+                <img className="object-cover" src={blogOne} alt="speakers" />
+                <div className="leading-normal text-wrap gap-4">
+                  <button className="news-btn p-2 rounded-3xl">20 Oct, 2021</button>
+                  <p className="font-semibold text-2xl mt-4">Who avoids a pain that produces?</p>
+                  <p className="text-sm mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
+                  <p className="text-sm mt-4">By spacing tech</p>
                 </div>
               </div>
             </div>
-            <div className="flex justify-center gap-2 items-center pb-6">
-              <div className="rounded-full w-4 h-4 ellipse-1 cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 ellipse-2 cursor-pointer"></div>
+
+            <div className="rounded-2xl p-8 product-card">
+              <div className="flex justify-between items-center gap-6">
+                <img className="object-cover" src={blogTwo} alt="speakers" />
+                <div className="leading-normal text-wrap gap-4">
+                  <button className="news-btn p-2 rounded-3xl">20 Oct, 2021</button>
+                  <p className="font-semibold text-2xl mt-4">Who avoids a pain that produces?</p>
+                  <p className="text-sm mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
+                  <p className="text-sm mt-4">By spacing tech</p>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div className="flex justify-center gap-2 mt-10 items-center">
+            <div className="rounded-full w-4 h-4 ellipse-1 cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 ellipse-2 cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 ellipse-3 cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 ellipse-3 cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 ellipse-3 cursor-pointer"></div>
           </div>
         </section>
 

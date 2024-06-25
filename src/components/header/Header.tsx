@@ -1,5 +1,6 @@
 import React from 'react';
 import "../../custom.d.ts"
+// import { Link } from 'react-router-dom';
 import "../../styles/Header.css"
 import location from "../../assets/icons/location.svg";
 import track from "../../assets/icons/track.svg";
@@ -58,6 +59,11 @@ const Header = () => {
             <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
             </svg>
+            {/* {categories.map(category => (
+          <li key={category}>
+            <Link to={`/category/${category}`}>{category}</Link>
+          </li>
+        ))} */}
           </button>
 
           <div className='flex items-center'>
