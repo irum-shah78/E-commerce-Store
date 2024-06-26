@@ -1,47 +1,114 @@
-// import React from "react";
-// import Header from "../../components/header/Header.tsx";
-// // import Footer from "../../components/footer/Footer.tsx";
+// import React, { useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getCategories, getProductsByCategory } from '../../store/ProductSlice.ts';
+// import { AppDispatch, RootState } from '../../store/index.ts';
+// import Header from '../../components/header/Header.tsx';
+// import Footer from '../../components/footer/Footer.tsx';
+// import ProductCard from '../../components/productCard/ProductCard.tsx';
 
-// const CategoryPage = ()=>{
-// return (
-//   <>
-//   <Header />
-//   {/* <Footer /> */}
-//   </>
-// )
-// }
+// const CategoryPage: React.FC = () => {
+//   const dispatch = useDispatch<AppDispatch>();
+//   const { categories, products, loading, error } = useSelector((state: RootState) => state.products);
+
+//   useEffect(() => {
+//     dispatch(getCategories());
+//   }, [dispatch]);
+
+//   const handleCategoryClick = (category: string) => {
+//     dispatch(getProductsByCategory(category));
+//   };
+
+//   return (
+//     <>
+//       <Header />
+//       <div className="categories">
+//         <h2>Categories</h2>
+//         {loading && <p>Loading...</p>}
+//         {error && <p>{error}</p>}
+//         <ul>
+//           {categories.map((category) => (
+//             <li key={category} onClick={() => handleCategoryClick(category)}>
+//               {category}
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//       <div className="products">
+//         <h2>Products</h2>
+//         {loading && <p>Loading...</p>}
+//         {error && <p>{error}</p>}
+//         <div className="product-list">
+//           {products.map((product) => (
+//             <ProductCard key={product.id} {...product} />
+//           ))}
+//         </div>
+//       </div>
+//       <Footer />
+//     </>
+//   );
+// };
 
 // export default CategoryPage;
 
+
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories, getProductsByCategory } from '../../store/ProductSlice.ts';
+import { AppDispatch, RootState } from '../../store';
+import Header from '../../components/header/Header.tsx';
+import Footer from '../../components/footer/Footer.tsx';
 import ProductCard from '../../components/productCard/ProductCard.tsx';
 
-const CategoryPage: React.FC = () => {
-  const { category } = useParams();
-  const [products, setProducts] = useState([]);
 
-  fetch('https://fakestoreapi.com/products/categories')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
+const CategoryPage: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { categories, products, loading, error } = useSelector((state: RootState) => state.products);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
   useEffect(() => {
-    axios.get(`https://fakestoreapi.com/products/category/${category}`).then(response => setProducts(response.data));
-  }, [category]);
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      dispatch(getProductsByCategory(selectedCategory));
+    }
+  }, [selectedCategory, dispatch]);
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
 
   return (
-    <div>
-      <h2 className="text-2xl my-4">Category: {category}</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {products.map(product => (
-          <ProductCard key={product.id} {...product} />
-        ))}
+    <>
+      <Header />
+      <div className="category-page">
+        <aside className="categories">
+          <h2>Categories</h2>
+          {loading && <p>Loading...</p>}
+          {error && <p>{error}</p>}
+          <ul>
+            {categories.map((category) => (
+              <li key={category} onClick={() => handleCategoryClick(category)}>
+                {category}
+              </li>
+            ))}
+          </ul>
+        </aside>
+        <main className="products">
+          <h2>Products</h2>
+          {loading && <p>Loading...</p>}
+          {error && <p>{error}</p>}
+          <div className="product-list">
+            {products.map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))}
+          </div>
+        </main>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
 export default CategoryPage;
-
-
