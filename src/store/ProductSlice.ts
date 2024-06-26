@@ -42,8 +42,13 @@ export const getCategories = createAsyncThunk('products/getCategories', async ()
 });
 
 export const getProductsByCategory = createAsyncThunk('products/getProductsByCategory', async (category: string) => {
-  const products = await fetchProductsByCategory(category);
-  return products;
+  if (category === 'all') {
+    const products = await fetchProducts();
+    return products;
+  } else {
+    const products = await fetchProductsByCategory(category);
+    return products;
+  }
 });
 
 const productSlice = createSlice({
@@ -110,3 +115,4 @@ const productSlice = createSlice({
 export const { setProduct } = productSlice.actions;
 
 export default productSlice.reducer;
+
