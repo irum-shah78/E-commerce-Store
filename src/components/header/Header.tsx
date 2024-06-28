@@ -7,9 +7,7 @@ import user from "../../assets/icons/user.svg";
 import heart from "../../assets/icons/heart.svg";
 import cart from "../../assets/icons/shopping-cart.svg";
 
-const categories = ["All categories"];
-
-const Header = () => {
+const Header: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -78,13 +76,11 @@ const Header = () => {
             </button>
             {dropdownOpen && (
               <ul className="absolute left-0 w-full bg-white shadow-lg rounded-lg p-2 z-10">
-                {categories.map(category => (
-                  <li key={category} className="p-2 hover:bg-gray-200">
-                    <Link to={`/category/${category}`} onClick={() => setDropdownOpen(false)}>
-                      {category}
-                    </Link>
-                  </li>
-                ))}
+                <li className="p-3 hover:bg-gray-100">
+                  <Link to={`/category/all`} onClick={() => setDropdownOpen(false)}>
+                    All categories
+                  </Link>
+                </li>
               </ul>
             )}
           </div>

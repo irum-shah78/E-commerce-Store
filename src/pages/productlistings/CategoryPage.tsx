@@ -75,7 +75,7 @@ const CategoryPage: React.FC = () => {
                 onClick={handleReset}>Reset</button>
             </div>
             {loading && <p className='text-center'>Loading...</p>}
-            {error && <p>{error}</p>}
+            {error && <p className='text-center'>{error}</p>}
             <ul className="space-y-2">
               <li>
                 <label className="flex items-center justify-between">
@@ -252,7 +252,7 @@ const CategoryPage: React.FC = () => {
 
           <main className="products">
             {loading && <p className='text-center'>Loading...</p>}
-            {error && <p>{error}</p>}
+            {error && <p className='text-center'>{error}</p>}
             <div className="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {products.map((product) => (
                 <ProductCard key={product.id} {...product} />
