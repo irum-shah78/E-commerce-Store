@@ -17,8 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, title, price, image }) =>
         <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue ms-2"><img src={heart} alt="heart" /></div>
       </div>
       <div className=" mt-1">
-        <p className="mt-2 font-semibold text-xs text-customBlue ">{title}</p> 
-        {/* truncate w-40 */}
+        <p className="mt-2 font-semibold text-xs text-customBlue truncate w-40">{title}</p>
         <p className="mt-2 font-semibold text-gray-600 text-sm">${price}</p>
         <Link className="rounded-lg text-white text-xs bg-customYellow p-2 mt-3 inline-block" to={`/product/${id}`}>
           View Details

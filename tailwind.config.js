@@ -19,6 +19,7 @@ module.exports = {
         customLightBlue: 'rgba(226, 244, 255, 1)',
         customMarker: 'rgba(217, 217, 217, 1)',
         lightBlue: 'rgba(179, 212, 229, 1)',
+        Gray: 'rgba(74, 74, 74, 1)'
       },
     },
   },
