@@ -18,11 +18,6 @@ export const fetchCategories = async () => {
   return response.data;
 };
 
-// export const fetchProductsByCategory = async (category: string) => {
-//   const response = await axios.get(`${API_URL}/products/category/${category}?limit=12`);
-//   return response.data;
-// };
-
 export const fetchProductsByCategory = async (category: string) => {
   const response = await axios.get(`${API_URL}/products/category/${category}`);
   return response.data;
