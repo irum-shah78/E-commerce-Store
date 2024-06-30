@@ -61,7 +61,7 @@ const ProductDetails: React.FC = () => {
                 <img className="w-96 h-96" src={product.image} alt={product.title} />
               </div>
               <div className="p-6 flex-1">
-                <h1 className="text-2xl font-semibold mb-2 text-customBlue">{product.title}</h1>
+                <h1 className="text-2xl mb-2 text-customBlue">{product.title}</h1>
                 <p className="text-lg mb-2 text-Gray font-semibold">${product.price}</p>
                 <div className="flex items-center mb-2">
                   <div className="text-yellow-400 flex gap-2">
@@ -78,7 +78,7 @@ const ProductDetails: React.FC = () => {
                   <img src={vector} alt='tick' className='w-5 h-3 mt-2 ml-4' />
                   <p className="text-green-600 mb-2 ml-2">In stock</p>
                 </div>
-                <p className="text-gray-500 mb-4">Hurry up! Only 34 products left in stock!</p>
+                <p className="text-gray-500 mb-4 text-sm">Hurry up! Only 34 products left in stock!</p>
                 <hr className='mb-4 border-gray-400' />
 
                 <div className="mb-4">
@@ -116,7 +116,7 @@ const ProductDetails: React.FC = () => {
                 <div className="flex space-x-4 mb-4">
                   <button className="px-8 bg-customYellow text-white rounded-full text-sm font-semibold">Add to cart</button>
                   <button className="px-8 bg-customYellow text-white rounded-full text-sm font-semibold">Buy it now</button>
-                  <div className="rounded-full border border-gray-400 w-14 h-14 flex items-center justify-center cursor-pointer"><img src={heart} alt="heart" className='h-6 w-6' /></div>
+                  <div className="rounded-full border bg-gray-300 w-14 h-14 flex items-center justify-center cursor-pointer"><img src={heart} alt="heart" className='h-6 w-6' /></div>
                 </div>
                 <hr className='mb-4 border-gray-400' />
 
