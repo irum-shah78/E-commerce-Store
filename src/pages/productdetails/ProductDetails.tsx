@@ -20,54 +20,6 @@ import vector from "../../assets/icons/Vector.svg"
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/CartSlice.ts';
 
-
-// interface Product {
-//   id: number;
-//   title: string;
-//   description: string;
-//   price: number;
-//   image: string;
-// }
-
-// const ProductDetails: React.FC = () => {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const { id } = useParams<{ id: string }>();
-//   const [product, setProduct] = useState<Product | null>(null);
-//   const [quantity, setQuantity] = useState<number>(1);
-
-//   useEffect(() => {
-//     if (id) {
-//       const productDetail = productDetails.find((product) => product.id === parseInt(id));
-//       setProduct(productDetail || null);
-//     }
-//   }, [id]);
-
-//   if (!product) {
-//     return <div>Loading...</div>;
-//   }
-
-//   const handleAddToCart = () => {
-//     if (product) {
-//       dispatch(addToCart({ ...product, quantity }));
-//       navigate('/cart');
-//     }
-//   };
-
-//   const increaseQuantity = () => {
-//     setQuantity(quantity + 1);
-//   };
-
-//   const decreaseQuantity = () => {
-//     if (quantity > 1) {
-//       setQuantity(quantity - 1);
-//     }
-//   };
-
-
-
-
-
 interface Product {
   id: number;
   title: string;
@@ -157,7 +109,6 @@ const ProductDetails: React.FC = () => {
                   <div className='inline-block'>
                     <div className="flex space-x-2 ml-2">
                       <button className="px-2 py-1 border rounded bg-gray-200">30</button>
-                      <button className="px-2 py-1 border rounded bg-gray-200">56</button>
                       <button className="px-2 py-1 border rounded bg-gray-200">56</button>
                       <button className="px-2 py-1 border rounded bg-gray-200">42</button>
                       <button className="px-2 py-1 border rounded bg-gray-200">48</button>

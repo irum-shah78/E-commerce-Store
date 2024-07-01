@@ -1,10 +1,10 @@
-// src/pages/cart/CartPage.tsx
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { removeFromCart, updateQuantity } from '../../store/CartSlice.ts';
+import { removeFromCart, updateQuantity, clearCart, updateCart } from '../../store/CartSlice.ts';
 import Header from '../../components/header/Header.tsx';
 import Footer from '../../components/footer/Footer.tsx';
+import closeCircle from "../../assets/icons/close-circle.png";
 
 const CartPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,97 +20,96 @@ const CartPage: React.FC = () => {
     }
   };
 
+  const handleUpdateCart = () => {
+    dispatch(updateCart(cartItems));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <>
       <Header />
-      <div className="container mx-auto p-4">
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-3/4">
-            <table className="min-w-full bg-white">
+      <section className='px-32 py-4 p-6 mt-14 mb-14'>
+        <div className="flex justify-around">
+          <div className="w-full">
+            <table className="bg-white w-4/5" style={{ borderSpacing: '0' }}>
               <thead>
-                <tr>
-                  <th className="py-2">Product</th>
-                  <th className="py-2">Price</th>
-                  <th className="py-2">Quantity</th>
-                  <th className="py-2">Subtotal</th>
-                  <th className="py-2">Remove</th>
+                <tr className='bg-sky-100 ml-4'>
+                  <th className="text-start px-4 py-2">Product</th>
+                  <th className="text-start px-4 py-2">Price</th>
+                  <th className="text-start px-4 py-2">Quantity</th>
+                  <th className="text-start px-4 py-2">Subtotal</th>
+                  <th className="text-start px-4 py-2">Remove</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="space-y-4">
                 {cartItems.map((item) => (
-                  <tr key={item.id} className="border-t">
-                    <td className="py-2 flex items-center">
-                      <img src={item.image} alt={item.title} className="w-16 h-16 mr-4" />
+                  <tr key={item.id} className="border-t border-b border-gray-200">
+                    <td className="py-6 px-4 flex items-center space-x-4">
+                      <img src={item.image} alt={item.title} className="w-16 h-16" />
                       <div>
-                        <p>{item.title}</p>
+                        <p className='truncate w-40'>{item.title}</p>
                       </div>
                     </td>
-                    <td className="py-2">${item.price.toFixed(2)}</td>
-                    <td className="py-2">
-                      <div className="flex items-center">
-                        <button
-                          className="px-2 border"
-                          onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                        >
-                          -
-                        </button>
-                        <input
-                          type="number"
-                          value={item.quantity}
-                          onChange={(e) =>
-                            handleQuantityChange(item.id, parseInt(e.target.value))
-                          }
-                          className="w-12 text-center mx-2 border"
-                          min="1"
-                        />
-                        <button
-                          className="px-2 border"
-                          onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                        >
-                          +
-                        </button>
+                    <td className="py-6 px-4">${item.price.toFixed(2)}</td>
+                    <td className="py-6 px-4">
+                      <div className="flex items-center space-x-2">
+                        <button className="px-2 border border-gray-400 bg-gray-200" onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
+                        <input type="number" value={item.quantity} onChange={(e) =>
+                          handleQuantityChange(item.id, parseInt(e.target.value))}
+                          className="w-12 text-center mx-2 border border-gray-400 bg-gray-200" min="1" />
+                        <button className="px-2 border border-gray-400 bg-gray-200"
+                          onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                       </div>
                     </td>
-                    <td className="py-2">${(item.price * item.quantity).toFixed(2)}</td>
-                    <td className="py-2">
-                      <button
-                        className="text-red-500"
-                        onClick={() => handleRemove(item.id)}
-                      >
-                        &times;
-                      </button>
+                    <td className="py-6 px-4">${(item.price * item.quantity).toFixed(2)}</td>
+                    <td className="py-6 px-4">
+                      <button className="ml-6" onClick={() => handleRemove(item.id)}><img src={closeCircle} alt="remove" /></button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <div className="flex justify-around w-4/5 mt-8">
+              <button className="px-4 py-3 bg-customYellow text-white font-semibold rounded-2xl">Continue shopping</button>
+              <button className="px-5 py-3 text-gray-500 font-semibold rounded-2xl border border-gray-300" onClick={handleUpdateCart}>Update cart</button>
+              <button className="px-5 py-3 text-red-700 font-semibold rounded-2xl border border-red-600" onClick={handleClearCart}>Clear cart</button>
+            </div>
           </div>
-          <div className="w-full md:w-1/4 md:ml-4 mt-4 md:mt-0">
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <h2 className="text-lg font-bold">Cart Total</h2>
-              <div className="flex justify-between py-2">
-                <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Enter coupon code"
-                className="w-full p-2 my-2 border rounded"
-              />
-              <button className="w-full py-2 bg-blue-500 text-white rounded-lg">Apply</button>
-              <div className="flex justify-between py-2 mt-4">
-                <span>Total</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>
-              <button className="w-full py-2 bg-green-500 text-white rounded-lg mt-4">
-                Proceed to Checkout
+
+          <div className="border border-gray-200">
+            <h2 className="text-lg font-bold bg-sky-100 py-2 text-center">Cart total</h2>
+            <div className="flex justify-between py-4 px-4">
+              <span className="font-semibold">Subtotal</span>
+              <span className="font-semibold">${subtotal.toFixed(2)}</span>
+            </div>
+            <hr className='border-1 border-gray-400' />
+            <div className="flex items-center my-2 px-4 py-4 border rounded-2xl mx-4 mt-4">
+              <input type="text" placeholder="Enter coupon code" className="flex-grow outline-none placeholder:text-black" />
+              <button className="text-customBlue ml-2">Apply</button>
+            </div>
+            <hr className='mt-4 border-1 border-gray-400' />
+            <div className="flex items-center my-2 px-4 py-4 border rounded-2xl mx-4 mt-6">
+              <select className="flex-grow outline-none">
+                <option>Country</option>
+              </select>
+            </div>
+            <div className="flex justify-between py-2 px-4 mt-4">
+              <span>Total amount</span>
+              <span>${subtotal.toFixed(2)}</span>
+            </div>
+            <div className="px-4">
+              <button className="w-full py-2 px-3 bg-customYellow text-white rounded-3xl mt-4 mb-2 font-semibold">
+                Proceed to checkout
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <Footer />
     </>
   );
