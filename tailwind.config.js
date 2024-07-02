@@ -27,7 +27,8 @@ module.exports = {
         productCardBorder: 'rgba(182, 182, 182, 1)',
         iconLightBlue: 'rgba(135, 188, 217, 1)',
         sizeColor: 'rgba(226, 244, 255, 1)',
-        newsBorder: 'rgba(212, 212, 212, 1)'
+        newsBorder: 'rgba(212, 212, 212, 1)',
+        saleColor: 'rgba(46, 143, 197, 1)'
       },
     },
   },

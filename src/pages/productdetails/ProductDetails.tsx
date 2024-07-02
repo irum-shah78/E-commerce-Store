@@ -158,32 +158,32 @@ const ProductDetails: React.FC = () => {
         </div>
 
         <div className='mt-12'>
-          <p className='text-lg font-semibold'>Related Product</p>
+          <p className='text-lg font-semibold text-customBlue'>Related Product</p>
 
           <div className="flex items-center justify-between cursor-pointer mt-10">
-            <div className="rounded-2xl w-64 h-64 product-card">
+            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
               <div className="flex items-stretch justify-center mt-6">
                 <img className="w-36 h-30" src={camera} alt="camera" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
               </div>
               <div className="flex justify-between mt-7">
-                <div className=" flex justify-between gap-4 rounded-xl ms-2 px-5 py-3 cursor-pointer add-to-cart">
+                <div className=" flex justify-between gap-4 rounded-xl ms-2 px-5 py-3 cursor-pointer bg-iconLightBlue">
                   <p className="text-black font-semibold">Add to cart</p>
-                  <div className="cart-btn h-6 w-6 rounded-full p-0.5 text-center">
+                  <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
                     <button><img alt="cart" src={cart} className="w-4 h-4" /></button>
                   </div>
                 </div>
-                <div className="rounded-xl eye-icon px-4 py-2 mr-2 p-0.5 text-center cursor-pointer"><img src={eye} alt="eye" /></div>
+                <div className="rounded-xl bg-iconLightBlue px-4 py-2 mr-2 p-0.5 text-center cursor-pointer"><img src={eye} alt="eye" /></div>
               </div>
             </div>
 
-            <div className="rounded-2xl w-64 h-64 product-card">
+            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
               <div className="flex items-stretch justify-center mt-6">
                 <img className="w-36 h-30" src={headphone} alt="headphone" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
               </div>
               <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm">Wireless headphones</p>
+                <p className="font-semibold text-sm text-customBlue">Wireless headphones</p>
                 <p className="font-semibold text-gray-600 mt-2">$11,70</p>
                 <div className="flex gap-2 mt-2">
                   <img src={vector} alt="star" />
@@ -195,13 +195,13 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl w-64 h-64 product-card">
+            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
               <div className="flex items-stretch justify-center mt-6">
                 <img className="w-36 h-30" src={playGame} alt="playGame" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
               </div>
               <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm">Play game</p>
+                <p className="font-semibold text-sm text-customBlue">Play game</p>
                 <p className="font-semibold text-gray-600 mt-2">$11,70</p>
                 <div className="flex gap-2 mt-2">
                   <img src={vector} alt="star" />
@@ -213,13 +213,13 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl w-64 h-64 product-card">
+            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
               <div className="flex items-stretch justify-center mt-6">
                 <img className="w-36 h-30" src={laptop} alt="laptop" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer favorite-product"><img src={heart} alt="heart" /></div>
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
               </div>
               <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm">Tablet as a aptop</p>
+                <p className="font-semibold text-sm text-customBlue">Tablet as a aptop</p>
                 <p className="font-semibold text-gray-600 mt-2">$11,70</p>
                 <div className="flex gap-2 mt-2">
                   <img src={vector} alt="star" />

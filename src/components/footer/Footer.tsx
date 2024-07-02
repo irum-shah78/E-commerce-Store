@@ -9,11 +9,11 @@ import whatsapp from "../../assets/icons/whatsapp.svg";
 const Footer = () => {
   return (
     <footer className="bg-customLightBlue">
-      <div className="px-32 py-4">
-        <div className='bg-white mt-4 flex items-center justify-around h-36 rounded-xl'>
-          <p className='font-bold text-2xl text-customBlue'>Subscribe newsletter</p>
+      <div className="px-4 md:px-8 lg:px-32 py-4">
+        <div className='bg-white mt-4 flex flex-col lg:flex-row items-center justify-around h-auto lg:h-36 rounded-xl p-4 lg:p-0'>
+          <p className='font-bold text-xl md:text-2xl text-customBlue mb-4 lg:mb-0'>Subscribe newsletter</p>
 
-          <div className='relative flex items-center'>
+          <div className='relative flex items-center mb-4 lg:mb-0'>
             <input type="email" className='rounded-xl px-8 py-3 bg-customYellow text-white placeholder-white placeholder-opacity-70 text-sm focus:outline-none' placeholder='Email address' />
             <img src={share} alt="email" className='absolute right-4 cursor-pointer' />
           </div>
@@ -24,8 +24,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex justify-between mt-6">
-          <div className="flex-1">
+        <div className="flex flex-col lg:flex-row justify-between mt-6">
+          <div className="flex-1 mb-6 lg:mb-0">
             <img src={logo1} className="h-8 mb-3" alt="Logo" />
             <p className='mt-6 text-xs text-customBlue'>64 st james boulevard<br /> hoswick, ze2 7zj</p>
             <hr className='mt-6 w-1/2 border-t-1 border-customGray' />
@@ -36,18 +36,18 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className='text-base flex-1'>
+          <div className='text-base flex-1 mb-6 lg:mb-0'>
             <p className="font-semibold mb-2 text-customBlue">Find Product</p>
             <ul className="ml-4 list-disc font-medium text-customBlue marker:text-customMarker space-y-2 cursor-pointer">
-              <li className="hover:underline">Brwnonze arnold</li>
+              <li className="hover:underline">Brownze arnold</li>
               <li className="hover:underline">Chronograph blue</li>
               <li className="hover:underline">Smart phones</li>
               <li className="hover:underline">Automatic watch</li>
-              <li className="hover:underline">Hair starighteners</li>
+              <li className="hover:underline">Hair straighteners</li>
             </ul>
           </div>
 
-          <div className='text-base flex-1'>
+          <div className='text-base flex-1 mb-6 lg:mb-0'>
             <p className="font-semibold mb-2 text-customBlue">Get help</p>
             <ul className="ml-4 list-disc font-medium text-customBlue marker:text-customMarker space-y-2 cursor-pointer">
               <li className="hover:underline">About us</li>
@@ -75,3 +75,4 @@ const Footer = () => {
 }
 
 export default Footer;
+
