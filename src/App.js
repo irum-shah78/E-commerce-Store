@@ -1,5 +1,6 @@
 import React from 'react';
 import HomePage from './pages/home/HomePage.tsx';
+
 // import Header from './components/header/Header.tsx';
 // import Footer from './components/footer/Footer.tsx';
 

@@ -2,18 +2,22 @@ import React, { useEffect, useState } from "react";
 import "../../custom.d.ts";
 import Header from "../../components/header/Header.tsx";
 import Footer from "../../components/footer/Footer.tsx";
-import canon from "../../assets/images/canon-camera.png";
-import speaker from "../../assets/images/speaker.png";
+import sandisk from "../../assets/images/sandisk ssd.jpg";
+import whitegold from "../../assets/images/white gold.jpg";
+import cottonjacket from "../../assets/images/cotton jacket.jpg";
+import danvouy from "../../assets/images/danvouy.jpg";
+import gaming from "../../assets/images/gaming drive.jpg";
 import leftArrow from "../../assets/icons/arrow-left.svg";
-import laptop from "../../assets/images/laptop.png";
-import dslr from "../../assets/images/dslr.png";
+import piercedowl from "../../assets/images/pierced owl.jpg";
+import rainjacket from "../../assets/images/rain jacket women.jpg";
 import rightArrow from "../../assets/icons/arrow-right.svg";
-import playGame from "../../assets/images/play-games.png";
+import menscasual from "../../assets/images/mens casual.jpg"
+import biylaclesen from "../../assets/images/biylaclesen.jpg";
+import chainbracelet from "../../assets/images/chain bracelet.jpg";
 import cart from "../../assets/icons/shopping-cart.svg";
 import eye from "../../assets/icons/eye.svg";
 import vector from "../../assets/icons/Vector.svg";
 import sale from "../../assets/images/sale.png";
-import speakers from "../../assets/images/speakers.png";
 import boxTick from "../../assets/icons/box-tick.svg";
 import crown from "../../assets/icons/crown.svg";
 import shield from "../../assets/icons/shield-security.svg";
@@ -29,6 +33,19 @@ import blogOne from "../../assets/images/blog-1.png";
 import blogTwo from "../../assets/images/blog-2.png";
 import { fetchCategories, fetchProducts, fetchProductsByCategory } from "../../api.ts";
 import ProductCard from "../../components/productCard/ProductCard.tsx";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
+
+
+interface Item {
+  id: number;
+  name: string;
+  img: string;
+  count: number;
+}
 
 const HomePage: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -63,68 +80,134 @@ const HomePage: React.FC = () => {
     getProducts();
   }, [selectedCategory]);
 
+
+  const [items, setItems] = useState<Item[]>([
+    { id: 1, name: 'Gaming Drive', img: gaming, count: 6 },
+    { id: 2, name: 'Pierced Owl', img: piercedowl, count: 6 },
+    { id: 3, name: 'Rain Jacket', img: rainjacket, count: 6 }
+  ]);
+
+  const swapItems = (direction: 'left' | 'right') => {
+    let newItems = [...items];
+    if (direction === 'left') {
+      const item = newItems.pop();
+      if (item) {
+        newItems.unshift(item);
+      }
+    } else if (direction === 'right') {
+      const item = newItems.shift();
+      if (item) {
+        newItems.push(item);
+      }
+    }
+    setItems(newItems);
+  };
+
   return (
     <>
       <Header />
-      <div className="px-4 sm:px-8 lg:px-16 xl:px-32 py-4">
+      <div className="px-4 md:px-8 lg:px-32 py-4">
 
         {/* HERO SECTION */}
         <section>
-          <div className="flex flex-col lg:flex-row items-center justify-around mt-4">
-            <div className="text-center lg:text-left">
-              <p className="text-4xl font-bold text-customBlue">Canon</p>
-              <p className="text-4xl font-bold mt-4 text-customBlue">Camera</p>
-              <div className="flex gap-4 mt-4 justify-center lg:justify-start">
-                <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
-                <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+          <Swiper
+            modules={[Navigation, Pagination]}
+            navigation
+            className="mySwiper"
+            spaceBetween={10}
+            slidesPerView={"auto"}
+            pagination={{ clickable: true }}
+          >
+            <SwiperSlide>
+              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
+                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
+                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">SanDisk</p>
+                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">SSD</p>
+                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
+                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
+                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+                  </div>
+                </div>
+                <div className="relative order-1 md:order-2">
+                  <img src={sandisk} alt="SanDisk SSD" className="h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $109</div>
+                </div>
               </div>
+            </SwiperSlide>
 
-              <div className="flex justify-center lg:justify-start gap-2 mt-8 items-center">
-                <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
-                <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-                <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
+            <SwiperSlide>
+              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
+                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
+                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">White</p>
+                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">Gold</p>
+                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
+                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
+                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+                  </div>
+                </div>
+                <div className="relative order-1 md:order-2">
+                  <img src={whitegold} alt="White Gold" className="h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $9.99</div>
+                </div>
               </div>
-            </div>
+            </SwiperSlide>
 
-            <div className="relative mt-8 lg:mt-0">
-              <img alt="hero-pic" src={canon} className="h-64 w-64 md:h-80 md:w-80 object-cover mx-auto lg:mx-0" />
-              <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $89</div>
-            </div>
-          </div>
+            <SwiperSlide>
+              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
+                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
+                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">Cotton</p>
+                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">Jacket</p>
+                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
+                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
+                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+                  </div>
+                </div>
+                <div className="relative order-1 md:order-2">
+                  <img src={cottonjacket} alt="Cotton Jacket" className="h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $55.99</div>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide>
+              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
+                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
+                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">DANVOUY</p>
+                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">Womens</p>
+                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
+                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
+                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+                  </div>
+                </div>
+                <div className="relative order-1 md:order-2">
+                  <img src={danvouy} alt="DANVOUY Womens" className="h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $12.99</div>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
         </section>
 
         {/* PRODUCTS SECTION */}
         <section>
-          <div className="flex flex-col lg:flex-row justify-around items-center mt-6">
-            <div className="flex items-center justify-around rounded-xl w-full lg:w-80 h-32 border border-cardBorderColor relative mb-4 lg:mb-0">
-              <div className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute -inset-x-4">
+          <div className="flex flex-col lg:flex-row justify-around items-center mt-14">
+            <div className="relative">
+              <div className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute left-0 top-1/2 transform -translate-y-1/2" onClick={() => swapItems('left')}>
                 <img src={leftArrow} alt="left-arrow" className="w-6 h-6" />
               </div>
-              <img className="object-cover w-20 h-20" src={speaker} alt="speaker" />
-              <div className="flex flex-col justify-between p-4 leading-normal">
-                <p className="font-bold text-lg text-customBlue">Speaker</p>
-                <p className="text-sm mt-2 text-customBlue">(6 items)</p>
-              </div>
             </div>
-
-            <div className="flex items-center justify-around rounded-xl w-full lg:w-80 h-32 border border-cardBorderColor mb-4 lg:mb-0">
-              <img className="object-cover w-24 h-24" src={laptop} alt="laptop" />
-              <div className="flex flex-col justify-between p-4 leading-normal">
-                <p className="font-bold text-lg text-customBlue">Desktop & Laptop</p>
-                <p className="text-sm mt-2 text-customBlue">(6 items)</p>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-around rounded-xl w-full lg:w-80 h-32 border border-cardBorderColor">
-              <img className="object-cover w-20 h-20" src={dslr} alt="dslr" />
-              <div className="flex flex-col justify-between p-4 leading-normal">
-                <p className="font-bold text-lg text-customBlue">DSLR Camera</p>
-                <p className="text-sm mt-2 text-customBlue">(6 items)</p>
-              </div>
-              <div className="relative">
-                <div className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute -inset-y-3">
-                  <img src={rightArrow} alt="right-arrow" className="w-6 h-6" />
+            {items.map((item, index) => (
+              <div key={item.id} className="flex items-center justify-around rounded-xl w-full lg:w-80 h-32 border border-cardBorderColor mb-4 lg:mb-0">
+                <img className="object-cover w-20 h-20" src={item.img} alt={item.name} />
+                <div className="flex flex-col justify-between p-4 leading-normal">
+                  <p className="font-bold text-lg text-customBlue">{item.name}</p>
+                  <p className="text-sm mt-2 text-customBlue">({item.count} items)</p>
                 </div>
+              </div>
+            ))}
+            <div className="relative">
+              <div className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute right-0 top-1/2 transform -translate-y-1/2" onClick={() => swapItems('right')}>
+                <img src={rightArrow} alt="right-arrow" className="w-6 h-6" />
               </div>
             </div>
           </div>
@@ -171,24 +254,25 @@ const HomePage: React.FC = () => {
         {/* SALES SECTION */}
         <section>
           <div className="relative mt-12 mb-12">
-            <img src={sale} alt="sale" className="object-cover w-full h-full" />
+            <img src={sale} alt="sale" className="object-cover w-full h-96 sm:h-full" />
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:items-end sm:pr-28 space-y-4 text-center sm:text-right">
-              <button className="rounded-2xl text-white text-xs sm:text-sm md:text-base lg:text-lg px-4 py-2 bg-customYellow">New laptop</button>
+              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">New laptop</button>
               <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-saleColor">Sale up to 50% off</p>
               <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white">12 inch HD display</p>
-              <button className="rounded-2xl text-white text-xs sm:text-sm md:text-base lg:text-lg px-4 py-2 bg-customYellow">Shop now</button>
+              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">Shop now</button>
             </div>
           </div>
         </section>
 
         {/* CATEGORY SECTION */}
-        <section className="flex flex:col sm:flex-row justify-between mt-12 gap-6">
-          <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:hidden md:inline-block">
-            <div className="flex justify-around items-center ">
-              <img className="object-cover sm:w-auto sm:h-auto" src={speakers} alt="speakers" />
+        <section className="flex flex-col sm:flex-row justify-between mt-12 gap-6">
+          <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
+            <div className="flex flex-col sm:flex-row justify-around items-center p-4 h-full">
+              <img className="object-cover h-40 w-auto sm:w-48" src={menscasual} alt="speakers" />
               <div className="p-4 leading-normal">
-                <p className="font-semibold text-lg text-customBlue">JBL bar 2.1 deep bass</p>
-                <p className="font-semibold text-gray-600 mt-4">$11,70</p>
+                <p className="font-semibold text-lg text-customBlue">Mens Casual Premium</p>
+                <p className="font-semibold text-lg text-customBlue"> Slim Fit T-Shirts</p>
+                <p className="font-semibold text-gray-600 mt-4">$22.3</p>
                 <div className="flex gap-2 mt-4">
                   <img src={vector} alt="star" />
                   <img src={vector} alt="star" />
@@ -197,13 +281,13 @@ const HomePage: React.FC = () => {
                   <img src={vector} alt="star" />
                 </div>
                 <div className="flex mt-6 gap-2">
-                  <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">57</button>
-                  <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">11</button>
-                  <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">33</button>
-                  <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">59</button>
+                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">57</button>
+                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">11</button>
+                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">33</button>
+                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">59</button>
                 </div>
                 <div className="flex justify-between items-center mt-7">
-                  <div className=" flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
+                  <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
                     <p className="text-black font-semibold">Add to cart</p>
                     <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
                       <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
@@ -213,20 +297,16 @@ const HomePage: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center gap-2 items-center pb-6">
-              <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-            </div>
           </div>
 
-          <div>
-            <div className="rounded-2xl border border-productCardBorder h-52 w-full sm:w-96">
-              <div className="flex justify-around items-center pt-4 gap-4 ">
-                <img className="object-cover sm:w-auto sm:h-auto" src={playGame} alt="play game" />
+          <div className="flex flex-col items-center sm:items-start">
+            <div className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96 mb-4 sm:mb-0">
+              <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-4 h-full">
+                <img className="object-cover w-20 h-20 sm:w-32 sm:h-32" src={biylaclesen} alt="play game" />
                 <div className="p-4 leading-normal">
-                  <p className="font-semibold text-sm text-customBlue">Play game</p>
-                  <p className="font-semibold text-gray-600 mt-4">$11,70</p>
-                  <div className="flex gap-2 mt-4">
+                  <p className="font-semibold text-sm text-customBlue">BIYLACLESEN</p>
+                  <p className="font-semibold text-gray-600 mt-2">$56.99</p>
+                  <div className="flex gap-2 mt-2">
                     <img src={vector} alt="star" />
                     <img src={vector} alt="star" />
                     <img src={vector} alt="star" />
@@ -237,13 +317,13 @@ const HomePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-productCardBorder h-52 w-full sm:w-96 mt-2">
-              <div className="flex justify-around items-center pt-4 gap-4  ">
-                <img className="object-cover sm:w-auto sm:h-auto" src={laptop} alt="laptop" />
+            <div className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96 mt-2">
+              <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-4 h-full">
+                <img className="object-cover w-20 h-20 sm:w-32 sm:h-32" src={chainbracelet} alt="laptop" />
                 <div className="p-4 leading-normal">
-                  <p className="font-semibold text-sm text-customBlue">Laptop</p>
-                  <p className="font-semibold text-gray-600 mt-4">$11,70</p>
-                  <div className="flex gap-2 mt-4">
+                  <p className="font-semibold text-sm text-customBlue">Chain Bracelet</p>
+                  <p className="font-semibold text-gray-600 mt-2">$695</p>
+                  <div className="flex gap-2 mt-2">
                     <img src={vector} alt="star" />
                     <img src={vector} alt="star" />
                     <img src={vector} alt="star" />
@@ -255,7 +335,6 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         </section>
-
 
         {/* FEATURES SECTION */}
         <section className="mt-12">
@@ -399,8 +478,7 @@ const HomePage: React.FC = () => {
             <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
           </div>
         </section>
-
-      </div>
+      </div >
       <Footer />
     </>
   );
