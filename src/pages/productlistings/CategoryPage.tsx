@@ -64,9 +64,9 @@ const CategoryPage: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="category-page px-32 py-4 p-6 mt-14">
-        <section className="flex justify-between">
-          <aside className="w-64 text-sm">
+      <div className="category-page px-4 py-4 md:px-8 lg:px-32 md:py-6 mt-14">
+        <section className="flex flex-col md:flex-row md:justify-between">
+          <aside className="w-full md:w-64 text-sm mb-6 md:mb-0">
             {/* Categories */}
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-semibold text-customBlue">Categories</h2>
@@ -110,7 +110,6 @@ const CategoryPage: React.FC = () => {
             </ul>
             <hr className='mt-6 border-gray-300' />
 
-
             {/* Availability */}
             <h2 className="font-semibold text-customBlue mt-4">Availability</h2>
             <div className="flex justify-between items-center mb-4">
@@ -130,7 +129,6 @@ const CategoryPage: React.FC = () => {
                   <span className="text-gray-500">5</span>
                 </label>
               </li>
-
               <li>
                 <label className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -144,7 +142,6 @@ const CategoryPage: React.FC = () => {
               </li>
             </ul>
             <hr className='mt-6 border-gray-300' />
-
 
             {/* Product Type */}
             <h2 className="font-semibold text-customBlue mt-4">Product type</h2>
@@ -162,7 +159,6 @@ const CategoryPage: React.FC = () => {
                   <span className="text-gray-500">5</span>
                 </label>
               </li>
-
               <li>
                 <label className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -172,12 +168,11 @@ const CategoryPage: React.FC = () => {
                   <span className="text-gray-500">5</span>
                 </label>
               </li>
-
               <li>
                 <label className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">Jewlery</span>
+                    <span className="text-gray-800">Jewelry</span>
                   </div>
                   <span className="text-gray-500">5</span>
                 </label>
@@ -250,10 +245,10 @@ const CategoryPage: React.FC = () => {
             <hr className='mt-6 border-gray-300' />
           </aside>
 
-          <main className="products">
+          <main className="products flex-1 md:ml-4 flex flex-col items-center md:items-stretch">
             {loading && <p className='text-center'>Loading...</p>}
             {error && <p className='text-center'>{error}</p>}
-            <div className="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {products.map((product) => (
                 <ProductCard key={product.id} {...product} />
               ))}
@@ -264,12 +259,12 @@ const CategoryPage: React.FC = () => {
         {/* SALES SECTION */}
         <section>
           <div className="relative mt-12 mb-12">
-            <img src={sale} alt="sale" className="object-cover w-full h-full" />
-            <div className="absolute inset-y-0 right-0 flex flex-col items-center justify-center space-y-4 p-4 pr-28">
-              <button className="rounded-2xl text-white text-xs px-4 py-2 shop-now-btn">New laptop</button>
-              <p className="text-4xl font-bold" style={{ color: 'rgba(46, 143, 197, 1)' }}>Sale up to 50% off</p>
-              <p className="text-white">12 inch hd display</p>
-              <button className="rounded-2xl text-white text-xs px-4 py-2 shop-now-btn">Shop now</button>
+            <img src={sale} alt="sale" className="object-cover w-full h-96 sm:h-full" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:items-end sm:pr-28 space-y-4 text-center sm:text-right">
+              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">New laptop</button>
+              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-saleColor">Sale up to 50% off</p>
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white">12 inch HD display</p>
+              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">Shop now</button>
             </div>
           </div>
         </section>

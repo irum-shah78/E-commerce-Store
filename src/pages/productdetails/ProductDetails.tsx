@@ -9,13 +9,11 @@ import favorite from "../../assets/icons/favorite.png"
 import google from "../../assets/icons/google.svg"
 import facebook from "../../assets/icons/facebook.svg"
 import whatsApp from "../../assets/icons/whatsapp.svg"
-import camera from "../../assets/images/camera.png"
-import headphone from "../../assets/images/wireless-headphones.png"
-import playGame from "../../assets/images/play-games.png"
+import gaming from "../../assets/images/gaming drive.jpg";
+import piercedowl from "../../assets/images/pierced owl.jpg";
+import rainjacket from "../../assets/images/rain jacket women.jpg";
+import menslim from "../../assets/images/slimfir-men.jpg"
 import heart from "../../assets/icons/heart.png"
-import cart from "../../assets/icons/shopping-cart.svg"
-import eye from "../../assets/icons/eye.svg"
-import laptop from "../../assets/images/laptop.png"
 import vector from "../../assets/icons/Vector.svg"
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/CartSlice.ts';
@@ -66,83 +64,89 @@ const ProductDetails: React.FC = () => {
   return (
     <>
       <Header />
-      <section className='px-32 py-4 p-6 mt-14'>
-        <div className="flex justify-around">
-          <div className="w-full px-4">
-            <div className="overflow-hidden flex">
-              <div className="w-1/2 p-4 border-2 border-gray-400 rounded-lg flex items-center justify-center">
-                <img className="w-96 h-96" src={product.image} alt={product.title} />
+      <section className='px-4 py-4 md:px-6 lg:px-32 md:py-8 lg:py-4 mt-14'>
+        {/* DETAILS SECTION */}
+        <div className="flex flex-col lg:flex-row justify-between">
+          <div className="w-full lg:w-1/2 px-2 lg:px-4">
+            <div className="overflow-hidden flex justify-center lg:justify-start">
+              <div className="w-full lg:w-full p-4 border-2 border-gray-400 rounded-lg flex items-center justify-center">
+                <img className="w-48 h-48 md:w-96 md:h-96" src={product.image} alt={product.title} />
               </div>
-              <div className="p-6 flex-1">
-                <h1 className="text-2xl mb-2 text-customBlue">{product.title}</h1>
-                <p className="text-lg mb-2 text-Gray font-semibold">${product.price}</p>
-                <div className="flex items-center mb-2">
-                  <div className="text-yellow-400 flex gap-2">
-                    <img src={star} alt='star' />
-                    <img src={star} alt='star' />
-                    <img src={star} alt='star' />
-                    <img src={star} alt='star' />
-                    <img src={star} alt='star' />
-                  </div>
-                  <p className="ml-2 text-gray-700 text-sm">No reviews</p>
-                </div>
-                <div className='flex'>
-                  <p className='text-black'>Availability: </p>
-                  <img src={tick} alt='tick' className='w-5 h-3 mt-2 ml-4' />
-                  <p className="text-green-600 mb-2 ml-2">In stock</p>
-                </div>
-                <p className="text-gray-500 mb-4 text-sm">Hurry up! Only 34 products left in stock!</p>
-                <hr className='mb-4 border-gray-400' />
+            </div>
+          </div>
+          <div className="flex-1 p-4 lg:p-6">
+            <h1 className="text-xl md:text-2xl mb-2 text-customBlue">{product.title}</h1>
+            <p className="text-lg mb-2 text-gray-700 font-semibold">${product.price}</p>
+            <div className="flex items-center mb-2">
+              <div className="text-yellow-400 flex gap-2">
+                <img src={star} alt='star' />
+                <img src={star} alt='star' />
+                <img src={star} alt='star' />
+                <img src={star} alt='star' />
+                <img src={star} alt='star' />
+              </div>
+              <p className="ml-2 text-gray-700 text-sm">No reviews</p>
+            </div>
+            <div className='flex'>
+              <p className='text-black'>Availability: </p>
+              <img src={tick} alt='tick' className='w-5 h-3 mt-2 ml-4' />
+              <p className="text-green-600 mb-2 ml-2">In stock</p>
+            </div>
+            <p className="text-gray-500 mb-4 text-sm">Hurry up! Only 34 products left in stock!</p>
+            <hr className='mb-4 border-gray-400' />
 
-                <div className="mb-4">
-                  <label className="inline-block mr-2 text-sm font-semibold">Color:</label>
-                  <div className='inline-block'>
-                    <div className="flex gap-2">
-                      <div className="w-6 h-6 bg-lime-500 rounded-full border-2 border-gray-200 cursor-pointer"></div>
-                      <div className="w-6 h-6 bg-gray-600 rounded-full border-2 border-gray-200 cursor-pointer"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-4 text-sm">
-                  <label className=" mb-1 font-semibold">Size:</label>
-                  <div className='inline-block'>
-                    <div className="flex space-x-2 ml-2">
-                      <button className="px-2 py-1 border rounded bg-gray-200">30</button>
-                      <button className="px-2 py-1 border rounded bg-gray-200">56</button>
-                      <button className="px-2 py-1 border rounded bg-gray-200">42</button>
-                      <button className="px-2 py-1 border rounded bg-gray-200">48</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <label className="mb-1 text-sm font-semibold">Quantity:</label>
-                  <div className="inline-block">
-                    <div className="flex items-center ml-2">
-                      <button className="px-2 border border-gray-400 bg-gray-200" onClick={decreaseQuantity}>-</button>
-                      <input type="number" className="w-10 text-center border border-gray-400 bg-gray-200" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value) || 1)} />
-                      <button className=" px-2 border border-gray-400 bg-gray-200" onClick={increaseQuantity}>+</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex space-x-4 mb-4">
-                  <button className="px-8 bg-customYellow text-white rounded-full text-sm font-semibold"  onClick={handleAddToCart}>Add to cart</button>
-                  <button className="px-8 bg-customYellow text-white rounded-full text-sm font-semibold">Buy it now</button>
-                  <div className="rounded-full border bg-gray-300 w-14 h-14 flex items-center justify-center cursor-pointer"><img src={favorite} alt="heart" className='h-6 w-6' /></div>
-                </div>
-                <hr className='mb-4 border-gray-400' />
-
-                <div className="flex space-x-4 cursor-pointer">
-                  <p className='text-sm font-semibold text-black'>Share:</p>
-                  <img src={google} alt='google' className='h-5 w-5' />
-                  <img src={facebook} alt='facebook' className='h-5 w-5' />
-                  <img src={whatsApp} alt='whatsapp' className='h-5 w-5' />
+            <div className="mb-4">
+              <label className="inline-block mr-2 text-sm font-semibold">Color:</label>
+              <div className='inline-block'>
+                <div className="flex gap-2">
+                  <div className="w-6 h-6 bg-lime-500 rounded-full border-2 border-gray-200 cursor-pointer"></div>
+                  <div className="w-6 h-6 bg-gray-600 rounded-full border-2 border-gray-200 cursor-pointer"></div>
                 </div>
               </div>
+            </div>
+
+            <div className="mb-4 text-sm">
+              <label className="mb-1 font-semibold">Size:</label>
+              <div className='inline-block'>
+                <div className="flex space-x-2 ml-2">
+                  <button className="px-2 py-1 border rounded bg-gray-200">30</button>
+                  <button className="px-2 py-1 border rounded bg-gray-200">56</button>
+                  <button className="px-2 py-1 border rounded bg-gray-200">42</button>
+                  <button className="px-2 py-1 border rounded bg-gray-200">48</button>
+                </div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <label className="mb-1 text-sm font-semibold">Quantity:</label>
+              <div className="inline-block">
+                <div className="flex items-center ml-2">
+                  <button className="px-2 border border-gray-400 bg-gray-200" onClick={decreaseQuantity}>-</button>
+                  <input type="number" className="w-10 text-center border border-gray-400 bg-gray-200" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value) || 1)} />
+                  <button className="px-2 border border-gray-400 bg-gray-200" onClick={increaseQuantity}>+</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
+              <button className="px-4 py-2 md:px-8 md:py-3 bg-customYellow text-white rounded-full text-sm font-semibold" onClick={handleAddToCart}>Add to cart</button>
+              <button className="px-4 py-2 md:px-8 md:py-3 bg-customYellow text-white rounded-full text-sm font-semibold">Buy it now</button>
+              <div className="rounded-full border bg-gray-300 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center cursor-pointer">
+                <img src={favorite} alt="heart" className='h-5 w-5 md:h-6 md:w-6' />
+              </div>
+            </div>
+
+            <hr className='mb-4 border-gray-400' />
+
+            <div className="flex space-x-4 cursor-pointer">
+              <p className='text-sm font-semibold text-black'>Share:</p>
+              <img src={google} alt='google' className='h-5 w-5' />
+              <img src={facebook} alt='facebook' className='h-5 w-5' />
+              <img src={whatsApp} alt='whatsapp' className='h-5 w-5' />
             </div>
           </div>
         </div>
 
+        {/* REVIEWS SECTION */}
         <div>
           <div className='flex items-center justify-center gap-3 mt-12' >
             <button className="rounded-xl border border-gray-400 py-2 px-4">Description</button>
@@ -157,34 +161,19 @@ const ProductDetails: React.FC = () => {
           </div>
         </div>
 
+        {/* RELATED PRODUCT */}
         <div className='mt-12'>
           <p className='text-lg font-semibold text-customBlue'>Related Product</p>
 
-          <div className="flex items-center justify-between cursor-pointer mt-10">
-            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-around lg:justify-between cursor-pointer mt-10 gap-4">
+            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
               <div className="flex items-stretch justify-center mt-6">
-                <img className="w-36 h-30" src={camera} alt="camera" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
-              </div>
-              <div className="flex justify-between mt-7">
-                <div className=" flex justify-between gap-4 rounded-xl ms-2 px-5 py-3 cursor-pointer bg-iconLightBlue">
-                  <p className="text-black font-semibold">Add to cart</p>
-                  <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
-                    <button><img alt="cart" src={cart} className="w-4 h-4" /></button>
-                  </div>
-                </div>
-                <div className="rounded-xl bg-iconLightBlue px-4 py-2 mr-2 p-0.5 text-center cursor-pointer"><img src={eye} alt="eye" /></div>
-              </div>
-            </div>
-
-            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
-              <div className="flex items-stretch justify-center mt-6">
-                <img className="w-36 h-30" src={headphone} alt="headphone" />
+                <img className="w-28 h-28" src={piercedowl} alt="headphone" />
                 <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
               </div>
               <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm text-customBlue">Wireless headphones</p>
-                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <p className="font-semibold text-sm text-customBlue">Pierced Owl</p>
+                <p className="font-semibold text-gray-600 mt-2">$10.99</p>
                 <div className="flex gap-2 mt-2">
                   <img src={vector} alt="star" />
                   <img src={vector} alt="star" />
@@ -195,14 +184,31 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
+            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
               <div className="flex items-stretch justify-center mt-6">
-                <img className="w-36 h-30" src={playGame} alt="playGame" />
+                <img className="w-28 h-28" src={menslim} alt="headphone" />
                 <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
               </div>
               <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm text-customBlue">Play game</p>
-                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <p className="font-semibold text-sm text-customBlue">Mens Casual Slim Fit</p>
+                <p className="font-semibold text-gray-600 mt-2">$11.70</p>
+                <div className="flex gap-2 mt-2">
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                  <img src={vector} alt="star" />
+                </div>
+              </div>
+            </div>
+            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
+              <div className="flex items-stretch justify-center mt-6">
+                <img className="w-28 h-28" src={rainjacket} alt="playGame" />
+                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
+              </div>
+              <div className="ms-2 mt-1">
+                <p className="font-semibold text-sm text-customBlue">Rain Jacket</p>
+                <p className="font-semibold text-gray-600 mt-2">$39.99</p>
                 <div className="flex gap-2 mt-2">
                   <img src={vector} alt="star" />
                   <img src={vector} alt="star" />
@@ -213,14 +219,14 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl w-64 h-64 border border-productCardBorder">
+            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
               <div className="flex items-stretch justify-center mt-6">
-                <img className="w-36 h-30" src={laptop} alt="laptop" />
+                <img className="w-28 h-28" src={gaming} alt="laptop" />
                 <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
               </div>
               <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm text-customBlue">Tablet as a aptop</p>
-                <p className="font-semibold text-gray-600 mt-2">$11,70</p>
+                <p className="font-semibold text-sm text-customBlue">Gaming Drive</p>
+                <p className="font-semibold text-gray-600 mt-2">$114</p>
                 <div className="flex gap-2 mt-2">
                   <img src={vector} alt="star" />
                   <img src={vector} alt="star" />
@@ -239,5 +245,4 @@ const ProductDetails: React.FC = () => {
 };
 
 export default ProductDetails;
-
 

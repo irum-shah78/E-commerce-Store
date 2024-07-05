@@ -129,8 +129,8 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
                 <div className="relative order-1 md:order-2">
-                  <img src={sandisk} alt="SanDisk SSD" className="h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $109</div>
+                  <img src={sandisk} alt="SanDisk SSD" className="h-40 sm:h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-8 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $109</div>
                 </div>
               </div>
             </SwiperSlide>
@@ -146,8 +146,8 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
                 <div className="relative order-1 md:order-2">
-                  <img src={whitegold} alt="White Gold" className="h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $9.99</div>
+                  <img src={whitegold} alt="White Gold" className="h-40 sm:h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-6 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $9.99</div>
                 </div>
               </div>
             </SwiperSlide>
@@ -163,8 +163,8 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
                 <div className="relative order-1 md:order-2">
-                  <img src={cottonjacket} alt="Cotton Jacket" className="h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $55.99</div>
+                  <img src={cottonjacket} alt="Cotton Jacket" className="h-40 sm:h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-6 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $55.99</div>
                 </div>
               </div>
             </SwiperSlide>
@@ -180,8 +180,8 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
                 <div className="relative order-1 md:order-2">
-                  <img src={danvouy} alt="DANVOUY Womens" className="h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-8 rounded-full w-28 h-28 absolute inset-y-44 right-0">only $12.99</div>
+                  <img src={danvouy} alt="DANVOUY Womens" className="h-40 sm:h-60 md:h-80 mx-auto" />
+                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-6 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $12.99</div>
                 </div>
               </div>
             </SwiperSlide>
