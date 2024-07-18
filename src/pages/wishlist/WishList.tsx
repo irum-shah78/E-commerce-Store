@@ -64,8 +64,7 @@ const Wishlist = () => {
               Clear Wishlist
             </button>
           </div>
-        ) : (
-          <p>Your wishlist is empty.</p>
+        ) : ( <p>Your wishlist is empty.</p>
         )}
       </div>
       <Footer />
