@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import productDetails from '../../data/ProductData.json';
-import Header from '../../components/header/Header.tsx';
-import Footer from '../../components/footer/Footer.tsx';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 import star from "../../assets/icons/star.png"
 import tick from "../../assets/icons/Vector.png"
 import favorite from "../../assets/icons/favorite.png"
 import google from "../../assets/icons/google.svg"
 import facebook from "../../assets/icons/facebook.svg"
 import whatsApp from "../../assets/icons/whatsapp.svg"
-import gaming from "../../assets/images/gaming drive.jpg";
-import piercedowl from "../../assets/images/pierced owl.jpg";
-import rainjacket from "../../assets/images/rain jacket women.jpg";
+import gaming from "../../assets/images/gamingdrive.jpg";
+import piercedowl from "../../assets/images/piercedowl.jpg";
+import rainjacket from "../../assets/images/rainjacket-women.jpg";
 import menslim from "../../assets/images/slimfir-men.jpg"
 import heart from "../../assets/icons/heart.png"
 import vector from "../../assets/icons/Vector.svg"
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../store/CartSlice.ts';
+import { addToCart } from '../../store/cartSlice';
 
 interface Product {
   id: number;

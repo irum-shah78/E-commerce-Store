@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories, getProductsByCategory } from '../../store/ProductSlice.ts';
-import { AppDispatch, RootState } from '../../store';
-import Header from '../../components/header/Header.tsx';
-import Footer from '../../components/footer/Footer.tsx';
-import ProductCard from '../../components/productCard/ProductCard.tsx';
+import { getCategories, getProductsByCategory } from '../../store/productSlice';
+import { AppDispatch, RootState } from '../../store/store';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
+import ProductCard from '../../components/productCard/ProductCard';
 import sale from "../../assets/images/sale.png";
 
 const CategoryPage: React.FC = () => {

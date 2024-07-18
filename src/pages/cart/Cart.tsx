@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
-import { removeFromCart, updateQuantity, clearCart, updateCart } from '../../store/CartSlice.ts';
-import Header from '../../components/header/Header.tsx';
-import Footer from '../../components/footer/Footer.tsx';
+import { RootState } from '../../store/store';
+import { removeFromCart, updateQuantity, clearCart, updateCart } from '../../store/cartSlice';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 import closeCircle from "../../assets/icons/close-circle.png";
+import { Link } from 'react-router-dom';
 
 const CartPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,6 @@ const CartPage: React.FC = () => {
     <>
       <Header />
       <section className='px-2 sm:px-2 md:px-8 lg:px-16 py-4 mt-14 mb-14'>
-      {/* px-4 sm:px-8 md:px-16 lg:px-32 py-4 mt-14 mb-14 */}
         <div className="flex flex-col lg:flex-row lg:justify-around">
           <div className="w-full lg:w-3/5 overflow-x-auto">
             <table className="bg-white w-full min-w-full lg:min-w-min" style={{ borderSpacing: '0' }}>
@@ -76,7 +76,10 @@ const CartPage: React.FC = () => {
               </tbody>
             </table>
             <div className="flex flex-col sm:flex-row justify-around w-full mt-8">
-              <button className="w-full sm:w-auto px-4 py-3 bg-customYellow text-white font-semibold rounded-2xl mb-4 sm:mb-0">Continue shopping</button>
+              <Link to={`/category/all`}>
+                <button className="w-full sm:w-auto px-4 py-3 bg-customYellow text-white font-semibold rounded-2xl mb-4 sm:mb-0">Continue shopping</button>
+              </Link>
+
               <button className="w-full sm:w-auto px-5 py-3 text-gray-500 font-semibold rounded-2xl border border-gray-300 mb-4 sm:mb-0" onClick={handleUpdateCart}>Update cart</button>
               <button className="w-full sm:w-auto px-5 py-3 text-red-700 font-semibold rounded-2xl border border-red-600" onClick={handleClearCart}>Clear cart</button>
             </div>

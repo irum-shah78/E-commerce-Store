@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from '../src/pages/home/HomePage.tsx';
-import CategoryPage from '../src/pages/productlistings/CategoryPage.tsx';
-import ProductDetailsPage from '../src/pages/productdetails/ProductDetails.tsx';
-import CartPage from '../src/pages/shoppingcart/CartPage.tsx';
+import HomePage from './pages/home/Home.tsx';
+import CategoryPage from './pages/category/Category.tsx';
+import ProductDetailsPage from './pages/productdetails/ProductDetails.tsx';
+import CartPage from './pages/cart/Cart.tsx';
+import Wishlist from './pages/wishlist/WishList.tsx';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path='/wishlist' element={<Wishlist />} />
       </Routes>
     </div>
   );

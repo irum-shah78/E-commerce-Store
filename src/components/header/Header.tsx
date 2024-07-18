@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../store/store';
 import { Link } from 'react-router-dom';
 import location from "../../assets/icons/location.svg";
 import track from "../../assets/icons/track.svg";
@@ -14,6 +14,7 @@ const Header: React.FC = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -61,8 +62,8 @@ const Header: React.FC = () => {
             <span className="hidden sm:block">Sign in</span>
             <div className='flex items-center gap-1'>
               <img alt='heart' src={heart} className="w-6 h-10" />
-              <div className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>0</div>
-              <span className='hidden sm:block pl-2'>Wishlist</span>
+              <div className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>{wishlistItems.length}</div>
+              <Link to="/wishlist" className='hidden sm:block pl-2'>Wishlist</Link>
             </div>
 
             <div className='relative'>
