@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from '../../store/store';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import ProductCard from '../../components/productCard/ProductCard';
-import sale from "../../assets/images/sale.png";
+import sale from "../../assets/images/hero-sale.svg";
 
 const CategoryPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

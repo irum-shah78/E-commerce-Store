@@ -2,25 +2,18 @@ import React, { useEffect, useState } from "react";
 import "../../custom.d.ts";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
-import sandisk from "../../assets/images/sandiskssd.jpg";
-import whitegold from "../../assets/images/whitegold.jpg";
-import cottonjacket from "../../assets/images/cottonjacket.jpg";
-import danvouy from "../../assets/images/danvouy.jpg";
-import gaming from "../../assets/images/gamingdrive.jpg";
 import leftArrow from "../../assets/icons/arrow-left.svg";
-import piercedowl from "../../assets/images/piercedowl.jpg";
-import rainjacket from "../../assets/images/rainjacket-women.jpg";
 import rightArrow from "../../assets/icons/arrow-right.svg";
 import menscasual from "../../assets/images/menscasual.jpg"
 import biylaclesen from "../../assets/images/biylaclesen.jpg";
 import chainbracelet from "../../assets/images/chainbracelet.jpg";
-import cart from "../../assets/icons/shopping-cart.svg";
+import cart from "../../assets/icons/cart.svg";
 import eye from "../../assets/icons/eye.svg";
 import vector from "../../assets/icons/Vector.svg";
-import sale from "../../assets/images/sale.png";
+import sale from "../../assets/images/hero-sale.svg";
 import boxTick from "../../assets/icons/box-tick.svg";
 import crown from "../../assets/icons/crown.svg";
-import shield from "../../assets/icons/shield-security.svg";
+import shield from "../../assets/icons/security.svg";
 import reviewOne from "../../assets/images/review-1.png";
 import reviewTwo from "../../assets/images/review-2.png";
 import reviewThree from "../../assets/images/review-3.png";
@@ -31,7 +24,7 @@ import brandFour from "../../assets/images/brand-4.png";
 import brandFive from "../../assets/images/brand-5.png";
 import blogOne from "../../assets/images/blog-1.png";
 import blogTwo from "../../assets/images/blog-2.png";
-import { fetchCategories, fetchProducts, fetchProductsByCategory } from "../../api";
+import { fetchCategories, fetchProducts, fetchProductsByCategory, fetchProductById } from "../../api";
 import ProductCard from "../../components/productCard/ProductCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -39,55 +32,55 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 
-
-interface Item {
-  id: number;
-  name: string;
-  img: string;
-  count: number;
-}
-
 const HomePage: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [products, setProducts] = useState<any[]>([]);
+  const [upperSwiperProducts, setUpperSwiperProducts] = useState<any[]>([]);
+  const [lowerSwiperProducts, setLowerSwiperProducts] = useState<any[]>([]);
+  const [categoryProducts, setCategoryProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    const getCategories = async () => {
+    const fetchInitialData = async () => {
       try {
         const categoriesData = await fetchCategories();
         setCategories(categoriesData);
+
+        const upperProductIds = [4, 5, 13, 17];
+        const upperProductsPromises = upperProductIds.map(id => fetchProductById(id));
+        const upperProducts = await Promise.all(upperProductsPromises);
+        setUpperSwiperProducts(upperProducts);
+
+        const lowerProductIds = [3, 8 , 15];
+        const lowerProductsPromises = lowerProductIds.map(id => fetchProductById(id));
+        const lowerProducts = await Promise.all(lowerProductsPromises);
+        setLowerSwiperProducts(lowerProducts);
+
+        const allProducts = await fetchProducts();
+        setCategoryProducts(allProducts);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching initial data:", error);
       }
     };
 
-    getCategories();
+    fetchInitialData();
   }, []);
 
   useEffect(() => {
-    const getProducts = async () => {
+    const getProductsByCategory = async () => {
       try {
         const productsData = selectedCategory === "all"
           ? await fetchProducts()
           : await fetchProductsByCategory(selectedCategory);
-        setProducts(productsData);
+        setCategoryProducts(productsData);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching products by category:", error);
       }
     };
 
-    getProducts();
+    getProductsByCategory();
   }, [selectedCategory]);
 
-
-  const [items, setItems] = useState<Item[]>([
-    { id: 1, name: 'Gaming Drive', img: gaming, count: 6 },
-    { id: 2, name: 'Pierced Owl', img: piercedowl, count: 6 },
-    { id: 3, name: 'Rain Jacket', img: rainjacket, count: 6 }
-  ]);
-
-  const swapItems = (direction: 'left' | 'right') => {
+  const swapItems = (items: any[], direction: 'left' | 'right') => {
     let newItems = [...items];
     if (direction === 'left') {
       const item = newItems.pop();
@@ -100,15 +93,14 @@ const HomePage: React.FC = () => {
         newItems.push(item);
       }
     }
-    setItems(newItems);
+    return newItems;
   };
 
   return (
     <>
       <Header />
       <div className="px-4 md:px-8 lg:px-32 py-4">
-
-        {/* HERO SECTION */}
+        {/* Upper Swiper */}
         <section>
           <Swiper
             modules={[Navigation, Pagination]}
@@ -118,102 +110,63 @@ const HomePage: React.FC = () => {
             slidesPerView={"auto"}
             pagination={{ clickable: true }}
           >
-            <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
-                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
-                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">SanDisk</p>
-                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">SSD</p>
-                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
-                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
-                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+            {upperSwiperProducts.map(product => (
+              <SwiperSlide key={product.id}>
+                <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
+                  <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
+                    <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">{product.title}</p>
+                    <div className="flex gap-4 mt-4 justify-center md:justify-start">
+                      <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
+                      <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+                    </div>
+                  </div>
+                  <div className="relative order-1 md:order-2">
+                    <img src={product.image} alt={product.title} className="h-40 sm:h-60 md:h-80 mx-auto" />
+                    <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-6 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">
+                      only ${product.price}
+                    </div>
                   </div>
                 </div>
-                <div className="relative order-1 md:order-2">
-                  <img src={sandisk} alt="SanDisk SSD" className="h-40 sm:h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-8 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $109</div>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
-                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
-                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">White</p>
-                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">Gold</p>
-                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
-                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
-                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
-                  </div>
-                </div>
-                <div className="relative order-1 md:order-2">
-                  <img src={whitegold} alt="White Gold" className="h-40 sm:h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-6 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $9.99</div>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
-                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
-                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">Cotton</p>
-                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">Jacket</p>
-                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
-                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
-                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
-                  </div>
-                </div>
-                <div className="relative order-1 md:order-2">
-                  <img src={cottonjacket} alt="Cotton Jacket" className="h-40 sm:h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-6 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $55.99</div>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
-                <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
-                  <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">DANVOUY</p>
-                  <p className="text-2xl md:text-4xl font-bold mt-4 text-customBlue text-center md:text-left">Womens</p>
-                  <div className="flex gap-4 mt-4 justify-center md:justify-start">
-                    <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
-                    <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
-                  </div>
-                </div>
-                <div className="relative order-1 md:order-2">
-                  <img src={danvouy} alt="DANVOUY Womens" className="h-40 sm:h-60 md:h-80 mx-auto" />
-                  <div className="bg-customYellow text-white text-center font-semibold p-4 sm:p-6 md:p-8 rounded-full w-20 h-20 sm:w-20 sm:h-20 md:w-28 md:h-28 absolute top-1/2 right-0 transform -translate-y-1/2">only $12.99</div>
-                </div>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </section>
 
-        {/* PRODUCTS SECTION */}
+        {/* Lower Swiper */}
         <section>
           <div className="flex flex-col lg:flex-row justify-around items-center mt-14">
             <div className="relative">
-              <div className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute left-0 top-1/2 transform -translate-y-1/2" onClick={() => swapItems('left')}>
+              <div
+                className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute left-0 top-1/2 transform -translate-y-1/2"
+                onClick={() => setLowerSwiperProducts(swapItems(lowerSwiperProducts, 'left'))}
+              >
                 <img src={leftArrow} alt="left-arrow" className="w-6 h-6" />
               </div>
             </div>
-            {items.map((item, index) => (
-              <div key={item.id} className="flex items-center justify-around rounded-xl w-full lg:w-80 h-32 border border-cardBorderColor mb-4 lg:mb-0">
-                <img className="object-cover w-20 h-20" src={item.img} alt={item.name} />
+            {lowerSwiperProducts.map((product) => (
+              <div
+                key={product.id}
+                className="flex items-center justify-around rounded-xl w-full lg:w-80 h-32 border border-cardBorderColor mb-4 lg:mb-0"
+              >
+                <img className="object-cover w-20 h-20" src={product.image} alt={product.title} />
                 <div className="flex flex-col justify-between p-4 leading-normal">
-                  <p className="font-bold text-lg text-customBlue">{item.name}</p>
-                  <p className="text-sm mt-2 text-customBlue">({item.count} items)</p>
+                  <p className="font-bold text-lg text-customBlue truncate w-40">{product.title}</p>
+                  <p className="text-sm mt-2 text-customBlue">${product.price}</p>
                 </div>
               </div>
             ))}
             <div className="relative">
-              <div className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute right-0 top-1/2 transform -translate-y-1/2" onClick={() => swapItems('right')}>
+              <div
+                className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute right-0 top-1/2 transform -translate-y-1/2"
+                onClick={() => setLowerSwiperProducts(swapItems(lowerSwiperProducts, 'right'))}
+              >
                 <img src={rightArrow} alt="right-arrow" className="w-6 h-6" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* POPULAR PRODUCTS */}
+        {/* Popular Products */}
         <section className="mt-16">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="font-bold text-2xl text-customBlue mb-4 sm:mb-0">Popular products</p>
@@ -239,7 +192,7 @@ const HomePage: React.FC = () => {
 
         <section className="mt-10 px-2 sm:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
-            {products.map((product) => (
+            {categoryProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 id={product.id}
@@ -478,10 +431,11 @@ const HomePage: React.FC = () => {
             <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
           </div>
         </section>
-      </div >
+      </div>
       <Footer />
     </>
   );
 };
 
 export default HomePage;
+

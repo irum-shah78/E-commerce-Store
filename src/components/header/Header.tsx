@@ -4,10 +4,10 @@ import { RootState } from '../../store/store';
 import { Link } from 'react-router-dom';
 import location from "../../assets/icons/location.svg";
 import track from "../../assets/icons/track.svg";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 import user from "../../assets/icons/user.svg";
 import heart from "../../assets/icons/heart.svg";
-import cart from "../../assets/icons/shopping-cart.svg";
+import cart from "../../assets/icons/cart.svg";
 
 const Header: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
