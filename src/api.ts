@@ -1,23 +1,21 @@
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import api from "./services/axiosInstance";
 
 export const fetchProducts = async () => {
-  const response = await axios.get(`${API_URL}/products`);
+  const response = await api.get(`/products`);
   return response.data;
 };
 
 export const fetchProductById = async (id: number) => {
-  const response = await axios.get(`${API_URL}/products/${id}`);
+  const response = await api.get(`/products/${id}`);
   return response.data;
 };
 
 export const fetchCategories = async () => {
-  const response = await axios.get(`${API_URL}/products/categories`);
+  const response = await api.get(`/products/categories`);
   return response.data;
 };
 
 export const fetchProductsByCategory = async (category: string) => {
-  const response = await axios.get(`${API_URL}/products/category/${category}`);
+  const response = await api.get(`/products/category/${category}`);
   return response.data;
 };

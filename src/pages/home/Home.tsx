@@ -4,9 +4,6 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import leftArrow from "../../assets/icons/arrow-left.svg";
 import rightArrow from "../../assets/icons/arrow-right.svg";
-import menscasual from "../../assets/images/menscasual.jpg"
-import biylaclesen from "../../assets/images/biylaclesen.jpg";
-import chainbracelet from "../../assets/images/chainbracelet.jpg";
 import cart from "../../assets/icons/cart.svg";
 import eye from "../../assets/icons/eye.svg";
 import vector from "../../assets/icons/Vector.svg";
@@ -14,16 +11,16 @@ import sale from "../../assets/images/hero-sale.svg";
 import boxTick from "../../assets/icons/box-tick.svg";
 import crown from "../../assets/icons/crown.svg";
 import shield from "../../assets/icons/security.svg";
-import reviewOne from "../../assets/images/review-1.png";
-import reviewTwo from "../../assets/images/review-2.png";
-import reviewThree from "../../assets/images/review-3.png";
-import brandOne from "../../assets/images/brand-1.png";
-import brandTwo from "../../assets/images/brand-2.png";
-import brandThree from "../../assets/images/brand-3.png";
-import brandFour from "../../assets/images/brand-4.png";
-import brandFive from "../../assets/images/brand-5.png";
-import blogOne from "../../assets/images/blog-1.png";
-import blogTwo from "../../assets/images/blog-2.png";
+import reviewOne from "../../assets/images/review-1.svg";
+import reviewTwo from "../../assets/images/review-2.svg";
+import reviewThree from "../../assets/images/review-3.svg";
+import brandOne from "../../assets/images/brand-1.svg";
+import brandTwo from "../../assets/images/brand-2.svg";
+import brandThree from "../../assets/images/brand-3.svg";
+import brandFour from "../../assets/images/brand-4.svg";
+import brandFive from "../../assets/images/brand-5.svg";
+import blogOne from "../../assets/images/bolg-1.svg";
+import blogTwo from "../../assets/images/blog-2.svg";
 import { fetchCategories, fetchProducts, fetchProductsByCategory, fetchProductById } from "../../api";
 import ProductCard from "../../components/productCard/ProductCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -35,8 +32,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 const HomePage: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [upperSwiperProducts, setUpperSwiperProducts] = useState<any[]>([]);
-  const [lowerSwiperProducts, setLowerSwiperProducts] = useState<any[]>([]);
+  const [upperSwiperProducts, setHeroProducts] = useState<any[]>([]);
+  const [lowerSwiperProducts, setFeaturedProducts] = useState<any[]>([]);
   const [categoryProducts, setCategoryProducts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -48,12 +45,12 @@ const HomePage: React.FC = () => {
         const upperProductIds = [4, 5, 13, 17];
         const upperProductsPromises = upperProductIds.map(id => fetchProductById(id));
         const upperProducts = await Promise.all(upperProductsPromises);
-        setUpperSwiperProducts(upperProducts);
+        setHeroProducts(upperProducts);
 
-        const lowerProductIds = [3, 8 , 15];
+        const lowerProductIds = [11, 8, 15];
         const lowerProductsPromises = lowerProductIds.map(id => fetchProductById(id));
         const lowerProducts = await Promise.all(lowerProductsPromises);
-        setLowerSwiperProducts(lowerProducts);
+        setFeaturedProducts(lowerProducts);
 
         const allProducts = await fetchProducts();
         setCategoryProducts(allProducts);
@@ -96,11 +93,27 @@ const HomePage: React.FC = () => {
     return newItems;
   };
 
+  const fetchContentProducts = async () => {
+    const categoryProductIds = [3, 10, 12];
+    const categoryProductsPromises = categoryProductIds.map(id => fetchProductById(id));
+    const categoryProducts = await Promise.all(categoryProductsPromises);
+    return categoryProducts;
+  };
+
+  const [categorySectionProducts, setCategorySectionProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await fetchContentProducts();
+      setCategorySectionProducts(products);
+    };
+    fetchProducts();
+  }, []);
   return (
     <>
       <Header />
       <div className="px-4 md:px-8 lg:px-32 py-4">
-        {/* Upper Swiper */}
+        {/* Hero Swiper */}
         <section>
           <Swiper
             modules={[Navigation, Pagination]}
@@ -132,13 +145,13 @@ const HomePage: React.FC = () => {
           </Swiper>
         </section>
 
-        {/* Lower Swiper */}
+        {/* Featured Swiper */}
         <section>
           <div className="flex flex-col lg:flex-row justify-around items-center mt-14">
             <div className="relative">
               <div
                 className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute left-0 top-1/2 transform -translate-y-1/2"
-                onClick={() => setLowerSwiperProducts(swapItems(lowerSwiperProducts, 'left'))}
+                onClick={() => setHeroProducts(swapItems(lowerSwiperProducts, 'left'))}
               >
                 <img src={leftArrow} alt="left-arrow" className="w-6 h-6" />
               </div>
@@ -158,7 +171,7 @@ const HomePage: React.FC = () => {
             <div className="relative">
               <div
                 className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute right-0 top-1/2 transform -translate-y-1/2"
-                onClick={() => setLowerSwiperProducts(swapItems(lowerSwiperProducts, 'right'))}
+                onClick={() => setFeaturedProducts(swapItems(lowerSwiperProducts, 'right'))}
               >
                 <img src={rightArrow} alt="right-arrow" className="w-6 h-6" />
               </div>
@@ -219,73 +232,50 @@ const HomePage: React.FC = () => {
 
         {/* CATEGORY SECTION */}
         <section className="flex flex-col sm:flex-row justify-between mt-12 gap-6">
-          <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
-            <div className="flex flex-col sm:flex-row justify-around items-center p-4 h-full">
-              <img className="object-cover h-40 w-auto sm:w-48" src={menscasual} alt="speakers" />
-              <div className="p-4 leading-normal">
-                <p className="font-semibold text-lg text-customBlue">Mens Casual Premium</p>
-                <p className="font-semibold text-lg text-customBlue"> Slim Fit T-Shirts</p>
-                <p className="font-semibold text-gray-600 mt-4">$22.3</p>
-                <div className="flex gap-2 mt-4">
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                </div>
-                <div className="flex mt-6 gap-2">
-                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">57</button>
-                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">11</button>
-                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">33</button>
-                  <button className="rounded-full h-10 w-10 sm:h-14 sm:w-14 font-semibold bg-sizeColor text-customYellow">59</button>
-                </div>
-                <div className="flex justify-between items-center mt-7">
-                  <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
-                    <p className="text-black font-semibold">Add to cart</p>
-                    <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
-                      <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
+          {categorySectionProducts.length > 0 && (
+            <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
+              <div className="flex flex-col sm:flex-row justify-around items-center p-4 h-full">
+                <img className="object-cover h-40 w-auto sm:w-48" src={categorySectionProducts[0].image} alt={categorySectionProducts[0].title} />
+                <div className="p-4 leading-normal">
+                  <p className="font-semibold text-lg text-customBlue">{categorySectionProducts[0].title}</p>
+                  <p className="font-semibold text-gray-600 mt-4">${categorySectionProducts[0].price}</p>
+                  <div className="flex gap-2 mt-4">
+                    {[...Array(5)].map((_, index) => (
+                      <img key={index} src={vector} alt="star" />
+                    ))}
+                  </div>
+                  <div className="flex justify-between items-center mt-7">
+                    <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
+                      <p className="text-black font-semibold">Add to cart</p>
+                      <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
+                        <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
+                      </div>
+                    </div>
+                    <div className="rounded-2xl bg-iconLightBlue px-5 py-3 ml-2 text-center cursor-pointer">
+                      <img src={eye} alt="eye" />
                     </div>
                   </div>
-                  <div className="rounded-2xl bg-iconLightBlue px-5 py-3 ml-2 text-center cursor-pointer"><img src={eye} alt="eye" /></div>
                 </div>
               </div>
             </div>
-          </div>
-
+          )}
           <div className="flex flex-col items-center sm:items-start">
-            <div className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96 mb-4 sm:mb-0">
-              <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-4 h-full">
-                <img className="object-cover w-20 h-20 sm:w-32 sm:h-32" src={biylaclesen} alt="play game" />
-                <div className="p-4 leading-normal">
-                  <p className="font-semibold text-sm text-customBlue">BIYLACLESEN</p>
-                  <p className="font-semibold text-gray-600 mt-2">$56.99</p>
-                  <div className="flex gap-2 mt-2">
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
+            {categorySectionProducts.slice(1).map((product) => (
+              <div key={product.id} className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96 mb-4 sm:mb-0">
+                <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-4 h-full">
+                  <img className="object-cover w-20 h-20 sm:w-32 sm:h-32" src={product.image} alt={product.title} />
+                  <div className="p-4 leading-normal">
+                    <p className="font-semibold text-sm text-customBlue truncate w-40">{product.title}</p>
+                    <p className="font-semibold text-gray-600 mt-2">${product.price}</p>
+                    <div className="flex gap-2 mt-2">
+                      {[...Array(5)].map((_, index) => (
+                        <img key={index} src={vector} alt="star" />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96 mt-2">
-              <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-4 h-full">
-                <img className="object-cover w-20 h-20 sm:w-32 sm:h-32" src={chainbracelet} alt="laptop" />
-                <div className="p-4 leading-normal">
-                  <p className="font-semibold text-sm text-customBlue">Chain Bracelet</p>
-                  <p className="font-semibold text-gray-600 mt-2">$695</p>
-                  <div className="flex gap-2 mt-2">
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
-                    <img src={vector} alt="star" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -319,7 +309,7 @@ const HomePage: React.FC = () => {
         {/* REVIEWS SECTION */}
         <section className="mt-14">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-            <div className="rounded-2xl border border-productCardBorder h-52 w-full sm:w-96">
+            <div className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96">
               <div className="flex justify-around items-center mt-4">
                 <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
                   <img className="rounded-full" src={reviewOne} alt="review" />
@@ -328,12 +318,12 @@ const HomePage: React.FC = () => {
                   <p className="font-semibold text-customBlue">Savannah Nguyen</p>
                 </div>
               </div>
-              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6">
+              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-4">
                 <p className="text-customBlue">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit voluptas ipsam repellendus veritatis</p>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-productCardBorder h-52 w-full sm:w-96">
+            <div className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96">
               <div className="flex justify-around items-center mt-4">
                 <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
                   <img className="rounded-full" src={reviewTwo} alt="review" />
@@ -342,12 +332,12 @@ const HomePage: React.FC = () => {
                   <p className="font-semibold text-customBlue">Esther Howard</p>
                 </div>
               </div>
-              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6">
+              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-4">
                 <p className="text-customBlue">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit voluptas ipsam repellendus veritatis</p>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-productCardBorder h-52 w-full sm:w-96">
+            <div className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96">
               <div className="flex justify-around items-center mt-4">
                 <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
                   <img className="rounded-full" src={reviewThree} alt="review" />
@@ -356,7 +346,7 @@ const HomePage: React.FC = () => {
                   <p className="font-semibold text-customBlue">Savannah Nguyen</p>
                 </div>
               </div>
-              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6">
+              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-4">
                 <p className="text-customBlue">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit voluptas ipsam repellendus veritatis</p>
               </div>
             </div>
@@ -438,4 +428,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-

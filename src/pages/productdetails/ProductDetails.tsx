@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import productDetails from '../../data/ProductData.json';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import star from "../../assets/icons/star.png"
-import tick from "../../assets/icons/Vector.png"
-import favorite from "../../assets/icons/favorite.png"
-import google from "../../assets/icons/google.svg"
-import facebook from "../../assets/icons/facebook.svg"
-import whatsApp from "../../assets/icons/whatsapp.svg"
-import gaming from "../../assets/images/gamingdrive.jpg";
-import piercedowl from "../../assets/images/piercedowl.jpg";
-import rainjacket from "../../assets/images/rainjacket-women.jpg";
-import menslim from "../../assets/images/slimfir-men.jpg"
-import heart from "../../assets/icons/heart.png"
-import vector from "../../assets/icons/Vector.svg"
+import star from "../../assets/icons/star.svg";
+import tick from "../../assets/icons/tick.svg";
+import favorite from "../../assets/icons/favorite.svg";
+import google from "../../assets/icons/google.svg";
+import facebook from "../../assets/icons/facebook.svg";
+import whatsApp from "../../assets/icons/whatsapp.svg";
+import vector from "../../assets/icons/Vector.svg";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
+import { fetchProductById } from "../../api";
 
 interface Product {
   id: number;
@@ -32,13 +27,30 @@ const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
+  const [categorySectionProducts, setCategorySectionProducts] = useState<any[]>([]);
 
   useEffect(() => {
     if (id) {
-      const productDetail = productDetails.find((product) => product.id === parseInt(id));
-      setProduct(productDetail || null);
+      fetchProductById(parseInt(id)).then(productDetail => {
+        setProduct(productDetail || null);
+      });
     }
   }, [id]);
+
+  const fetchContentProducts = async () => {
+    const categoryProductIds = [3, 10, 12, 17];
+    const categoryProductsPromises = categoryProductIds.map(id => fetchProductById(id));
+    const categoryProducts = await Promise.all(categoryProductsPromises);
+    return categoryProducts;
+  };
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await fetchContentProducts();
+      setCategorySectionProducts(products);
+    };
+    fetchProducts();
+  }, []);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -162,82 +174,26 @@ const ProductDetails: React.FC = () => {
         </div>
 
         {/* RELATED PRODUCT */}
-        <div className='mt-12'>
-          <p className='text-lg font-semibold text-customBlue'>Related Product</p>
-
-          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-around lg:justify-between cursor-pointer mt-10 gap-4">
-            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
-              <div className="flex items-stretch justify-center mt-6">
-                <img className="w-28 h-28" src={piercedowl} alt="headphone" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
-              </div>
-              <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm text-customBlue">Pierced Owl</p>
-                <p className="font-semibold text-gray-600 mt-2">$10.99</p>
-                <div className="flex gap-2 mt-2">
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
+        <section className="flex flex-wrap justify-between mt-12 gap-6">
+          {categorySectionProducts.map((product, index) => (
+            <div key={product.id} className="rounded-2xl border border-productCardBorder w-full sm:w-[23%] mb-6 sm:mb-0 p-4">
+              <div className="flex flex-col h-full">
+                <div className="flex justify-center w-full mb-4">
+                  <img className="object-cover w-40 h-40" src={product.image} alt={product.title} />
+                </div>
+                <div className="leading-normal">
+                  <p className="font-semibold text-base text-customBlue truncate w-40">{product.title}</p>
+                  <p className="font-semibold text-base text-gray-600 mt-2">${product.price}</p>
+                  <div className="flex gap-2 mt-2">
+                    {[...Array(5)].map((_, starIndex) => (
+                      <img key={starIndex} src={vector} alt="star" />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
-              <div className="flex items-stretch justify-center mt-6">
-                <img className="w-28 h-28" src={menslim} alt="headphone" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
-              </div>
-              <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm text-customBlue">Mens Casual Slim Fit</p>
-                <p className="font-semibold text-gray-600 mt-2">$11.70</p>
-                <div className="flex gap-2 mt-2">
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                </div>
-              </div>
-            </div>
-            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
-              <div className="flex items-stretch justify-center mt-6">
-                <img className="w-28 h-28" src={rainjacket} alt="playGame" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
-              </div>
-              <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm text-customBlue">Rain Jacket</p>
-                <p className="font-semibold text-gray-600 mt-2">$39.99</p>
-                <div className="flex gap-2 mt-2">
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-2xl w-full sm:w-64 h-64 border border-productCardBorder">
-              <div className="flex items-stretch justify-center mt-6">
-                <img className="w-28 h-28" src={gaming} alt="laptop" />
-                <div className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue"><img src={heart} alt="heart" /></div>
-              </div>
-              <div className="ms-2 mt-1">
-                <p className="font-semibold text-sm text-customBlue">Gaming Drive</p>
-                <p className="font-semibold text-gray-600 mt-2">$114</p>
-                <div className="flex gap-2 mt-2">
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                  <img src={vector} alt="star" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          ))}
+        </section>
       </section>
       <Footer />
     </>

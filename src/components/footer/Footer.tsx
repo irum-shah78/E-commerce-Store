@@ -1,7 +1,7 @@
 import React from 'react';
 import share from "../../assets/icons/share.svg";
 import headphone from "../../assets/icons/headphone.svg";
-import logo1 from "../../assets/images/logo-1.png";
+import footerLogo from "../../assets/images/footer-logo.svg";
 import google from "../../assets/icons/google.svg";
 import facebook from "../../assets/icons/facebook.svg";
 import whatsapp from "../../assets/icons/whatsapp.svg";
@@ -26,7 +26,7 @@ const Footer = () => {
 
         <div className="flex flex-col lg:flex-row justify-between mt-6">
           <div className="flex-1 mb-6 lg:mb-0">
-            <img src={logo1} className="h-8 mb-3" alt="Logo" />
+            <img src={footerLogo} className="h-8 mb-3" alt="Logo" />
             <p className='mt-6 text-xs text-customBlue'>64 st james boulevard<br /> hoswick, ze2 7zj</p>
             <hr className='mt-6 w-1/2 border-t-1 border-customGray' />
             <div className='flex items-center gap-4 mt-4 cursor-pointer'>

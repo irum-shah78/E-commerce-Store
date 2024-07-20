@@ -12,6 +12,7 @@ import cart from "../../assets/icons/cart.svg";
 const Header: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
@@ -22,6 +23,10 @@ const Header: React.FC = () => {
 
   const toggleCart = () => {
     setCartOpen(!cartOpen);
+  };
+
+  const toggleWishlist = () => { 
+    setWishlistOpen(!wishlistOpen);
   };
 
   const toggleMenu = () => {
@@ -60,10 +65,30 @@ const Header: React.FC = () => {
           <div className='flex items-center text-white cursor-pointer gap-3 mt-4 md:mt-0'>
             <img alt='user' src={user} className="w-6 h-10" />
             <span className="hidden sm:block">Sign in</span>
-            <div className='flex items-center gap-1'>
-              <img alt='heart' src={heart} className="w-6 h-10" />
-              <div className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>{wishlistItems.length}</div>
-              <Link to="/wishlist" className='hidden sm:block pl-2'>Wishlist</Link>
+            <div className='relative'>
+              <div className='flex items-center gap-1' onClick={toggleWishlist}>
+                <img alt='heart' src={heart} className="w-6 h-10" />
+                <div className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>{wishlistItems.length}</div>
+                <span className='hidden sm:block pl-2'>Wishlist</span>
+              </div>
+              {wishlistOpen && (
+                <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10'>
+                  {wishlistItems.length > 0 ? (
+                    <ul>
+                      {wishlistItems.map(item => (
+                        <li key={item.id} className='flex justify-between p-2'>
+                          <span className='text-customBlue'>{item.title}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className='text-center'>Your wishlist is empty.</p>
+                  )}
+                  <Link to="/wishlist" className="text-center block font-semibold text-customBlue">
+                    View Wishlist
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className='relative'>
@@ -148,7 +173,7 @@ const Header: React.FC = () => {
 
             <Link to="/pages" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
               Pages
-              <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 10">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
               </svg>
             </Link>

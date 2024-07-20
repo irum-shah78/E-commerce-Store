@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToWishlist } from '../../store/wishlistSlice';
-import heart from "../../assets/icons/heart.png"
+import heart from "../../assets/icons/favorite-heart.svg"
 
 interface ProductCardProps {
   id: number;

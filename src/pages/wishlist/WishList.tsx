@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import { removeFromWishlist, clearWishlist } from '../../store/wishlistSlice';
 import { addToCart } from '../../store/cartSlice'; 
-import favorite from "../../../src/assets/icons/favorite.png"
+import favorite from "../../../src/assets/icons/favorite.svg"
 import Header from 'src/components/header/Header';
 import Footer from 'src/components/footer/Footer';
 import { useNavigate } from 'react-router-dom';

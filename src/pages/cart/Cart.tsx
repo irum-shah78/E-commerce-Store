@@ -4,7 +4,7 @@ import { RootState } from '../../store/store';
 import { removeFromCart, updateQuantity, clearCart, updateCart } from '../../store/cartSlice';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import closeCircle from "../../assets/icons/close-circle.png";
+import closeCircle from "../../assets/icons/close-circle.svg";
 import { Link } from 'react-router-dom';
 
 const CartPage: React.FC = () => {
