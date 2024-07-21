@@ -12,30 +12,15 @@ import vector from "../../assets/icons/Vector.svg";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { fetchProductById } from "../../api";
-
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-}
+import useFetchProductById from 'src/hooks/useFetchProductById';
 
 const ProductDetails: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [categorySectionProducts, setCategorySectionProducts] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (id) {
-      fetchProductById(parseInt(id)).then(productDetail => {
-        setProduct(productDetail || null);
-      });
-    }
-  }, [id]);
+  const { id } = useParams<{ id: string }>();
+  const { product, loading, error } = useFetchProductById(Number(id));
 
   const fetchContentProducts = async () => {
     const categoryProductIds = [3, 10, 12, 17];
@@ -52,6 +37,8 @@ const ProductDetails: React.FC = () => {
     fetchProducts();
   }, []);
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -201,4 +188,3 @@ const ProductDetails: React.FC = () => {
 };
 
 export default ProductDetails;
-

@@ -16,6 +16,15 @@ export const fetchCategories = async () => {
 };
 
 export const fetchProductsByCategory = async (category: string) => {
-  const response = await api.get(`/products/category/${category}`);
-  return response.data;
+  try {
+    if (category === 'all') {
+      const response = await api.get('/products');
+      return response.data;
+    } else {
+      const response = await api.get(`/products/category/${category}`);
+      return response.data;
+    }
+  } catch (error) {
+    throw new Error('Failed to fetch products');
+  }
 };

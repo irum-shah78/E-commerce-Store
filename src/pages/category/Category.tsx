@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCategories, getProductsByCategory } from '../../store/productSlice';
-import { AppDispatch, RootState } from '../../store/store';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import ProductCard from '../../components/productCard/ProductCard';
+import useFetchCategories from '../../hooks/useFetchCategories';
+import useFetchProductsByCategory from '../../hooks/useFetchProductsByCategories';
 import sale from "../../assets/images/hero-sale.svg";
 
 const CategoryPage: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { categories, products, loading, error } = useSelector((state: RootState) => state.products);
+  const { categories, loading: categoriesLoading, error: categoriesError } = useFetchCategories();
   const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
     const savedCategories = localStorage.getItem('selectedCategories');
     return savedCategories ? JSON.parse(savedCategories) : [];
@@ -19,19 +17,9 @@ const CategoryPage: React.FC = () => {
     return savedAllCategoriesChecked ? JSON.parse(savedAllCategoriesChecked) : false;
   });
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (allCategoriesChecked) {
-      dispatch(getProductsByCategory('all'));
-    } else if (selectedCategories.length > 0) {
-      selectedCategories.forEach(category => {
-        dispatch(getProductsByCategory(category));
-      });
-    }
-  }, [selectedCategories, allCategoriesChecked, categories, dispatch]);
+  const { products, loading: productsLoading, error: productsError } = useFetchProductsByCategory(
+    allCategoriesChecked ? 'all' : selectedCategories.join(',')
+  );
 
   useEffect(() => {
     localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
@@ -42,9 +30,6 @@ const CategoryPage: React.FC = () => {
     if (category === 'all') {
       setAllCategoriesChecked(!allCategoriesChecked);
       setSelectedCategories([]);
-      if (!allCategoriesChecked) {
-        dispatch(getProductsByCategory('all'));
-      }
     } else {
       setAllCategoriesChecked(false);
       if (selectedCategories.includes(category)) {
@@ -58,7 +43,6 @@ const CategoryPage: React.FC = () => {
   const handleReset = () => {
     setSelectedCategories([]);
     setAllCategoriesChecked(false);
-    dispatch(getProductsByCategory('all'));
   };
 
   return (
@@ -74,8 +58,8 @@ const CategoryPage: React.FC = () => {
                 className="text-gray-500 hover:text-gray-700"
                 onClick={handleReset}>Reset</button>
             </div>
-            {loading && <p className='text-center'>Loading...</p>}
-            {error && <p className='text-center'>{error}</p>}
+            {categoriesLoading && <p className='text-center'>Loading categories...</p>}
+            {categoriesError && <p className='text-center'>{categoriesError}</p>}
             <ul className="space-y-2">
               <li>
                 <label className="flex items-center justify-between">
@@ -109,6 +93,7 @@ const CategoryPage: React.FC = () => {
               ))}
             </ul>
             <hr className='mt-6 border-gray-300' />
+            {/* </aside> */}
 
             {/* Availability */}
             <h2 className="font-semibold text-customBlue mt-4">Availability</h2>
@@ -245,12 +230,21 @@ const CategoryPage: React.FC = () => {
             <hr className='mt-6 border-gray-300' />
           </aside>
 
-          <main className="products flex-1 md:ml-4 flex flex-col items-center md:items-stretch">
+          {/* <main className="products flex-1 md:ml-4 flex flex-col items-center md:items-stretch">
             {loading && <p className='text-center'>Loading...</p>}
             {error && <p className='text-center'>{error}</p>}
             <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {products.map((product) => (
-                <ProductCard key={product.id} {...product} />
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </main> */}
+          <main className="products flex-1 md:ml-4 flex flex-col items-center md:items-stretch">
+            {productsLoading && <p className='text-center'>Loading products...</p>}
+            {productsError && <p className='text-center'>{productsError}</p>}
+            <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </main>

@@ -21,27 +21,29 @@ import brandFour from "../../assets/images/brand-4.svg";
 import brandFive from "../../assets/images/brand-5.svg";
 import blogOne from "../../assets/images/bolg-1.svg";
 import blogTwo from "../../assets/images/blog-2.svg";
-import { fetchCategories, fetchProducts, fetchProductsByCategory, fetchProductById } from "../../api";
+import { fetchProductById } from "../../api";
 import ProductCard from "../../components/productCard/ProductCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
+import useFetchCategories from '../../hooks/useFetchCategories';
+import useFetchProducts from '../../hooks/useFetchProducts';
+import useFetchProductsByCategory from '../../hooks/useFetchProductsByCategories';
 
 const HomePage: React.FC = () => {
-  const [categories, setCategories] = useState<string[]>([]);
+  const { categories } = useFetchCategories();
+  const { products: allProducts } = useFetchProducts();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const { products: categoryProducts } = useFetchProductsByCategory(selectedCategory);
   const [upperSwiperProducts, setHeroProducts] = useState<any[]>([]);
   const [lowerSwiperProducts, setFeaturedProducts] = useState<any[]>([]);
-  const [categoryProducts, setCategoryProducts] = useState<any[]>([]);
+  const [categoriesProducts, setCategoryProducts] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const categoriesData = await fetchCategories();
-        setCategories(categoriesData);
-
         const upperProductIds = [4, 5, 13, 17];
         const upperProductsPromises = upperProductIds.map(id => fetchProductById(id));
         const upperProducts = await Promise.all(upperProductsPromises);
@@ -52,8 +54,10 @@ const HomePage: React.FC = () => {
         const lowerProducts = await Promise.all(lowerProductsPromises);
         setFeaturedProducts(lowerProducts);
 
-        const allProducts = await fetchProducts();
-        setCategoryProducts(allProducts);
+        const categoryProductIds = [3, 5, 20]; // Example IDs
+        const categoryProductsPromises = categoryProductIds.map(id => fetchProductById(id));
+        const categoryProduct = await Promise.all(categoryProductsPromises);
+        setCategoryProducts(categoryProduct);
       } catch (error) {
         console.error("Error fetching initial data:", error);
       }
@@ -62,23 +66,8 @@ const HomePage: React.FC = () => {
     fetchInitialData();
   }, []);
 
-  useEffect(() => {
-    const getProductsByCategory = async () => {
-      try {
-        const productsData = selectedCategory === "all"
-          ? await fetchProducts()
-          : await fetchProductsByCategory(selectedCategory);
-        setCategoryProducts(productsData);
-      } catch (error) {
-        console.error("Error fetching products by category:", error);
-      }
-    };
-
-    getProductsByCategory();
-  }, [selectedCategory]);
-
-  const swapItems = (items: any[], direction: 'left' | 'right') => {
-    let newItems = [...items];
+  const swapUpperItems = (direction: 'left' | 'right') => {
+    let newItems = [...upperSwiperProducts];
     if (direction === 'left') {
       const item = newItems.pop();
       if (item) {
@@ -90,25 +79,25 @@ const HomePage: React.FC = () => {
         newItems.push(item);
       }
     }
-    return newItems;
+    setHeroProducts(newItems);
   };
 
-  const fetchContentProducts = async () => {
-    const categoryProductIds = [3, 10, 12];
-    const categoryProductsPromises = categoryProductIds.map(id => fetchProductById(id));
-    const categoryProducts = await Promise.all(categoryProductsPromises);
-    return categoryProducts;
+  const swapLowerItems = (direction: 'left' | 'right') => {
+    let newItems = [...lowerSwiperProducts];
+    if (direction === 'left') {
+      const item = newItems.pop();
+      if (item) {
+        newItems.unshift(item);
+      }
+    } else if (direction === 'right') {
+      const item = newItems.shift();
+      if (item) {
+        newItems.push(item);
+      }
+    }
+    setFeaturedProducts(newItems);
   };
 
-  const [categorySectionProducts, setCategorySectionProducts] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await fetchContentProducts();
-      setCategorySectionProducts(products);
-    };
-    fetchProducts();
-  }, []);
   return (
     <>
       <Header />
@@ -122,6 +111,7 @@ const HomePage: React.FC = () => {
             spaceBetween={10}
             slidesPerView={"auto"}
             pagination={{ clickable: true }}
+            onClick={() => swapUpperItems('left')}
           >
             {upperSwiperProducts.map(product => (
               <SwiperSlide key={product.id}>
@@ -151,7 +141,7 @@ const HomePage: React.FC = () => {
             <div className="relative">
               <div
                 className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute left-0 top-1/2 transform -translate-y-1/2"
-                onClick={() => setHeroProducts(swapItems(lowerSwiperProducts, 'left'))}
+                onClick={() => swapLowerItems('left')}
               >
                 <img src={leftArrow} alt="left-arrow" className="w-6 h-6" />
               </div>
@@ -171,7 +161,7 @@ const HomePage: React.FC = () => {
             <div className="relative">
               <div
                 className="rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg absolute right-0 top-1/2 transform -translate-y-1/2"
-                onClick={() => setFeaturedProducts(swapItems(lowerSwiperProducts, 'right'))}
+                onClick={() => swapLowerItems('right')}
               >
                 <img src={rightArrow} alt="right-arrow" className="w-6 h-6" />
               </div>
@@ -205,13 +195,13 @@ const HomePage: React.FC = () => {
 
         <section className="mt-10 px-2 sm:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
-            {categoryProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                title={product.title}
-                price={product.price}
-                image={product.image}
+            {(selectedCategory === 'all' ? allProducts : categoryProducts).map(product => (
+              < ProductCard
+                key={product.id} product={product}
+              // id={product.id}
+              // title={product.title}
+              // price={product.price}
+              // image={product.image}
               />
             ))}
           </div>
@@ -232,17 +222,23 @@ const HomePage: React.FC = () => {
 
         {/* CATEGORY SECTION */}
         <section className="flex flex-col sm:flex-row justify-between mt-12 gap-6">
-          {categorySectionProducts.length > 0 && (
+          {categoriesProducts.length > 0 && (
             <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
-              <div className="flex flex-col sm:flex-row justify-around items-center p-4 h-full">
-                <img className="object-cover h-40 w-auto sm:w-48" src={categorySectionProducts[0].image} alt={categorySectionProducts[0].title} />
+              <div className="flex flex-col sm:flex-row justify-around items-center h-full">
+                <img className="object-cover h-auto w-auto sm:w-48" src={categoriesProducts[0].image} alt={categoriesProducts[0].title} />
                 <div className="p-4 leading-normal">
-                  <p className="font-semibold text-lg text-customBlue">{categorySectionProducts[0].title}</p>
-                  <p className="font-semibold text-gray-600 mt-4">${categorySectionProducts[0].price}</p>
+                  <p className="font-semibold text-lg text-customBlue">{categoriesProducts[0].title}</p>
+                  <p className="font-semibold text-gray-600 mt-4">${categoriesProducts[0].price}</p>
                   <div className="flex gap-2 mt-4">
                     {[...Array(5)].map((_, index) => (
                       <img key={index} src={vector} alt="star" />
                     ))}
+                  </div>
+                  <div className="flex mt-6 gap-2">
+                    <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">57</button>
+                    <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">11</button>
+                    <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">33</button>
+                    <button className="rounded-full h-14 w-14 sm-h-14 sm-w-14 font-semibold bg-sizeColor text-customYellow">59</button>
                   </div>
                   <div className="flex justify-between items-center mt-7">
                     <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
@@ -259,11 +255,11 @@ const HomePage: React.FC = () => {
               </div>
             </div>
           )}
-          <div className="flex flex-col items-center sm:items-start">
-            {categorySectionProducts.slice(1).map((product) => (
-              <div key={product.id} className="rounded-2xl border border-productCardBorder h-56 w-full sm:w-96 mb-4 sm:mb-0">
-                <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-4 h-full">
-                  <img className="object-cover w-20 h-20 sm:w-32 sm:h-32" src={product.image} alt={product.title} />
+          <div className="flex flex-col items-center sm:items-start gap-4">
+            {categoriesProducts.slice(1).map((product) => (
+              <div key={product.id} className="rounded-2xl border border-productCardBorder h-48 w-full sm:w-96 mb-4 sm:mb-0">
+                <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-2">
+                  <img className="object-cover mt-2 w-20 h-20 sm:w-32 sm:h-32" src={product.image} alt={product.title} />
                   <div className="p-4 leading-normal">
                     <p className="font-semibold text-sm text-customBlue truncate w-40">{product.title}</p>
                     <p className="font-semibold text-gray-600 mt-2">${product.price}</p>
