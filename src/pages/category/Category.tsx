@@ -229,16 +229,6 @@ const CategoryPage: React.FC = () => {
             </ul>
             <hr className='mt-6 border-gray-300' />
           </aside>
-
-          {/* <main className="products flex-1 md:ml-4 flex flex-col items-center md:items-stretch">
-            {loading && <p className='text-center'>Loading...</p>}
-            {error && <p className='text-center'>{error}</p>}
-            <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </main> */}
           <main className="products flex-1 md:ml-4 flex flex-col items-center md:items-stretch">
             {productsLoading && <p className='text-center'>Loading products...</p>}
             {productsError && <p className='text-center'>{productsError}</p>}

@@ -1,15 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToWishlist } from '../../store/wishlistSlice';
-import heart from "../../assets/icons/favorite-heart.svg"
-
-// interface ProductCardProps {
-//   id: number;
-//   title: string;
-//   price: number;
-//   image: string;
-// }
+import { Link } from 'react-router-dom';
+import heart from "../../assets/icons/favorite-heart.svg";
 
 interface ProductCardProps {
   product: {
@@ -22,8 +15,9 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
+
   const handleAddToWishlist = () => {
-    dispatch(addToWishlist(product)); // Pass the product directly
+    dispatch(addToWishlist(product));
   };
 
   return (
@@ -49,29 +43,3 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 };
 
 export default ProductCard;
-
-
-
-// import React from 'react';
-
-// interface ProductCardProps {
-//   product: {
-//     id: number;
-//     title: string;
-//     price: number;
-//     image: string;
-//   };
-// }
-
-// const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-//   return (
-//     <div className="product-card">
-//       <img src={product.image} alt={product.title} className="product-image" />
-//       <h3 className="product-title">{product.title}</h3>
-//       <p className="product-price">${product.price}</p>
-//       <button className="add-to-cart">Add to Cart</button>
-//     </div>
-//   );
-// };
-
-// export default ProductCard;

@@ -10,9 +10,9 @@ const useFetchProductsByCategory = (category: string) => {
     const fetchData = async () => {
       try {
         const data = await fetchProductsByCategory(category);
-        setProducts(data);
+        setProducts(Array.isArray(data) ? data : []);
       } catch (err) {
-        setError('Failed to fetch products by category');
+        setError('Failed to fetch products');
       } finally {
         setLoading(false);
       }

@@ -1,19 +1,18 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import { removeFromWishlist, clearWishlist } from '../../store/wishlistSlice';
-import { addToCart } from '../../store/cartSlice'; 
-import favorite from "../../../src/assets/icons/favorite.svg"
+import favorite from "../../assets/icons/favorite.svg";
 import Header from 'src/components/header/Header';
 import Footer from 'src/components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import { addToCart } from '../../store/cartSlice';
 
 const Wishlist = () => {
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleAddToCart = (item:any) => {
+  const handleAddToCart = (item: any) => {
     dispatch(addToCart({ ...item, quantity: 1 }));
     navigate('/cart');
   };
@@ -31,7 +30,7 @@ const Wishlist = () => {
             <table className="min-w-full bg-white">
               <thead>
                 <tr className="w-full">
-                  <th className="px-6 py-3 text-left text-lg font-bold text-black uppercase tracking-wider">Product name</th>
+                  <th className="px-6 py-3 text-left text-lg font-bold text-black uppercase tracking-wider">Product</th>
                   <th className="px-6 py-3 text-left text-lg font-bold text-black uppercase tracking-wider">Price</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                 </tr>
