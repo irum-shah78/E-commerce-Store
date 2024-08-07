@@ -54,7 +54,7 @@ const HomePage: React.FC = () => {
         const lowerProducts = await Promise.all(lowerProductsPromises);
         setFeaturedProducts(lowerProducts);
 
-        const categoryProductIds = [3, 5, 20]; // Example IDs
+        const categoryProductIds = [3, 5, 20];
         const categoryProductsPromises = categoryProductIds.map(id => fetchProductById(id));
         const categoryProduct = await Promise.all(categoryProductsPromises);
         setCategoryProducts(categoryProduct);
