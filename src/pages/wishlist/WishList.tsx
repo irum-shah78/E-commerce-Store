@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
-import { removeFromWishlist, clearWishlist } from '../../store/WishlistSlice';
+import { removeFromWishlist, clearWishlist } from '../../store/wishlistSlice';
 import favorite from "../../assets/icons/favorite.svg";
 import Header from 'src/components/header/Header';
 import Footer from 'src/components/footer/Footer';

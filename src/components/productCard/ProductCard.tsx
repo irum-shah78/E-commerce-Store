@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addToWishlist } from '../../store/WishlistSlice';
+import { addToWishlist } from '../../store/wishlistSlice';
 import { Link } from 'react-router-dom';
 import heart from "../../assets/icons/favorite-heart.svg";
 
