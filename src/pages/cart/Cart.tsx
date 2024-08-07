@@ -6,13 +6,19 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import closeCircle from "../../assets/icons/close-circle.svg";
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CartPage: React.FC = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   const handleRemove = (id: number) => {
-    dispatch(removeFromCart(id));
+    try {
+      dispatch(removeFromCart(id));
+      toast.success('Product removed successfully!');
+    } catch (error) {
+      toast.error('Failed to remove product.');
+    }
   };
 
   const handleQuantityChange = (id: number, quantity: number) => {
@@ -23,10 +29,16 @@ const CartPage: React.FC = () => {
 
   const handleUpdateCart = () => {
     dispatch(updateCart(cartItems));
+    toast.success('Cart updated successfully!');
   };
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    try {
+      dispatch(clearCart());
+      toast.success('Cart cleared successfully!');
+    } catch (error) {
+      toast.error('Failed to clear cart.');
+    }
   };
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -117,6 +129,7 @@ const CartPage: React.FC = () => {
         </div>
       </section>
       <Footer />
+      <Toaster />
     </>
   );
 };

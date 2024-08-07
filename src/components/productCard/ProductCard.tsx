@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addToWishlist } from '../../store/wishlistSlice';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import heart from "../../assets/icons/favorite-heart.svg";
 
 interface ProductCardProps {
@@ -17,7 +18,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
 
   const handleAddToWishlist = () => {
-    dispatch(addToWishlist(product));
+    try {
+      dispatch(addToWishlist(product));
+      toast.success(`${product.title} added to wishlist!`);
+    } catch (error:any) {
+      toast.error(`Failed to add ${product.title} to wishlist: ${error.message}`);
+    }
   };
 
   return (

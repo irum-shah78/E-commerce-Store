@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Toaster } from 'react-hot-toast';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
     <Provider store={store}>
       <Router>
         <App />
+        <Toaster />
       </Router>
     </Provider>
   </React.StrictMode>

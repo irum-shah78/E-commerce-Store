@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { fetchProductById } from "../../api";
 import useFetchProductById from 'src/hooks/useFetchProductById';
+import toast from 'react-hot-toast';
 
 const ProductDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -39,14 +40,15 @@ const ProductDetails: React.FC = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  if (!product) return <div>Loading...</div>;
 
-  const handleAddToCart = () => {
-    if (product) {
+  const handleAddToCart = async () => {
+    try {
       dispatch(addToCart({ ...product, quantity }));
+      toast.success(`${product.title} added to cart successfully!`);
       navigate('/cart');
+    } catch (error:any) {
+      toast.error(`Failed to add ${product.title} to cart: ${error.message}`);
     }
   };
 
@@ -147,7 +149,7 @@ const ProductDetails: React.FC = () => {
 
         {/* REVIEWS SECTION */}
         <div>
-          <div className='flex items-center justify-center gap-3 mt-12' >
+          <div className='flex items-center justify-center gap-3 mt-12'>
             <button className="rounded-xl border border-gray-400 py-2 px-4">Description</button>
             <button className="text-white bg-customBlue rounded-xl py-2 px-6">Reviews</button>
           </div>
@@ -162,7 +164,7 @@ const ProductDetails: React.FC = () => {
 
         {/* RELATED PRODUCT */}
         <section className="flex flex-wrap justify-between mt-12 gap-6">
-          {categorySectionProducts.map((product, index) => (
+          {categorySectionProducts.map((product) => (
             <div key={product.id} className="rounded-2xl border border-productCardBorder w-full sm:w-[23%] mb-6 sm:mb-0 p-4">
               <div className="flex flex-col h-full">
                 <div className="flex justify-center w-full mb-4">
