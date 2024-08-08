@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchProductById } from '../api';
+import { fetchProductById } from '../helper/api';
 
 const useFetchProductById = (id: number) => {
   const [product, setProduct] = useState<any | null>(null);

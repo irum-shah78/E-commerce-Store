@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchProducts } from '../api';
+import { fetchProducts } from '../helper/api';
 
 const useFetchProducts = () => {
   const [products, setProducts] = useState<any[]>([]);

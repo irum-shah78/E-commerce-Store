@@ -20,9 +20,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToWishlist = () => {
     try {
       dispatch(addToWishlist(product));
-      toast.success(`${product.title} added to wishlist!`);
+      toast.success(`Product added to wishlist!`);
     } catch (error:any) {
-      toast.error(`Failed to add ${product.title} to wishlist: ${error.message}`);
+      toast.error(`Failed to add product to wishlist.`);
     }
   };
 

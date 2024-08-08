@@ -1,64 +1,72 @@
-import React, { useEffect, useState } from 'react';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import ProductCard from '../../components/productCard/ProductCard';
-import useFetchCategories from '../../hooks/useFetchCategories';
-import useFetchProductsByCategory from '../../hooks/useFetchProductsByCategories';
 import sale from "../../assets/images/hero-sale.svg";
+import Loader from 'src/components/loader/Loader';
+import useSelectedCategories from '../../hooks/useSelectedCategories';
+import useCategoryData from '../../hooks/useCategoryData';
 
 const CategoryPage: React.FC = () => {
-  const { categories, loading: categoriesLoading, error: categoriesError } = useFetchCategories();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
-    const savedCategories = localStorage.getItem('selectedCategories');
-    return savedCategories ? JSON.parse(savedCategories) : [];
-  });
-  const [allCategoriesChecked, setAllCategoriesChecked] = useState<boolean>(() => {
-    const savedAllCategoriesChecked = localStorage.getItem('allCategoriesChecked');
-    return savedAllCategoriesChecked ? JSON.parse(savedAllCategoriesChecked) : false;
-  });
+  // const { categories, loading: categoriesLoading, error: categoriesError } = useFetchCategories();
+  // const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
+  //   const savedCategories = localStorage.getItem('selectedCategories');
+  //   return savedCategories ? JSON.parse(savedCategories) : [];
+  // });
+  // const [allCategoriesChecked, setAllCategoriesChecked] = useState<boolean>(() => {
+  //   const savedAllCategoriesChecked = localStorage.getItem('allCategoriesChecked');
+  //   return savedAllCategoriesChecked ? JSON.parse(savedAllCategoriesChecked) : false;
+  // });
 
-  const { products, loading: productsLoading, error: productsError } = useFetchProductsByCategory(
-    allCategoriesChecked ? 'all' : selectedCategories.join(',')
-  );
+  // const { products, loading: productsLoading, error: productsError } = useFetchProductsByCategory(
+  //   allCategoriesChecked ? 'all' : selectedCategories.join(',')
+  // );
 
-  useEffect(() => {
-    localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
-    localStorage.setItem('allCategoriesChecked', JSON.stringify(allCategoriesChecked));
-  }, [selectedCategories, allCategoriesChecked]);
+  // useEffect(() => {
+  //   localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
+  //   localStorage.setItem('allCategoriesChecked', JSON.stringify(allCategoriesChecked));
+  // }, [selectedCategories, allCategoriesChecked]);
 
-  const handleCategoryChange = (category: string) => {
-    if (category === 'all') {
-      setAllCategoriesChecked(!allCategoriesChecked);
-      setSelectedCategories([]);
-    } else {
-      setAllCategoriesChecked(false);
-      if (selectedCategories.includes(category)) {
-        setSelectedCategories(selectedCategories.filter(cat => cat !== category));
-      } else {
-        setSelectedCategories([...selectedCategories, category]);
-      }
-    }
-  };
+  // const handleCategoryChange = (category: string) => {
+  //   if (category === 'all') {
+  //     setAllCategoriesChecked(!allCategoriesChecked);
+  //     setSelectedCategories([]);
+  //   } else {
+  //     setAllCategoriesChecked(false);
+  //     if (selectedCategories.includes(category)) {
+  //       setSelectedCategories(selectedCategories.filter(cat => cat !== category));
+  //     } else {
+  //       setSelectedCategories([...selectedCategories, category]);
+  //     }
+  //   }
+  // };
 
-  const handleReset = () => {
-    setSelectedCategories([]);
-    setAllCategoriesChecked(false);
-  };
+  // const handleReset = () => {
+  //   setSelectedCategories([]);
+  //   setAllCategoriesChecked(false);
+  // };
 
+
+  const {
+    selectedCategories,
+    allCategoriesChecked,
+    handleCategoryChange,
+    handleReset
+  } = useSelectedCategories();
+
+  const { categories, categoriesLoading, categoriesError, products, productsLoading, productsError } = useCategoryData();
   return (
     <>
       <Header />
       <div className="category-page px-4 py-4 md:px-8 lg:px-32 md:py-6 mt-14">
         <section className="flex flex-col md:flex-row md:justify-between">
           <aside className="w-full md:w-64 text-sm mb-6 md:mb-0">
-            {/* Categories */}
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-semibold text-customBlue">Categories</h2>
               <button
                 className="text-gray-500 hover:text-gray-700"
                 onClick={handleReset}>Reset</button>
             </div>
-            {categoriesLoading && <p className='text-center'>Loading categories...</p>}
+            {categoriesLoading && <p className='text-center'><Loader /></p>}
             {categoriesError && <p className='text-center'>{categoriesError}</p>}
             <ul className="space-y-2">
               <li>
@@ -230,7 +238,7 @@ const CategoryPage: React.FC = () => {
             <hr className='mt-6 border-gray-300' />
           </aside>
           <main className="products flex-1 md:ml-4 flex flex-col items-center md:items-stretch">
-            {productsLoading && <p className='text-center'>Loading products...</p>}
+            {productsLoading && <p className='text-center'><Loader /></p>}
             {productsError && <p className='text-center'>{productsError}</p>}
             <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {products.map((product) => (

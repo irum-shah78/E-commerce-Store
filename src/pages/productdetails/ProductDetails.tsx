@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import useProductDetails from '../../hooks/useProductDetails';
+import useCategoryProducts from '../../hooks/useCategoryProducts';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import star from "../../assets/icons/star.svg";
@@ -9,46 +12,28 @@ import google from "../../assets/icons/google.svg";
 import facebook from "../../assets/icons/facebook.svg";
 import whatsApp from "../../assets/icons/whatsapp.svg";
 import vector from "../../assets/icons/Vector.svg";
-import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
-import { fetchProductById } from "../../api";
-import useFetchProductById from 'src/hooks/useFetchProductById';
 import toast from 'react-hot-toast';
+import Loader from 'src/components/loader/Loader';
 
 const ProductDetails: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState<number>(1);
-  const [categorySectionProducts, setCategorySectionProducts] = useState<any[]>([]);
-  const { id } = useParams<{ id: string }>();
-  const { product, loading, error } = useFetchProductById(Number(id));
+  const { product, loading, error } = useProductDetails();
+  const { categoryProducts, loading: categoryLoading, error: categoryError } = useCategoryProducts();
 
-  const fetchContentProducts = async () => {
-    const categoryProductIds = [3, 10, 12, 17];
-    const categoryProductsPromises = categoryProductIds.map(id => fetchProductById(id));
-    const categoryProducts = await Promise.all(categoryProductsPromises);
-    return categoryProducts;
-  };
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await fetchContentProducts();
-      setCategorySectionProducts(products);
-    };
-    fetchProducts();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>Error: {error}</p>;
-  if (!product) return <div>Loading...</div>;
+  if (!product) return <Loader />;
 
   const handleAddToCart = async () => {
     try {
       dispatch(addToCart({ ...product, quantity }));
-      toast.success(`${product.title} added to cart successfully!`);
+      toast.success('Product added to cart successfully!');
       navigate('/cart');
-    } catch (error:any) {
-      toast.error(`Failed to add ${product.title} to cart: ${error.message}`);
+    } catch {
+      toast.error('Failed to add product to cart.');
     }
   };
 
@@ -153,7 +138,7 @@ const ProductDetails: React.FC = () => {
             <button className="rounded-xl border border-gray-400 py-2 px-4">Description</button>
             <button className="text-white bg-customBlue rounded-xl py-2 px-6">Reviews</button>
           </div>
-          <div className="border boredr-1 border-gray-400 rounded-lg mt-6 p-6">
+          <div className="border border-1 border-gray-400 rounded-lg mt-6 p-6">
             <div className="w-full">
               <h2 className="text-lg font-bold mb-2 text-customBlue">Customer reviews</h2>
               <p className='text-gray-600'>No reviews yet</p>
@@ -164,24 +149,30 @@ const ProductDetails: React.FC = () => {
 
         {/* RELATED PRODUCT */}
         <section className="flex flex-wrap justify-between mt-12 gap-6">
-          {categorySectionProducts.map((product) => (
-            <div key={product.id} className="rounded-2xl border border-productCardBorder w-full sm:w-[23%] mb-6 sm:mb-0 p-4">
-              <div className="flex flex-col h-full">
-                <div className="flex justify-center w-full mb-4">
-                  <img className="object-cover w-40 h-40" src={product.image} alt={product.title} />
-                </div>
-                <div className="leading-normal">
-                  <p className="font-semibold text-base text-customBlue truncate w-40">{product.title}</p>
-                  <p className="font-semibold text-base text-gray-600 mt-2">${product.price}</p>
-                  <div className="flex gap-2 mt-2">
-                    {[...Array(5)].map((_, starIndex) => (
-                      <img key={starIndex} src={vector} alt="star" />
-                    ))}
+          {categoryLoading ? (
+            <Loader />
+          ) : categoryError ? (
+            <p>Error: {categoryError}</p>
+          ) : (
+            categoryProducts.map((product) => (
+              <div key={product.id} className="rounded-2xl border border-productCardBorder w-full sm:w-[23%] mb-6 sm:mb-0 p-4">
+                <div className="flex flex-col h-full">
+                  <div className="flex justify-center w-full mb-4">
+                    <img className="object-cover w-40 h-40" src={product.image} alt={product.title} />
+                  </div>
+                  <div className="leading-normal">
+                    <p className="font-semibold text-base text-customBlue truncate w-40">{product.title}</p>
+                    <p className="font-semibold text-base text-gray-600 mt-2">${product.price}</p>
+                    <div className="flex gap-2 mt-2">
+                      {[...Array(5)].map((_, starIndex) => (
+                        <img key={starIndex} src={vector} alt="star" />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </section>
       </section>
       <Footer />

@@ -22,7 +22,7 @@ const Wishlist = () => {
 
   const handleRemoveFromWishlist = (itemId: number) => {
     dispatch(removeFromWishlist(itemId));
-    toast.success('Item removed from wishlist successfully!');
+    toast.success('Item removed from wishlist!');
   };
 
   const handleClearWishlist = () => {

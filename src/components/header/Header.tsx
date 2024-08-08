@@ -51,7 +51,9 @@ const Header: React.FC = () => {
 
       <nav>
         <div className='bg-customBlue flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-32 py-6'>
+          <Link to="/">
           <img alt='logo' src={logo} className="w-24 md:w-auto" />
+          </Link>
           <div className='flex mt-4 md:mt-0 w-full md:w-auto'>
             <div className='relative w-full md:w-80'>
               <input type="search" placeholder='Search anything'

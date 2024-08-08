@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchProducts, fetchProductById, fetchCategories, fetchProductsByCategory } from '../api';
+import { fetchProducts, fetchProductById, fetchCategories, fetchProductsByCategory } from '../helper/api';
 
 interface Product {
   id: number;

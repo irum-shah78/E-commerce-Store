@@ -1,4 +1,4 @@
-import api from "./services/axiosInstance";
+import api from "../services/axiosInstance";
 
 export const fetchProducts = async () => {
   const response = await api.get(`/products`);

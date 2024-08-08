@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../custom.d.ts";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
@@ -21,7 +21,6 @@ import brandFour from "../../assets/images/brand-4.svg";
 import brandFive from "../../assets/images/brand-5.svg";
 import blogOne from "../../assets/images/bolg-1.svg";
 import blogTwo from "../../assets/images/blog-2.svg";
-import { fetchProductById } from "../../api";
 import ProductCard from "../../components/productCard/ProductCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -31,52 +30,35 @@ import { Navigation, Pagination } from 'swiper/modules';
 import useFetchCategories from '../../hooks/useFetchCategories';
 import useFetchProducts from '../../hooks/useFetchProducts';
 import useFetchProductsByCategory from '../../hooks/useFetchProductsByCategories';
+import { Link } from "react-router-dom";
+import useInitialHomePageData from "../../hooks/useFetchInitialData";
 
 const HomePage: React.FC = () => {
   const { categories } = useFetchCategories();
   const { products: allProducts } = useFetchProducts();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { products: categoryProducts } = useFetchProductsByCategory(selectedCategory);
-  const [upperSwiperProducts, setHeroProducts] = useState<any[]>([]);
-  const [lowerSwiperProducts, setFeaturedProducts] = useState<any[]>([]);
-  const [categoriesProducts, setCategoryProducts] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        const upperProductIds = [4, 5, 13, 17];
-        const upperProductsPromises = upperProductIds.map(id => fetchProductById(id));
-        const upperProducts = await Promise.all(upperProductsPromises);
-        setHeroProducts(upperProducts);
-
-        const lowerProductIds = [11, 8, 15];
-        const lowerProductsPromises = lowerProductIds.map(id => fetchProductById(id));
-        const lowerProducts = await Promise.all(lowerProductsPromises);
-        setFeaturedProducts(lowerProducts);
-
-        const categoryProductIds = [3, 5, 20];
-        const categoryProductsPromises = categoryProductIds.map(id => fetchProductById(id));
-        const categoryProduct = await Promise.all(categoryProductsPromises);
-        setCategoryProducts(categoryProduct);
-      } catch (error) {
-        console.error("Error fetching initial data:", error);
-      }
-    };
-
-    fetchInitialData();
-  }, []);
+  const { upperSwiperProducts, setHeroProducts, lowerSwiperProducts, setFeaturedProducts, categoriesProducts } = useInitialHomePageData();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const swapUpperItems = (direction: 'left' | 'right') => {
     let newItems = [...upperSwiperProducts];
+
     if (direction === 'left') {
+      if (currentIndex === 0) return;
+
       const item = newItems.pop();
       if (item) {
         newItems.unshift(item);
+        setCurrentIndex(currentIndex - 1);
       }
     } else if (direction === 'right') {
+      if (currentIndex === newItems.length - 1) return;
+
       const item = newItems.shift();
       if (item) {
         newItems.push(item);
+        setCurrentIndex(currentIndex + 1);
       }
     }
     setHeroProducts(newItems);
@@ -105,22 +87,27 @@ const HomePage: React.FC = () => {
         {/* Hero Swiper */}
         <section>
           <Swiper
+            slidesPerView={"auto"}
+            onClick={() => swapUpperItems('left')}
             modules={[Navigation, Pagination]}
             navigation
             className="mySwiper"
             spaceBetween={10}
-            slidesPerView={"auto"}
+            loop={false}
             pagination={{ clickable: true }}
-            onClick={() => swapUpperItems('left')}
           >
             {upperSwiperProducts.map(product => (
               <SwiperSlide key={product.id}>
                 <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
                   <div className="w-full md:w-1/2 flex flex-col justify-center md:order-1 order-2 mt-4 md:mt-0">
-                    <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left">{product.title}</p>
+                    <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left truncate w-3/5">{product.title}</p>
                     <div className="flex gap-4 mt-4 justify-center md:justify-start">
-                      <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
-                      <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+                      <Link to={`/category/all`}>
+                        <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow">Shop now</button>
+                      </Link>
+                      <Link to={`/product/${product.id}`}>
+                        <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue">View more</button>
+                      </Link>
                     </div>
                   </div>
                   <div className="relative order-1 md:order-2">
@@ -198,10 +185,6 @@ const HomePage: React.FC = () => {
             {(selectedCategory === 'all' ? allProducts : categoryProducts).map(product => (
               < ProductCard
                 key={product.id} product={product}
-              // id={product.id}
-              // title={product.title}
-              // price={product.price}
-              // image={product.image}
               />
             ))}
           </div>
