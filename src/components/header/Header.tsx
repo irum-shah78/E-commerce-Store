@@ -25,7 +25,7 @@ const Header: React.FC = () => {
     setCartOpen(!cartOpen);
   };
 
-  const toggleWishlist = () => { 
+  const toggleWishlist = () => {
     setWishlistOpen(!wishlistOpen);
   };
 
@@ -35,46 +35,54 @@ const Header: React.FC = () => {
 
   return (
     <header className='text-sm'>
-      <div className='flex flex-col md:flex-row justify-between px-4 md:px-8 lg:px-32 py-4'>
-        <p className='text-center md:text-left'>Need help? Call us: (+98) 0234 456 789</p>
-        <div className='flex flex-col md:flex-row cursor-pointer text-center md:text-right'>
-          <div className='flex items-center justify-center md:justify-end'>
-            <img className="px-3 w-6 md:w-10" src={location} alt="location" />
-            <span className="hidden sm:block">Our store</span>
+      <div className='flex flex-col md:flex-row justify-between items-center px-2 md:px-8 lg:px-28 py-5'>
+        <div className='h-[24px]'>
+          <p className='text-center md:text-left'>Need help? Call us: (+98) 0234 456 789</p>
+        </div>
+        <div className='flex items-center justify-center md:flex-row cursor-pointer text-center gap-6'>
+          <div className='flex text-nowrap items-center justify-center md:justify-end lg:gap-1 sm:gap-3'>
+            <img className="lg:px-3 w-5 md:w-10 sm:w-4" src={location} alt="location" />
+            <span className="sm:block">Our store</span>
           </div>
-          <div className='flex items-center justify-center md:justify-end'>
-            <img className="px-3 w-6 md:w-10" alt="track" src={track} />
-            <span className="hidden sm:block">Track your order</span>
+          <div className='flex text-nowrap items-center justify-center md:justify-end lg:gap-1 sm:gap-3'>
+            <img className="lg:px-3 w-5 md:w-10 sm:w-4" alt="track" src={track} />
+            <span className="sm:block">Track your order</span>
           </div>
         </div>
       </div>
-
       <nav>
-        <div className='bg-customBlue flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-32 py-6'>
+        <div className='bg-customBlue flex md:flex-row items-center justify-between px-4 md:px-8 lg:px-28 py-6'>
           <Link to="/">
-          <img alt='logo' src={logo} className="w-24 md:w-auto" />
+            <img alt='logo' src={logo} className="w-24 md:w-auto" />
           </Link>
-          <div className='flex mt-4 md:mt-0 w-full md:w-auto'>
-            <div className='relative w-full md:w-80'>
-              <input type="search" placeholder='Search anything'
-                className='relative rounded-xl p-3 pl-6 w-full border-customYellow focus:outline-none focus:border-customYellow placeholder-black' />
+          <div className='hidden md:flex w-full md:w-80'>
+            <div className='relative w-full'>
+              <input
+                type="search"
+                placeholder='Search anything'
+                className='rounded-xl p-3 pl-6 w-full border-customYellow focus:outline-none focus:border-customYellow placeholder-black'
+              />
               <button className='absolute text-white font-semibold rounded-xl px-6 py-3 focus:outline-none right-0 bg-customYellow'>
                 Search
               </button>
             </div>
           </div>
 
-          <div className='flex items-center text-white cursor-pointer gap-3 mt-4 md:mt-0'>
-            <img alt='user' src={user} className="w-6 h-10" />
-            <span className="hidden sm:block">Sign in</span>
-            <div className='relative'>
-              <div className='flex items-center gap-1' onClick={toggleWishlist}>
-                <img alt='heart' src={heart} className="w-6 h-10" />
-                <div className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>{wishlistItems.length}</div>
-                <span className='hidden sm:block pl-2'>Wishlist</span>
+          <div className='flex items-center text-white cursor-pointer gap-4 h-[24px]'>
+            <div className='flex items-center gap-2'>
+              <img alt='user' src={user} className="w-5 h-5" />
+              <span className="hidden sm:block">Sign in</span>
+            </div>
+
+            <div className='relative flex items-center gap-1' onClick={toggleWishlist}>
+              <img alt='heart' src={heart} className="w-5 h-5" />
+              <div className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>
+                {wishlistItems.length}
               </div>
+              <span className='hidden sm:block pl-2'>Wishlist</span>
+
               {wishlistOpen && (
-                <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10'>
+                <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10 mt-24'>
                   {wishlistItems.length > 0 ? (
                     <ul>
                       {wishlistItems.map(item => (
@@ -84,7 +92,7 @@ const Header: React.FC = () => {
                       ))}
                     </ul>
                   ) : (
-                    <p className='text-center'>Your wishlist is empty.</p>
+                    <p className='flex text-center'>Your wishlist is empty.</p>
                   )}
                   <Link to="/wishlist" className="text-center block font-semibold text-customBlue">
                     View Wishlist
@@ -93,16 +101,15 @@ const Header: React.FC = () => {
               )}
             </div>
 
-            <div className='relative'>
-              <div className='flex items-center gap-1' onClick={toggleCart}>
-                <img alt='cart' src={cart} className="w-6 h-10" />
-                <span className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>
-                  {cartItems.length}
-                </span>
-                <span className='hidden sm:block pl-2'>Cart</span>
-              </div>
+            <div className='relative flex items-center gap-1' onClick={toggleCart}>
+              <img alt='cart' src={cart} className="w-5 h-5" />
+              <span className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>
+                {cartItems.length}
+              </span>
+              <span className='hidden sm:block pl-2'>Cart</span>
+
               {cartOpen && (
-                <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10'>
+                <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10 mt-24'>
                   {cartItems.length > 0 ? (
                     <ul>
                       {cartItems.map(item => (
@@ -126,7 +133,7 @@ const Header: React.FC = () => {
       </nav>
 
       <nav className="bg-gray-200">
-        <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-32 py-4">
+        <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-28 py-3">
           <div className="relative">
             <button id="dropdownHoverButton"
               className="text-white bg-customYellow focus:outline-none font-semibold text-sm p-4 inline-flex items-center"

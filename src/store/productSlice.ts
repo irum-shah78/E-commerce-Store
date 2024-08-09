@@ -1,24 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchProducts, fetchProductById, fetchCategories, fetchProductsByCategory } from '../helper/api';
+import { ProductStateType } from '../types/types';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
-
-interface ProductState {
-  products: Product[];
-  product: Product | null;
-  categories: string[];
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: ProductState = {
+const initialState: ProductStateType = {
   products: [],
   product: null,
   categories: [],

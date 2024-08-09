@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react';
 import { fetchCategories, fetchProductsByCategory } from '../helper/api';
+import { ProductType } from '../types/types';
 
-interface ProductType {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-}
-
-const useCategoryData = () => {
+const useCategoryData = (selectedCategories: string[], allCategoriesChecked: boolean) => {
   const [categories, setCategories] = useState<string[]>([]);
   const [categoriesLoading, setCategoriesLoading] = useState<boolean>(true);
   const [categoriesError, setCategoriesError] = useState<string | null>(null);
@@ -27,9 +21,16 @@ const useCategoryData = () => {
         setCategoriesError('Failed to fetch categories');
         setCategoriesLoading(false);
       }
+    };
 
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
       try {
-        const productsData = await fetchProductsByCategory('all');
+        const categoryParam = allCategoriesChecked ? 'all' : selectedCategories.join(',');
+        const productsData = await fetchProductsByCategory(categoryParam);
         setProducts(productsData);
         setProductsLoading(false);
       } catch (error) {
@@ -37,8 +38,9 @@ const useCategoryData = () => {
         setProductsLoading(false);
       }
     };
-    fetchData();
-  }, []);
+
+    fetchProducts();
+  }, [selectedCategories, allCategoriesChecked]);
 
   return {
     categories,

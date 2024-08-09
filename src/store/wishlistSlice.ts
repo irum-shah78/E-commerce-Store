@@ -1,17 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { WishlistStateType, ProductType } from '../types/types';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-}
-
-interface WishlistState {
-  items: Product[];
-}
-
-const initialState: WishlistState = {
+const initialState: WishlistStateType = {
   items: [],
 };
 
@@ -19,7 +9,7 @@ const wishlistSlice = createSlice({
   name: 'wishlist',
   initialState,
   reducers: {
-    addToWishlist(state, action: PayloadAction<Product>) {
+    addToWishlist(state, action: PayloadAction<ProductType>) {
       state.items.push(action.payload);
     },
     removeFromWishlist(state, action: PayloadAction<number>) {

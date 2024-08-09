@@ -7,45 +7,6 @@ import useSelectedCategories from '../../hooks/useSelectedCategories';
 import useCategoryData from '../../hooks/useCategoryData';
 
 const CategoryPage: React.FC = () => {
-  // const { categories, loading: categoriesLoading, error: categoriesError } = useFetchCategories();
-  // const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
-  //   const savedCategories = localStorage.getItem('selectedCategories');
-  //   return savedCategories ? JSON.parse(savedCategories) : [];
-  // });
-  // const [allCategoriesChecked, setAllCategoriesChecked] = useState<boolean>(() => {
-  //   const savedAllCategoriesChecked = localStorage.getItem('allCategoriesChecked');
-  //   return savedAllCategoriesChecked ? JSON.parse(savedAllCategoriesChecked) : false;
-  // });
-
-  // const { products, loading: productsLoading, error: productsError } = useFetchProductsByCategory(
-  //   allCategoriesChecked ? 'all' : selectedCategories.join(',')
-  // );
-
-  // useEffect(() => {
-  //   localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
-  //   localStorage.setItem('allCategoriesChecked', JSON.stringify(allCategoriesChecked));
-  // }, [selectedCategories, allCategoriesChecked]);
-
-  // const handleCategoryChange = (category: string) => {
-  //   if (category === 'all') {
-  //     setAllCategoriesChecked(!allCategoriesChecked);
-  //     setSelectedCategories([]);
-  //   } else {
-  //     setAllCategoriesChecked(false);
-  //     if (selectedCategories.includes(category)) {
-  //       setSelectedCategories(selectedCategories.filter(cat => cat !== category));
-  //     } else {
-  //       setSelectedCategories([...selectedCategories, category]);
-  //     }
-  //   }
-  // };
-
-  // const handleReset = () => {
-  //   setSelectedCategories([]);
-  //   setAllCategoriesChecked(false);
-  // };
-
-
   const {
     selectedCategories,
     allCategoriesChecked,
@@ -53,7 +14,14 @@ const CategoryPage: React.FC = () => {
     handleReset
   } = useSelectedCategories();
 
-  const { categories, categoriesLoading, categoriesError, products, productsLoading, productsError } = useCategoryData();
+  const {
+    categories,
+    categoriesLoading,
+    categoriesError,
+    products,
+    productsLoading,
+    productsError
+  } = useCategoryData(selectedCategories, allCategoriesChecked);
   return (
     <>
       <Header />
