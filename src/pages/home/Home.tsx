@@ -182,221 +182,231 @@ const HomePage: React.FC = () => {
             ))}
           </div>
         </section>
+      </div>
 
-        <div className="px-4 md:px-8 lg:px-27">
-          {/* SALES SECTION */}
-          <section>
-            <div className="relative mt-12 mb-12">
-              <img src={sale} alt="sale" className="object-cover w-full h-96 sm:h-full" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:items-end sm:pr-28 space-y-4 text-center sm:text-right">
-                <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">New laptop</button>
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-saleColor">Sale up to 50% off</p>
-                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white">12 inch HD display</p>
-                <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">Shop now</button>
+      <div className="md:px-8 lg:px-27">
+        {/* SALES SECTION */}
+        <section>
+          <div className="relative mt-12 mb-12">
+            <img src={sale} alt="sale" className="object-cover w-full h-96 sm:h-full" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:items-end sm:pr-28 space-y-4 text-center sm:text-right">
+              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">New laptop</button>
+              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-saleColor">Sale up to 50% off</p>
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white">12 inch HD display</p>
+              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">Shop now</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="px-4 md:px-8 lg:px-27">
+        {/* CATEGORY SECTION */}
+        <section className="flex-col sm:flex-row justify-between mt-12 gap-6 hidden sm:flex">
+          {categoriesProducts.length > 0 && (
+            <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
+              <div className="flex flex-col sm:flex-row justify-around items-center h-full">
+                <img className="object-cover h-auto w-auto sm:w-48" src={categoriesProducts[0].image} alt={categoriesProducts[0].title} />
+                <div className="p-4 leading-normal">
+                  <p className="font-semibold text-lg text-customBlue">{categoriesProducts[0].title}</p>
+                  <p className="font-semibold text-gray-600 mt-4">${categoriesProducts[0].price}</p>
+                  <div className="flex gap-2 mt-4">
+                    {[...Array(5)].map((_, index) => (
+                      <img key={index} src={vector} alt="star" />
+                    ))}
+                  </div>
+                  <div className="flex mt-6 gap-2">
+                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">57</button>
+                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">11</button>
+                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">33</button>
+                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">59</button>
+                  </div>
+                  <div className="flex justify-between items-center mt-7">
+                    <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
+                      <p className="text-black font-semibold">Add to cart</p>
+                      <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
+                        <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
+                      </div>
+                    </div>
+                    <div className="rounded-2xl bg-iconLightBlue px-5 py-3 ml-2 text-center cursor-pointer">
+                      <img src={eye} alt="eye" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </section>
-
-          {/* CATEGORY SECTION */}
-          <section className="flex flex-col sm:flex-row justify-between mt-12 gap-6 hidden sm:flex">
-            {categoriesProducts.length > 0 && (
-              <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
-                <div className="flex flex-col sm:flex-row justify-around items-center h-full">
-                  <img className="object-cover h-auto w-auto sm:w-48" src={categoriesProducts[0].image} alt={categoriesProducts[0].title} />
+          )}
+          <div className="flex flex-col items-center sm:items-start gap-4">
+            {categoriesProducts.slice(1).map((product) => (
+              <div key={product.id} className="rounded-2xl border border-productCardBorder h-48 w-full sm:w-96 mb-4 sm:mb-0">
+                <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-2">
+                  <img className="object-cover mt-2 w-20 h-20 sm:w-32 sm:h-32" src={product.image} alt={product.title} />
                   <div className="p-4 leading-normal">
-                    <p className="font-semibold text-lg text-customBlue">{categoriesProducts[0].title}</p>
-                    <p className="font-semibold text-gray-600 mt-4">${categoriesProducts[0].price}</p>
-                    <div className="flex gap-2 mt-4">
+                    <p className="font-semibold text-sm text-customBlue truncate w-40">{product.title}</p>
+                    <p className="font-semibold text-gray-600 mt-2">${product.price}</p>
+                    <div className="flex gap-2 mt-2">
                       {[...Array(5)].map((_, index) => (
                         <img key={index} src={vector} alt="star" />
                       ))}
                     </div>
-                    <div className="flex mt-6 gap-2">
-                      <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">57</button>
-                      <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">11</button>
-                      <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">33</button>
-                      <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">59</button>
-                    </div>
-                    <div className="flex justify-between items-center mt-7">
-                      <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
-                        <p className="text-black font-semibold">Add to cart</p>
-                        <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
-                          <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
-                        </div>
-                      </div>
-                      <div className="rounded-2xl bg-iconLightBlue px-5 py-3 ml-2 text-center cursor-pointer">
-                        <img src={eye} alt="eye" />
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
-            )}
-            <div className="flex flex-col items-center sm:items-start gap-4">
-              {categoriesProducts.slice(1).map((product) => (
-                <div key={product.id} className="rounded-2xl border border-productCardBorder h-48 w-full sm:w-96 mb-4 sm:mb-0">
-                  <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-2">
-                    <img className="object-cover mt-2 w-20 h-20 sm:w-32 sm:h-32" src={product.image} alt={product.title} />
-                    <div className="p-4 leading-normal">
-                      <p className="font-semibold text-sm text-customBlue truncate w-40">{product.title}</p>
-                      <p className="font-semibold text-gray-600 mt-2">${product.price}</p>
-                      <div className="flex gap-2 mt-2">
-                        {[...Array(5)].map((_, index) => (
-                          <img key={index} src={vector} alt="star" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-
-          {/* FEATURES SECTION */}
-          <section className="mt-12">
-            <div className="flex flex-col lg:flex-row justify-around bg-sizeColor rounded-2xl p-10 gap-4 lg:gap-0">
-              <div className="flex justify-around items-center gap-4">
-                <img src={boxTick} alt="box-tick" />
-                <div>
-                  <p className="font-semibold text-lg text-customBlue">Free delivery</p>
-                  <p className="text-customBlue">on order above $50,00</p>
-                </div>
-              </div>
-              <div className="flex justify-around items-center gap-4">
-                <img src={crown} alt="box-tick" />
-                <div>
-                  <p className="font-semibold text-lg text-customBlue">Best quality</p>
-                  <p className="text-customBlue">best quality in low price</p>
-                </div>
-              </div>
-              <div className="flex justify-around items-center gap-4">
-                <img src={shield} alt="box-tick" />
-                <div>
-                  <p className="font-semibold text-lg text-customBlue">1 year warranty</p>
-                  <p className="text-customBlue">Available warranty</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* REVIEWS SECTION */}
-          <section className="mt-14">
-            <div className="flex flex-col lg:flex-row justify-between items-center">
-              <div className="rounded-2xl border border-productCardBorder h-[242px] w-[433px]">
-                <div className="flex justify-around items-center mt-4">
-                  <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
-                    <img className="rounded-full" src={reviewOne} alt="review" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-customBlue">Savannah Nguyen</p>
-                  </div>
-                </div>
-                <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6">
-                  <p className="text-customBlue">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-productCardBorder h-[242px] w-[433px]">
-                <div className="flex justify-around items-center mt-4">
-                  <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
-                    <img className="rounded-full" src={reviewTwo} alt="review" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-customBlue">Esther Howard</p>
-                  </div>
-                </div>
-                <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6">
-                  <p className="text-customBlue">orem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque</p>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-productCardBorder h-[242px] w-[433px]">
-                <div className="flex justify-around items-center mt-4">
-                  <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
-                    <img className="rounded-full" src={reviewThree} alt="review" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-customBlue">Savannah Nguyen</p>
-                  </div>
-                </div>
-                <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6">
-                  <p className="text-customBlue">orem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-center gap-2 mt-10 items-center">
-              <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-            </div>
-          </section>
-
-          {/* BRANDS SECTION */}
-          <section className="mt-12">
-            <div className="flex flex-wrap justify-between bg-sizeColor py-10 gap-4 lg:gap-0">
-              <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-                <img src={brandOne} alt="brand-one" className="h-10 w-52" />
-              </div>
-              <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-                <img src={brandTwo} alt="brand-two" className="h-10 w-52" />
-              </div>
-              <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-                <img src={brandThree} alt="brand-three" className="h-10 w-52" />
-              </div>
-              <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-                <img src={brandFour} alt="brand-four" className="h-10 w-52" />
-              </div>
-              <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-                <img src={brandFive} alt="brand-five" className="h-10 w-52" />
-              </div>
-            </div>
-          </section>
-
-          {/* LATEST NEWS SECTION */}
-          <section className="mt-16">
-            <div className="flex justify-between items-center">
-              <p className="font-bold text-2xl text-customBlue">Latest news</p>
-              <p className="text-customBlue">View all</p>
-            </div>
-
-            <div className="flex flex-col lg:flex-row justify-between gap-6 mt-12">
-              <div className="rounded-2xl p-8 border border-productCardBorder w-full lg:w-auto">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-                  <img className="object-cover" src={blogOne} alt="blog" />
-                  <div className="leading-normal text-wrap gap-4">
-                    <button className="p-2 rounded-3xl border border-newsBorder text-categoryBtn">20 Oct, 2021</button>
-                    <p className="font-semibold text-2xl mt-4 text-customBlue">Who avoids a pain that produces?</p>
-                    <p className="text-sm mt-4 text-customBlue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
-                    <p className="text-sm mt-4 text-customBlue">By spacing tech</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-2xl p-8 border border-productCardBorder w-full lg:w-auto">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-                  <img className="object-cover" src={blogTwo} alt="blog" />
-                  <div className="leading-normal text-wrap gap-4">
-                    <button className="p-2 rounded-3xl border border-newsBorder text-categoryBtn">20 Oct, 2021</button>
-                    <p className="font-semibold text-2xl mt-4 text-customBlue">Who avoids a pain that produces?</p>
-                    <p className="text-sm mt-4 text-customBlue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
-                    <p className="text-sm mt-4 text-customBlue">By spacing tech</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-center gap-2 mt-10 items-center mb-4">
-              <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-              <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-            </div>
-          </section>
-        </div>
+            ))}
+          </div>
+        </section>
       </div>
+
+      <div className="md:px-8 lg:px-27">
+        {/* FEATURES SECTION */}
+        <section className="mt-12">
+          <div className="flex flex-col lg:flex-row justify-around bg-sizeColor lg:rounded-2xl p-10 gap-4 lg:gap-0">
+            <div className="flex justify-around items-center gap-4">
+              <img src={boxTick} alt="box-tick" />
+              <div>
+                <p className="font-semibold text-lg text-customBlue">Free delivery</p>
+                <p className="text-customBlue">on order above $50,00</p>
+              </div>
+            </div>
+            <div className="flex justify-around items-center gap-4">
+              <img src={crown} alt="box-tick" />
+              <div>
+                <p className="font-semibold text-lg text-customBlue">Best quality</p>
+                <p className="text-customBlue">best quality in low price</p>
+              </div>
+            </div>
+            <div className="flex justify-around items-center gap-4">
+              <img src={shield} alt="box-tick" />
+              <div>
+                <p className="font-semibold text-lg text-customBlue">1 year warranty</p>
+                <p className="text-customBlue">Available warranty</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="px-4 md:px-8 lg:px-27">
+        {/* REVIEWS SECTION */}
+        <section className="mt-14 p-2">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-2">
+            <div className="rounded-2xl border border-productCardBorder h-60 w-full">
+              <div className="flex justify-around items-center mt-4">
+                <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
+                  <img className="rounded-full" src={reviewOne} alt="review" />
+                </div>
+                <div>
+                  <p className="font-semibold text-customBlue">Savannah Nguyen</p>
+                </div>
+              </div>
+              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6 lg:text-base text-sm">
+                <p className="text-customBlue">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-productCardBorder h-60 w-full">
+              <div className="flex justify-around items-center mt-4">
+                <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
+                  <img className="rounded-full" src={reviewTwo} alt="review" />
+                </div>
+                <div>
+                  <p className="font-semibold text-customBlue">Esther Howard</p>
+                </div>
+              </div>
+              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6 lg:text-base text-sm">
+                <p className="text-customBlue">orem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque</p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-productCardBorder h-60 w-full">
+              <div className="flex justify-around items-center mt-4">
+                <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
+                  <img className="rounded-full" src={reviewThree} alt="review" />
+                </div>
+                <div>
+                  <p className="font-semibold text-customBlue">Savannah Nguyen</p>
+                </div>
+              </div>
+              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6 lg:text-base text-sm">
+                <p className="text-customBlue">orem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-2 mt-10 items-center">
+            <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
+          </div>
+        </section>
+      </div>
+
+      <div className="md:px-8 lg:px-27">
+        {/* BRANDS SECTION */}
+        <section className="mt-12">
+          <div className="flex flex-wrap justify-between bg-sizeColor py-10 gap-4 lg:gap-0">
+            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
+              <img src={brandOne} alt="brand-one" className="h-10 w-52" />
+            </div>
+            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
+              <img src={brandTwo} alt="brand-two" className="h-10 w-52" />
+            </div>
+            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
+              <img src={brandThree} alt="brand-three" className="h-10 w-52" />
+            </div>
+            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
+              <img src={brandFour} alt="brand-four" className="h-10 w-52" />
+            </div>
+            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
+              <img src={brandFive} alt="brand-five" className="h-10 w-52" />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="px-4 md:px-8 lg:px-27">
+        {/* LATEST NEWS SECTION */}
+        <section className="mt-16">
+          <div className="flex justify-between items-center">
+            <p className="font-bold text-2xl text-customBlue">Latest news</p>
+            <p className="text-customBlue">View all</p>
+          </div>
+
+          <div className="flex flex-col lg:flex-row justify-between gap-6 mt-12">
+            <div className="rounded-2xl p-8 border border-productCardBorder w-full lg:w-auto">
+              <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
+                <img className="object-cover" src={blogOne} alt="blog" />
+                <div className="leading-normal text-wrap gap-4">
+                  <button className="p-2 rounded-3xl border border-newsBorder text-categoryBtn">20 Oct, 2021</button>
+                  <p className="font-semibold text-2xl mt-4 text-customBlue">Who avoids a pain that produces?</p>
+                  <p className="text-sm mt-4 text-customBlue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
+                  <p className="text-sm mt-4 text-customBlue">By spacing tech</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl p-8 border border-productCardBorder w-full lg:w-auto">
+              <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
+                <img className="object-cover" src={blogTwo} alt="blog" />
+                <div className="leading-normal text-wrap gap-4">
+                  <button className="p-2 rounded-3xl border border-newsBorder text-categoryBtn">20 Oct, 2021</button>
+                  <p className="font-semibold text-2xl mt-4 text-customBlue">Who avoids a pain that produces?</p>
+                  <p className="text-sm mt-4 text-customBlue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
+                  <p className="text-sm mt-4 text-customBlue">By spacing tech</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-2 mt-10 items-center mb-4">
+            <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
+            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
+          </div>
+        </section>
+      </div>
+
       <Footer />
     </>
   );
