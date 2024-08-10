@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import location from "../../assets/icons/location.svg";
 import track from "../../assets/icons/track.svg";
@@ -8,30 +6,16 @@ import logo from "../../assets/images/logo.svg";
 import user from "../../assets/icons/user.svg";
 import heart from "../../assets/icons/heart.svg";
 import cart from "../../assets/icons/cart.svg";
+import useDropdown from '../../hooks/useDropdown';
+import useCart from '../../hooks/useCart';
+import useWishlist from '../../hooks/useWishlist';
+import useMenu from '../../hooks/useMenu';
 
 const Header: React.FC = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [wishlistOpen, setWishlistOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const toggleCart = () => {
-    setCartOpen(!cartOpen);
-  };
-
-  const toggleWishlist = () => {
-    setWishlistOpen(!wishlistOpen);
-  };
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const { isOpen: dropdownOpen, toggleDropdown } = useDropdown();
+  const { cartItems, isOpen: cartOpen, toggleCart } = useCart();
+  const { wishlistItems, isOpen: wishlistOpen, toggleWishlist } = useWishlist();
+  const { isOpen: menuOpen, toggleMenu } = useMenu();
 
   return (
     <header className='text-sm'>
@@ -147,7 +131,7 @@ const Header: React.FC = () => {
             {dropdownOpen && (
               <ul className="absolute left-0 w-full bg-white shadow-lg rounded-lg p-2 z-10">
                 <li className="p-3 hover:bg-gray-100">
-                  <Link to={`/category/all`} onClick={() => setDropdownOpen(false)}>
+                  <Link to={`/category/all`} onClick={toggleDropdown}>
                     All categories
                   </Link>
                 </li>

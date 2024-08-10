@@ -1,46 +1,22 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
-import { removeFromCart, updateQuantity, clearCart, updateCart } from '../../store/cartSlice';
+import { useSelector } from 'react-redux';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import closeCircle from "../../assets/icons/close-circle.svg";
 import { Link } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import useRemoveFromCart from '../../hooks/useRemoveFromCart';
+import useUpdateQuantity from '../../hooks/useUpdateQuantity';
+import useUpdateCart from '../../hooks/useUpdateCart';
+import useClearCart from '../../hooks/useClearCart';
+import { RootState } from '../../store/store';
 
 const CartPage: React.FC = () => {
-  const dispatch = useDispatch();
+  const { handleRemove } = useRemoveFromCart();
+  const { handleQuantityChange } = useUpdateQuantity();
+  const { handleUpdateCart } = useUpdateCart();
+  const { handleClearCart } = useClearCart();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
-  const handleRemove = (id: number) => {
-    try {
-      dispatch(removeFromCart(id));
-      toast.success('Product removed successfully!');
-    } catch (error) {
-      toast.error('Failed to remove product.');
-    }
-  };
-
-  const handleQuantityChange = (id: number, quantity: number) => {
-    if (quantity > 0) {
-      dispatch(updateQuantity({ id, quantity }));
-    }
-  };
-
-  const handleUpdateCart = () => {
-    dispatch(updateCart(cartItems));
-    toast.success('Cart updated successfully!');
-  };
-
-  const handleClearCart = () => {
-    try {
-      dispatch(clearCart());
-      toast.success('Cart cleared successfully!');
-    } catch (error) {
-      toast.error('Failed to clear cart.');
-    }
-  };
-
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (

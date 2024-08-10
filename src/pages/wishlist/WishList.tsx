@@ -1,34 +1,17 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { removeFromWishlist, clearWishlist } from '../../store/wishlistSlice';
 import favorite from "../../assets/icons/favorite.svg";
 import Header from 'src/components/header/Header';
 import Footer from 'src/components/footer/Footer';
-import { useNavigate } from 'react-router-dom';
-import { addToCart } from '../../store/cartSlice';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import useAddToCart from '../../hooks/useAddToCart';
+import useWishlistActions from '../../hooks/useWishlistActions';
 
 const Wishlist = () => {
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleAddToCart = (item: any) => {
-    dispatch(addToCart({ ...item, quantity: 1 }));
-    toast.success('Product added to cart successfully!');
-    navigate('/cart');
-  };
-
-  const handleRemoveFromWishlist = (itemId: number) => {
-    dispatch(removeFromWishlist(itemId));
-    toast.success('Item removed from wishlist!');
-  };
-
-  const handleClearWishlist = () => {
-    dispatch(clearWishlist());
-    toast.success('Wishlist cleared successfully!');
-  };
+  const { addToCartHandler } = useAddToCart();
+  const { removeFromWishlistHandler, clearWishlistHandler } = useWishlistActions();
 
   return (
     <>
@@ -60,11 +43,11 @@ const Wishlist = () => {
                         <span className="text-sm font-semibold text-customBlue">${item.price}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button onClick={() => handleRemoveFromWishlist(item.id)}
+                        <button onClick={() => removeFromWishlistHandler(item.id)}
                           className="text-red-700">
                           Remove
                         </button>
-                        <button onClick={() => handleAddToCart(item)} className="bg-customYellow text-white px-3 py-3 rounded-lg ms-4">
+                        <button onClick={() => addToCartHandler(item)} className="bg-customYellow text-white px-3 py-3 rounded-lg ms-4">
                           Add to cart
                         </button>
                       </td>
@@ -74,13 +57,13 @@ const Wishlist = () => {
               </table>
             </div>
             <div className='mt-6'>
-            <button
-              className="w-full sm:w-auto px-5 py-3 text-red-700 font-semibold rounded-2xl border border-red-600"
-              onClick={handleClearWishlist}
-              style={{ display: 'block', margin: '0 auto' }}
-            >
-              Clear Wishlist
-            </button>
+              <button
+                className="w-full sm:w-auto px-5 py-3 text-red-700 font-semibold rounded-2xl border border-red-600"
+                onClick={clearWishlistHandler}
+                style={{ display: 'block', margin: '0 auto' }}
+              >
+                Clear Wishlist
+              </button>
             </div>
           </>
         ) : (

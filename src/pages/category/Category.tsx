@@ -18,7 +18,7 @@ const CategoryPage: React.FC = () => {
     categories,
     categoriesLoading,
     categoriesError,
-    products,
+    products = [],
     productsLoading,
     productsError
   } = useCategoryData(selectedCategories, allCategoriesChecked);
@@ -69,7 +69,6 @@ const CategoryPage: React.FC = () => {
               ))}
             </ul>
             <hr className='mt-6 border-gray-300' />
-            {/* </aside> */}
 
             {/* Availability */}
             <h2 className="font-semibold text-customBlue mt-4">Availability</h2>
@@ -209,7 +208,7 @@ const CategoryPage: React.FC = () => {
             {productsLoading && <p className='text-center'><Loader /></p>}
             {productsError && <p className='text-center'>{productsError}</p>}
             <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {products.map((product) => (
+              {Array.isArray(products) && products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>

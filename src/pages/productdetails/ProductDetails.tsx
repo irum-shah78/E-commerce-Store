@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import useProductDetails from '../../hooks/useProductDetails';
-import useCategoryProducts from '../../hooks/useCategoryProducts';
+import React from 'react';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import star from "../../assets/icons/star.svg";
@@ -12,40 +8,21 @@ import google from "../../assets/icons/google.svg";
 import facebook from "../../assets/icons/facebook.svg";
 import whatsApp from "../../assets/icons/whatsapp.svg";
 import vector from "../../assets/icons/Vector.svg";
-import { addToCart } from '../../store/cartSlice';
-import toast from 'react-hot-toast';
 import Loader from 'src/components/loader/Loader';
+import useProductDetails from '../../hooks/useProductDetails';
+import useCategoryProducts from '../../hooks/useCategoryProducts';
+import useAddToCart from '../../hooks/useAddToCart';
+import useQuantity from '../../hooks/useQuantity';
 
 const ProductDetails: React.FC = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [quantity, setQuantity] = useState<number>(1);
   const { product, loading, error } = useProductDetails();
   const { categoryProducts, loading: categoryLoading, error: categoryError } = useCategoryProducts();
+  const { addToCartHandler } = useAddToCart();
+  const { quantity, increaseQuantity, decreaseQuantity, setQuantity } = useQuantity();
 
   if (loading) return <Loader />;
   if (error) return <p>Error: {error}</p>;
   if (!product) return <Loader />;
-
-  const handleAddToCart = async () => {
-    try {
-      dispatch(addToCart({ ...product, quantity }));
-      toast.success('Product added to cart successfully!');
-      navigate('/cart');
-    } catch {
-      toast.error('Failed to add product to cart.');
-    }
-  };
-
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
 
   return (
     <>
@@ -114,7 +91,7 @@ const ProductDetails: React.FC = () => {
             </div>
 
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
-              <button className="px-4 py-2 md:px-8 md:py-3 bg-customYellow text-white rounded-full text-sm font-semibold" onClick={handleAddToCart}>Add to cart</button>
+              <button className="px-4 py-2 md:px-8 md:py-3 bg-customYellow text-white rounded-full text-sm font-semibold" onClick={() => addToCartHandler(product, quantity)}>Add to cart</button>
               <button className="px-4 py-2 md:px-8 md:py-3 bg-customYellow text-white rounded-full text-sm font-semibold">Buy it now</button>
               <div className="rounded-full border bg-gray-300 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center cursor-pointer">
                 <img src={favorite} alt="heart" className='h-5 w-5 md:h-6 md:w-6' />
