@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import location from "../../assets/icons/location.svg";
 import track from "../../assets/icons/track.svg";
 import logo from "../../assets/images/logo.svg";
+import arrowDown from "../../assets/icons/arrow-down.svg";
+import arrowCategories from "../../assets/icons/arrow-down-categories.svg"
 import user from "../../assets/icons/user.svg";
 import heart from "../../assets/icons/heart.svg";
 import cart from "../../assets/icons/cart.svg";
@@ -124,9 +126,7 @@ const Header: React.FC = () => {
               type="button"
               onClick={toggleDropdown}>
               Browse Categories
-              <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-              </svg>
+              <img src={arrowCategories} alt='dropdown' className="mt-1 ms-3" />
             </button>
             {dropdownOpen && (
               <ul className="absolute left-0 w-full bg-white shadow-lg rounded-lg p-2 z-10">
@@ -148,16 +148,12 @@ const Header: React.FC = () => {
           <div className={`flex-col md:flex-row items-center mt-4 md:mt-0 ${menuOpen ? 'flex' : 'hidden'} md:flex`}>
             <Link to="/" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
               Home
-              <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-              </svg>
+              <img src={arrowDown} alt='dropdown' className="mt-1 ms-3" />
             </Link>
 
             <Link to="/catalog" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
               Catalog
-              <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-              </svg>
+              <img src={arrowDown} alt='dropdown' className="mt-1 ms-3" />
             </Link>
 
             <Link to="/blog" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
@@ -166,9 +162,7 @@ const Header: React.FC = () => {
 
             <Link to="/pages" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
               Pages
-              <svg className="w-3 h-4 mt-1 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-              </svg>
+              <img src={arrowDown} alt='dropdown' className="mt-1 ms-3" />
             </Link>
 
             <Link to="/about" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">

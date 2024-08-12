@@ -1,20 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const useSelectedCategories = () => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
-    const savedCategories = localStorage.getItem('selectedCategories');
-    return savedCategories ? JSON.parse(savedCategories) : [];
-  });
-
-  const [allCategoriesChecked, setAllCategoriesChecked] = useState<boolean>(() => {
-    const savedAllCategoriesChecked = localStorage.getItem('allCategoriesChecked');
-    return savedAllCategoriesChecked ? JSON.parse(savedAllCategoriesChecked) : false;
-  });
-
-  useEffect(() => {
-    localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
-    localStorage.setItem('allCategoriesChecked', JSON.stringify(allCategoriesChecked));
-  }, [selectedCategories, allCategoriesChecked]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [allCategoriesChecked, setAllCategoriesChecked] = useState<boolean>(false);
 
   const handleCategoryChange = (category: string) => {
     if (category === 'all') {

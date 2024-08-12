@@ -13,6 +13,7 @@ import useProductDetails from '../../hooks/useProductDetails';
 import useCategoryProducts from '../../hooks/useCategoryProducts';
 import useAddToCart from '../../hooks/useAddToCart';
 import useQuantity from '../../hooks/useQuantity';
+import Reviews from 'src/components/reviews/Reviews';
 
 const ProductDetails: React.FC = () => {
   const { product, loading, error } = useProductDetails();
@@ -23,6 +24,9 @@ const ProductDetails: React.FC = () => {
   if (loading) return <Loader />;
   if (error) return <p>Error: {error}</p>;
   if (!product) return <Loader />;
+
+  const sizes = [30, 56, 42, 48];
+  const stars = Array(5).fill(0);
 
   return (
     <>
@@ -42,11 +46,9 @@ const ProductDetails: React.FC = () => {
             <p className="text-lg mb-2 text-gray-700 font-semibold">${product.price}</p>
             <div className="flex items-center mb-2">
               <div className="text-yellow-400 flex gap-2">
-                <img src={star} alt='star' />
-                <img src={star} alt='star' />
-                <img src={star} alt='star' />
-                <img src={star} alt='star' />
-                <img src={star} alt='star' />
+                {stars.map((_, index) => (
+                  <img key={index} src={star} alt="star" />
+                ))}
               </div>
               <p className="ml-2 text-gray-700 text-sm">No reviews</p>
             </div>
@@ -70,12 +72,13 @@ const ProductDetails: React.FC = () => {
 
             <div className="mb-4 text-sm">
               <label className="mb-1 font-semibold">Size:</label>
-              <div className='inline-block'>
+              <div className="inline-block">
                 <div className="flex space-x-2 ml-2">
-                  <button className="px-2 py-1 border rounded bg-gray-200">30</button>
-                  <button className="px-2 py-1 border rounded bg-gray-200">56</button>
-                  <button className="px-2 py-1 border rounded bg-gray-200">42</button>
-                  <button className="px-2 py-1 border rounded bg-gray-200">48</button>
+                  {sizes.map((size, index) => (
+                    <button key={index} className="px-2 py-1 border rounded bg-gray-200">
+                      {size}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -110,19 +113,7 @@ const ProductDetails: React.FC = () => {
         </div>
 
         {/* REVIEWS SECTION */}
-        <div>
-          <div className='flex items-center justify-center gap-3 mt-12'>
-            <button className="rounded-xl border border-gray-400 py-2 px-4">Description</button>
-            <button className="text-white bg-customBlue rounded-xl py-2 px-6">Reviews</button>
-          </div>
-          <div className="border border-1 border-gray-400 rounded-lg mt-6 p-6">
-            <div className="w-full">
-              <h2 className="text-lg font-bold mb-2 text-customBlue">Customer reviews</h2>
-              <p className='text-gray-600'>No reviews yet</p>
-              <button className='text-white bg-customBlue mt-2 px-4 py-2 underline'>Write a review</button>
-            </div>
-          </div>
-        </div>
+        <Reviews />
 
         {/* RELATED PRODUCT */}
         <section className="flex flex-wrap justify-between mt-12 gap-6">

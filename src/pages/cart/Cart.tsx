@@ -18,6 +18,7 @@ const CartPage: React.FC = () => {
   const { handleClearCart } = useClearCart();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const headers = ["Product", "Price", "Quantity", "Subtotal", "Remove"];
 
   return (
     <>
@@ -27,12 +28,12 @@ const CartPage: React.FC = () => {
           <div className="w-full lg:w-3/5 overflow-x-auto">
             <table className="bg-white w-full min-w-full lg:min-w-min" style={{ borderSpacing: '0' }}>
               <thead>
-                <tr className='bg-sky-100'>
-                  <th className="text-start px-2 py-2">Product</th>
-                  <th className="text-start px-2 py-2">Price</th>
-                  <th className="text-start px-2 py-2">Quantity</th>
-                  <th className="text-start px-2 py-2">Subtotal</th>
-                  <th className="text-start px-2 py-2">Remove</th>
+                <tr className="bg-sky-100">
+                  {headers.map((header, index) => (
+                    <th key={index} className="text-start px-2 py-2">
+                      {header}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">

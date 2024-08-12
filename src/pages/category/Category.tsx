@@ -1,10 +1,10 @@
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import ProductCard from '../../components/productCard/ProductCard';
-import sale from "../../assets/images/hero-sale.svg";
 import Loader from 'src/components/loader/Loader';
 import useSelectedCategories from '../../hooks/useSelectedCategories';
 import useCategoryData from '../../hooks/useCategoryData';
+import Sale from 'src/components/sale/Sale';
 
 const CategoryPage: React.FC = () => {
   const {
@@ -22,6 +22,30 @@ const CategoryPage: React.FC = () => {
     productsLoading,
     productsError
   } = useCategoryData(selectedCategories, allCategoriesChecked);
+
+  const colors = [
+    'bg-yellow-600',
+    'bg-red-600',
+    'bg-teal-950',
+    'bg-gray-500',
+    'bg-green-800',
+    'bg-blue-700',
+    'bg-purple-700',
+    'bg-orange-600'
+  ];
+
+  const sizes = [
+    { size: 'M', quantity: 5 },
+    { size: 'S', quantity: 5 },
+    { size: 'X', quantity: 5 },
+    { size: 'XX', quantity: 5 },
+  ];
+
+  const otherCategories = [
+    { name: 'Electronics', quantity: 5 },
+    { name: 'Dresses', quantity: 5 },
+    { name: 'Jewelry', quantity: 5 },
+  ];
   return (
     <>
       <Header />
@@ -30,9 +54,7 @@ const CategoryPage: React.FC = () => {
           <aside className="w-full md:w-64 text-sm mb-6 md:mb-0">
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-semibold text-customBlue">Categories</h2>
-              <button
-                className="text-gray-500 hover:text-gray-700"
-                onClick={handleReset}>Reset</button>
+              <button className="text-gray-500 hover:text-gray-700" onClick={handleReset}>Reset</button>
             </div>
             {categoriesLoading && <p className='text-center'><Loader /></p>}
             {categoriesError && <p className='text-center'>{categoriesError}</p>}
@@ -40,12 +62,7 @@ const CategoryPage: React.FC = () => {
               <li>
                 <label className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={allCategoriesChecked}
-                      onChange={() => handleCategoryChange('all')}
-                      className="h-5 w-5 accent-gray-700"
-                    />
+                    <input type="checkbox" checked={allCategoriesChecked} onChange={() => handleCategoryChange('all')} className="h-5 w-5 accent-gray-700" />
                     <span className="text-gray-800">All Categories</span>
                   </div>
                   <span className="text-gray-500">20</span>
@@ -55,12 +72,8 @@ const CategoryPage: React.FC = () => {
                 <li key={category}>
                   <label className="flex items-center justify-between">
                     <div className="flex items-center space-x-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={selectedCategories.includes(category)}
-                        onChange={() => handleCategoryChange(category)}
-                        className="h-5 w-5 accent-gray-700"
-                      />
+                      <input type="checkbox" checked={selectedCategories.includes(category)}
+                        onChange={() => handleCategoryChange(category)} className="h-5 w-5 accent-gray-700" />
                       <span className="text-gray-800">{category}</span>
                     </div>
                     <span className="text-gray-500">5</span>
@@ -80,10 +93,7 @@ const CategoryPage: React.FC = () => {
               <li>
                 <label className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      className="h-5 w-5 accent-gray-700 rounded"
-                    />
+                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
                     <span className="text-gray-800">In stock</span>
                   </div>
                   <span className="text-gray-500">5</span>
@@ -92,9 +102,7 @@ const CategoryPage: React.FC = () => {
               <li>
                 <label className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      className="h-5 w-5 accent-gray-700 rounded" disabled />
+                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" disabled />
                     <span className="text-gray-300">Out of stock</span>
                   </div>
                   <span className="text-gray-300">0</span>
@@ -110,33 +118,17 @@ const CategoryPage: React.FC = () => {
               <button className="text-gray-500 hover:text-gray-700">Reset</button>
             </div>
             <ul className="space-y-2 cursor-pointer">
-              <li>
-                <label className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">Electronics</span>
-                  </div>
-                  <span className="text-gray-500">5</span>
-                </label>
-              </li>
-              <li>
-                <label className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">Dresses</span>
-                  </div>
-                  <span className="text-gray-500">5</span>
-                </label>
-              </li>
-              <li>
-                <label className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">Jewelry</span>
-                  </div>
-                  <span className="text-gray-500">5</span>
-                </label>
-              </li>
+              {otherCategories.map((category, index) => (
+                <li key={index}>
+                  <label className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
+                      <span className="text-gray-800">{category.name}</span>
+                    </div>
+                    <span className="text-gray-500">{category.quantity}</span>
+                  </label>
+                </li>
+              ))}
             </ul>
             <hr className='mt-6 border-gray-300' />
 
@@ -147,14 +139,9 @@ const CategoryPage: React.FC = () => {
               <button className="text-gray-500 hover:text-gray-700">Reset</button>
             </div>
             <div className='flex gap-4'>
-              <div className='rounded-full bg-yellow-600 p-2'></div>
-              <div className='rounded-full bg-red-600 p-2'></div>
-              <div className='rounded-full bg-teal-950 p-2'></div>
-              <div className='rounded-full bg-gray-500 p-2'></div>
-              <div className='rounded-full bg-green-800 p-2'></div>
-              <div className='rounded-full bg-blue-700 p-2'></div>
-              <div className='rounded-full bg-purple-700 p-2'></div>
-              <div className='rounded-full bg-orange-600 p-2'></div>
+              {colors.map((color, index) => (
+                <div key={index} className={`rounded-full ${color} p-2`}></div>
+              ))}
             </div>
             <hr className='mt-6 border-gray-300' />
 
@@ -165,42 +152,17 @@ const CategoryPage: React.FC = () => {
               <button className="text-gray-500 hover:text-gray-700">Reset</button>
             </div>
             <ul className="space-y-2 cursor-pointer">
-              <li>
-                <label className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">M</span>
-                  </div>
-                  <span className="text-gray-500">5</span>
-                </label>
-              </li>
-              <li>
-                <label className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">S</span>
-                  </div>
-                  <span className="text-gray-500">5</span>
-                </label>
-              </li>
-              <li>
-                <label className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">X</span>
-                  </div>
-                  <span className="text-gray-500">5</span>
-                </label>
-              </li>
-              <li>
-                <label className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
-                    <span className="text-gray-800">XX</span>
-                  </div>
-                  <span className="text-gray-500">5</span>
-                </label>
-              </li>
+              {sizes.map((item, index) => (
+                <li key={index}>
+                  <label className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <input type="checkbox" className="h-5 w-5 accent-gray-700 rounded" />
+                      <span className="text-gray-800">{item.size}</span>
+                    </div>
+                    <span className="text-gray-500">{item.quantity}</span>
+                  </label>
+                </li>
+              ))}
             </ul>
             <hr className='mt-6 border-gray-300' />
           </aside>
@@ -214,20 +176,8 @@ const CategoryPage: React.FC = () => {
             </div>
           </main>
         </section>
-
-        {/* SALES SECTION */}
-        <section>
-          <div className="relative mt-12 mb-12">
-            <img src={sale} alt="sale" className="object-cover w-full h-96 sm:h-full" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:items-end sm:pr-28 space-y-4 text-center sm:text-right">
-              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">New laptop</button>
-              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-saleColor">Sale up to 50% off</p>
-              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white">12 inch HD display</p>
-              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">Shop now</button>
-            </div>
-          </div>
-        </section>
       </div>
+      <Sale />
       <Footer />
     </>
   );

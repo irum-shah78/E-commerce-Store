@@ -5,6 +5,15 @@ export type ProductType = {
   image: string;
 };
 
+export type Product = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
+};
+
 export type CartItemType = {
   id: number;
   title: string;

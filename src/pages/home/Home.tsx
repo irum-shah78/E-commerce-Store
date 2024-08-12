@@ -7,20 +7,6 @@ import rightArrow from "../../assets/icons/arrow-right.svg";
 import cart from "../../assets/icons/cart.svg";
 import eye from "../../assets/icons/eye.svg";
 import vector from "../../assets/icons/Vector.svg";
-import sale from "../../assets/images/hero-sale.svg";
-import boxTick from "../../assets/icons/box-tick.svg";
-import crown from "../../assets/icons/crown.svg";
-import shield from "../../assets/icons/security.svg";
-import reviewOne from "../../assets/images/review-1.svg";
-import reviewTwo from "../../assets/images/review-2.svg";
-import reviewThree from "../../assets/images/review-3.svg";
-import brandOne from "../../assets/images/brand-1.svg";
-import brandTwo from "../../assets/images/brand-2.svg";
-import brandThree from "../../assets/images/brand-3.svg";
-import brandFour from "../../assets/images/brand-4.svg";
-import brandFive from "../../assets/images/brand-5.svg";
-import blogOne from "../../assets/images/bolg-1.svg";
-import blogTwo from "../../assets/images/blog-2.svg";
 import ProductCard from "../../components/productCard/ProductCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -32,6 +18,9 @@ import useFetchProducts from '../../hooks/useFetchProducts';
 import useFetchProductsByCategory from '../../hooks/useFetchProductsByCategories';
 import { Link } from "react-router-dom";
 import useInitialHomePageData from "../../hooks/useFetchInitialData";
+import Sale from "src/components/sale/Sale";
+import Brands from "src/components/brands/Brands";
+import News from "src/components/news/News";
 
 const HomePage: React.FC = () => {
   const { categories } = useFetchCategories();
@@ -172,7 +161,6 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         </section>
-
         <section className="mt-10 px-2 sm:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
             {(selectedCategory === 'all' ? allProducts : categoryProducts).map(product => (
@@ -183,21 +171,8 @@ const HomePage: React.FC = () => {
           </div>
         </section>
       </div>
-
-      <div className="md:px-8 lg:px-27">
-        {/* SALES SECTION */}
-        <section>
-          <div className="relative mt-12 mb-12">
-            <img src={sale} alt="sale" className="object-cover w-full h-96 sm:h-full" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:items-end sm:pr-28 space-y-4 text-center sm:text-right">
-              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">New laptop</button>
-              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-saleColor">Sale up to 50% off</p>
-              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white">12 inch HD display</p>
-              <button className="rounded-3xl text-white text-xs sm:text-sm md:text-base lg:text-sm px-4 py-2 bg-customYellow">Shop now</button>
-            </div>
-          </div>
-        </section>
-      </div>
+      {/* Sale Section */}
+      <Sale />
 
       <div className="px-4 md:px-8 lg:px-27">
         {/* CATEGORY SECTION */}
@@ -255,158 +230,13 @@ const HomePage: React.FC = () => {
           </div>
         </section>
       </div>
+      {/* Brands */}
+      <Brands />
 
-      <div className="md:px-8 lg:px-27">
-        {/* FEATURES SECTION */}
-        <section className="mt-12">
-          <div className="flex flex-col lg:flex-row justify-around bg-sizeColor lg:rounded-2xl p-10 gap-4 lg:gap-0">
-            <div className="flex justify-around items-center gap-4">
-              <img src={boxTick} alt="box-tick" />
-              <div>
-                <p className="font-semibold text-lg text-customBlue">Free delivery</p>
-                <p className="text-customBlue">on order above $50,00</p>
-              </div>
-            </div>
-            <div className="flex justify-around items-center gap-4">
-              <img src={crown} alt="box-tick" />
-              <div>
-                <p className="font-semibold text-lg text-customBlue">Best quality</p>
-                <p className="text-customBlue">best quality in low price</p>
-              </div>
-            </div>
-            <div className="flex justify-around items-center gap-4">
-              <img src={shield} alt="box-tick" />
-              <div>
-                <p className="font-semibold text-lg text-customBlue">1 year warranty</p>
-                <p className="text-customBlue">Available warranty</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+      {/* News */}
+      <News />
 
-      <div className="px-4 md:px-8 lg:px-27">
-        {/* REVIEWS SECTION */}
-        <section className="mt-14 p-2">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-2">
-            <div className="rounded-2xl border border-productCardBorder h-60 w-full">
-              <div className="flex justify-around items-center mt-4">
-                <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
-                  <img className="rounded-full" src={reviewOne} alt="review" />
-                </div>
-                <div>
-                  <p className="font-semibold text-customBlue">Savannah Nguyen</p>
-                </div>
-              </div>
-              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6 lg:text-base text-sm">
-                <p className="text-customBlue">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-productCardBorder h-60 w-full">
-              <div className="flex justify-around items-center mt-4">
-                <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
-                  <img className="rounded-full" src={reviewTwo} alt="review" />
-                </div>
-                <div>
-                  <p className="font-semibold text-customBlue">Esther Howard</p>
-                </div>
-              </div>
-              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6 lg:text-base text-sm">
-                <p className="text-customBlue">orem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque</p>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-productCardBorder h-60 w-full">
-              <div className="flex justify-around items-center mt-4">
-                <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
-                  <img className="rounded-full" src={reviewThree} alt="review" />
-                </div>
-                <div>
-                  <p className="font-semibold text-customBlue">Savannah Nguyen</p>
-                </div>
-              </div>
-              <div className="bg-sizeColor mx-2 rounded-xl text-center mt-6 lg:text-base text-sm">
-                <p className="text-customBlue">orem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-2 mt-10 items-center">
-            <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
-            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-          </div>
-        </section>
-      </div>
-
-      <div className="md:px-8 lg:px-27">
-        {/* BRANDS SECTION */}
-        <section className="mt-12">
-          <div className="flex flex-wrap justify-between bg-sizeColor py-10 gap-4 lg:gap-0">
-            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-              <img src={brandOne} alt="brand-one" className="h-10 w-52" />
-            </div>
-            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-              <img src={brandTwo} alt="brand-two" className="h-10 w-52" />
-            </div>
-            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-              <img src={brandThree} alt="brand-three" className="h-10 w-52" />
-            </div>
-            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-              <img src={brandFour} alt="brand-four" className="h-10 w-52" />
-            </div>
-            <div className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
-              <img src={brandFive} alt="brand-five" className="h-10 w-52" />
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="px-4 md:px-8 lg:px-27">
-        {/* LATEST NEWS SECTION */}
-        <section className="mt-16">
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-2xl text-customBlue">Latest news</p>
-            <p className="text-customBlue">View all</p>
-          </div>
-
-          <div className="flex flex-col lg:flex-row justify-between gap-6 mt-12">
-            <div className="rounded-2xl p-8 border border-productCardBorder w-full lg:w-auto">
-              <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-                <img className="object-cover" src={blogOne} alt="blog" />
-                <div className="leading-normal text-wrap gap-4">
-                  <button className="p-2 rounded-3xl border border-newsBorder text-categoryBtn">20 Oct, 2021</button>
-                  <p className="font-semibold text-2xl mt-4 text-customBlue">Who avoids a pain that produces?</p>
-                  <p className="text-sm mt-4 text-customBlue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
-                  <p className="text-sm mt-4 text-customBlue">By spacing tech</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-2xl p-8 border border-productCardBorder w-full lg:w-auto">
-              <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-                <img className="object-cover" src={blogTwo} alt="blog" />
-                <div className="leading-normal text-wrap gap-4">
-                  <button className="p-2 rounded-3xl border border-newsBorder text-categoryBtn">20 Oct, 2021</button>
-                  <p className="font-semibold text-2xl mt-4 text-customBlue">Who avoids a pain that produces?</p>
-                  <p className="text-sm mt-4 text-customBlue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint voluptates quas aspernatur impedit dolorem quidem officiis non ad recusandae.</p>
-                  <p className="text-sm mt-4 text-customBlue">By spacing tech</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-2 mt-10 items-center mb-4">
-            <div className="rounded-full w-4 h-4 bg-customYellow cursor-pointer"></div>
-            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-            <div className="rounded-full w-4 h-4 border border-ellipseBorderColor cursor-pointer"></div>
-          </div>
-        </section>
-      </div>
-
+      {/* Footer */}
       <Footer />
     </>
   );
