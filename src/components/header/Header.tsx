@@ -8,16 +8,21 @@ import arrowCategories from "../../assets/icons/arrow-down-categories.svg"
 import user from "../../assets/icons/user.svg";
 import heart from "../../assets/icons/heart.svg";
 import cart from "../../assets/icons/cart.svg";
-import useDropdown from '../../hooks/useDropdown';
-import useCart from '../../hooks/useCart';
-import useWishlist from '../../hooks/useWishlist';
-import useMenu from '../../hooks/useMenu';
+import useHeaderState from './useHeader';
 
 const Header: React.FC = () => {
-  const { isOpen: dropdownOpen, toggleDropdown } = useDropdown();
-  const { cartItems, isOpen: cartOpen, toggleCart } = useCart();
-  const { wishlistItems, isOpen: wishlistOpen, toggleWishlist } = useWishlist();
-  const { isOpen: menuOpen, toggleMenu } = useMenu();
+  const {
+    isDropdownOpen,
+    toggleDropdown,
+    isCartOpen,
+    toggleCart,
+    cartItems,
+    isWishlistOpen,
+    toggleWishlist,
+    wishlistItems,
+    isMenuOpen,
+    toggleMenu,
+  } = useHeaderState();
 
   return (
     <header className='text-sm'>
@@ -67,7 +72,7 @@ const Header: React.FC = () => {
               </div>
               <span className='hidden sm:block pl-2'>Wishlist</span>
 
-              {wishlistOpen && (
+              {isWishlistOpen && (
                 <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10 mt-24'>
                   {wishlistItems.length > 0 ? (
                     <ul>
@@ -94,7 +99,7 @@ const Header: React.FC = () => {
               </span>
               <span className='hidden sm:block pl-2'>Cart</span>
 
-              {cartOpen && (
+              {isCartOpen && (
                 <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10 mt-24'>
                   {cartItems.length > 0 ? (
                     <ul>
@@ -128,7 +133,7 @@ const Header: React.FC = () => {
               Browse Categories
               <img src={arrowCategories} alt='dropdown' className="mt-1 ms-3" />
             </button>
-            {dropdownOpen && (
+            {isDropdownOpen && (
               <ul className="absolute left-0 w-full bg-white shadow-lg rounded-lg p-2 z-10">
                 <li className="p-3 hover:bg-gray-100">
                   <Link to={`/category/all`} onClick={toggleDropdown}>
@@ -145,7 +150,7 @@ const Header: React.FC = () => {
             </svg>
           </button>
 
-          <div className={`flex-col md:flex-row items-center mt-4 md:mt-0 ${menuOpen ? 'flex' : 'hidden'} md:flex`}>
+          <div className={`flex-col md:flex-row items-center mt-4 md:mt-0 ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
             <Link to="/" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
               Home
               <img src={arrowDown} alt='dropdown' className="mt-1 ms-3" />

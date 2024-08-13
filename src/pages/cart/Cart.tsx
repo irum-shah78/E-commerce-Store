@@ -1,22 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import closeCircle from "../../assets/icons/close-circle.svg";
 import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import useRemoveFromCart from '../../hooks/useRemoveFromCart';
-import useUpdateQuantity from '../../hooks/useUpdateQuantity';
-import useUpdateCart from '../../hooks/useUpdateCart';
-import useClearCart from '../../hooks/useClearCart';
-import { RootState } from '../../store/store';
+import useCartActions from './useCart';
 
 const CartPage: React.FC = () => {
-  const { handleRemove } = useRemoveFromCart();
-  const { handleQuantityChange } = useUpdateQuantity();
-  const { handleUpdateCart } = useUpdateCart();
-  const { handleClearCart } = useClearCart();
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const { cartItems, handleRemove, handleQuantityChange, handleUpdateCart, handleClearCart } = useCartActions();
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   const headers = ["Product", "Price", "Quantity", "Subtotal", "Remove"];
 

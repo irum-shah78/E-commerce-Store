@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchProductById } from '../helper/api';
-import { ProductType } from '../types/types';
+import { fetchProductById } from '../../../helper/api';
+import { ProductType } from '../../../types/types';
 
 const useCategoryProducts = () => {
   const [categoryProducts, setCategoryProducts] = useState<ProductType[]>([]);

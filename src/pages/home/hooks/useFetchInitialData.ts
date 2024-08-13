@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchProductById } from "../helper/api";
+import { fetchProductById } from "../../../helper/api";
 
 const useInitialHomePageData = () => {
   const [upperSwiperProducts, setHeroProducts] = useState<any[]>([]);

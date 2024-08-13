@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchCategories } from '../helper/api';
+import { fetchCategories } from '../../../helper/api';
 
 const useFetchCategories = () => {
   const [categories, setCategories] = useState<string[]>([]);

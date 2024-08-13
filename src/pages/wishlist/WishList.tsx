@@ -6,7 +6,7 @@ import Header from 'src/components/header/Header';
 import Footer from 'src/components/footer/Footer';
 import { Toaster } from 'react-hot-toast';
 import useAddToCart from '../../hooks/useAddToCart';
-import useWishlistActions from '../../hooks/useWishlistActions';
+import useWishlistActions from './useWishlistActions';
 
 const Wishlist = () => {
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);

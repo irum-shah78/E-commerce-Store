@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { fetchProductsByCategory } from '../helper/api';
-import { ProductType } from '../types/types'; 
+import { fetchProducts } from '../../../helper/api';
+import { ProductType } from '../../../types/types'; 
 
-const useFetchProductsByCategory = (category: string) => {
+const useFetchProducts = () => {
   const [products, setProducts] = useState<ProductType[]>([]); 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -10,8 +10,8 @@ const useFetchProductsByCategory = (category: string) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: ProductType[] = await fetchProductsByCategory(category); 
-        setProducts(Array.isArray(data) ? data : []);
+        const data: ProductType[] = await fetchProducts();
+        setProducts(data);
       } catch (err) {
         setError('Failed to fetch products');
       } finally {
@@ -20,9 +20,9 @@ const useFetchProductsByCategory = (category: string) => {
     };
 
     fetchData();
-  }, [category]);
+  }, []);
 
   return { products, loading, error };
 };
 
-export default useFetchProductsByCategory;
+export default useFetchProducts;

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { removeFromWishlist, clearWishlist } from '../store/wishlistSlice';
+import { removeFromWishlist, clearWishlist } from '../../store/wishlistSlice';
 import toast from 'react-hot-toast';
 
 const useWishlistActions = () => {

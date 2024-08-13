@@ -1,22 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { addToWishlist } from '../../store/wishlistSlice';
 import { Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
 import heart from "../../assets/icons/favorite-heart.svg";
+import useProductCard from './useProductCard';
 import { ProductCardPropsType } from '../../types/types';
 
 const ProductCard: React.FC<ProductCardPropsType> = ({ product }) => {
-  const dispatch = useDispatch();
-
-  const handleAddToWishlist = () => {
-    try {
-      dispatch(addToWishlist(product));
-      toast.success(`Product added to wishlist!`);
-    } catch (error: any) {
-      toast.error(`Failed to add product to wishlist.`);
-    }
-  };
+  const { handleAddToWishlist } = useProductCard();
 
   return (
     <div className="rounded-2xl w-[308px] h-[313px] border border-gray-400 pt-4 pl-4">
@@ -24,7 +13,7 @@ const ProductCard: React.FC<ProductCardPropsType> = ({ product }) => {
         <img className="w-[187px] h-[178px] object-cover" src={product.image} alt={product.title} />
         <div
           className="rounded-full w-6 h-6 p-1 text-center cursor-pointer bg-lightBlue ms-2"
-          onClick={handleAddToWishlist}
+          onClick={() => handleAddToWishlist(product)}
         >
           <img src={heart} alt="heart" />
         </div>

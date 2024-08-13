@@ -9,10 +9,10 @@ import facebook from "../../assets/icons/facebook.svg";
 import whatsApp from "../../assets/icons/whatsapp.svg";
 import vector from "../../assets/icons/Vector.svg";
 import Loader from 'src/components/loader/Loader';
-import useProductDetails from '../../hooks/useProductDetails';
-import useCategoryProducts from '../../hooks/useCategoryProducts';
+import useProductDetails from './hooks/useProductDetails';
+import useCategoryProducts from './hooks/useCategoryProducts';
 import useAddToCart from '../../hooks/useAddToCart';
-import useQuantity from '../../hooks/useQuantity';
+import useQuantity from './hooks/useQuantity';
 import Reviews from 'src/components/reviews/Reviews';
 
 const ProductDetails: React.FC = () => {

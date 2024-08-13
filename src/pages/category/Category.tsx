@@ -2,8 +2,7 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import ProductCard from '../../components/productCard/ProductCard';
 import Loader from 'src/components/loader/Loader';
-import useSelectedCategories from '../../hooks/useSelectedCategories';
-import useCategoryData from '../../hooks/useCategoryData';
+import useCategory from './useCategory';
 import Sale from 'src/components/sale/Sale';
 
 const CategoryPage: React.FC = () => {
@@ -11,17 +10,14 @@ const CategoryPage: React.FC = () => {
     selectedCategories,
     allCategoriesChecked,
     handleCategoryChange,
-    handleReset
-  } = useSelectedCategories();
-
-  const {
+    handleReset,
     categories,
     categoriesLoading,
     categoriesError,
     products = [],
     productsLoading,
     productsError
-  } = useCategoryData(selectedCategories, allCategoriesChecked);
+  } = useCategory();
 
   const colors = [
     'bg-yellow-600',
