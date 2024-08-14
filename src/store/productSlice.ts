@@ -51,11 +51,11 @@ const productSlice = createSlice({
       })
       .addCase(getProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload;
+        state.products = action.payload ?? [];
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch products';
+        state.error = action.error.message ?? 'Failed to fetch products';
       })
       .addCase(getProductById.pending, (state) => {
         state.loading = true;
@@ -63,11 +63,11 @@ const productSlice = createSlice({
       })
       .addCase(getProductById.fulfilled, (state, action) => {
         state.loading = false;
-        state.product = action.payload;
+        state.product = action.payload ?? null;
       })
       .addCase(getProductById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch product';
+        state.error = action.error.message ?? 'Failed to fetch product';
       })
       .addCase(getCategories.pending, (state) => {
         state.loading = true;
@@ -75,11 +75,11 @@ const productSlice = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.loading = false;
-        state.categories = action.payload;
+        state.categories = action.payload ?? [];
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch categories';
+        state.error = action.error.message ?? 'Failed to fetch categories';
       })
       .addCase(getProductsByCategory.pending, (state) => {
         state.loading = true;
@@ -87,11 +87,11 @@ const productSlice = createSlice({
       })
       .addCase(getProductsByCategory.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload;
+        state.products = action.payload ?? [];
       })
       .addCase(getProductsByCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch products by category';
+        state.error = action.error.message ?? 'Failed to fetch products by category';
       });
   },
 });

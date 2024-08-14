@@ -28,3 +28,8 @@ export const fetchProductsByCategory = async (category: string) => {
     throw new Error('Failed to fetch products');
   }
 };
+
+export const fetchLimitedProducts = async (limit: number) => {
+  const response = await api.get(`/products?limit=${limit}`);
+  return response.data;
+};

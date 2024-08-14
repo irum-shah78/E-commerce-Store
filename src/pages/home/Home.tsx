@@ -1,33 +1,27 @@
-import React, { useState } from "react";
-import "../../custom.d.ts";
+import React, { useState } from 'react';
 import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
-import leftArrow from "../../assets/icons/arrow-left.svg";
-import rightArrow from "../../assets/icons/arrow-right.svg";
-import cart from "../../assets/icons/cart.svg";
-import eye from "../../assets/icons/eye.svg";
-import vector from "../../assets/icons/Vector.svg";
-import ProductCard from "../../components/productCard/ProductCard";
+import ProductCard from '../../components/productCard/ProductCard';
+import Sale from '../../components/sale/Sale';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
-import useFetchCategories from './hooks/useFetchCategories';
-import useFetchProducts from './hooks/useFetchProducts';
-import useFetchProductsByCategory from './hooks/useFetchProductsByCategories';
-import { Link } from "react-router-dom";
-import useInitialHomePageData from "./hooks/useFetchInitialData";
-import Sale from "src/components/sale/Sale";
+import leftArrow from "../../assets/icons/arrow-left.svg";
+import rightArrow from "../../assets/icons/arrow-right.svg";
+import vector from '../../../src/assets/icons/Vector.svg';
+import { Link } from 'react-router-dom';
+import useHome from "./useHome"
 import Brands from "src/components/brands/Brands";
 import News from "src/components/news/News";
+import Footer from "src/components/footer/Footer";
+import cart from "../../assets/icons/cart.svg";
+import eye from "../../assets/icons/eye.svg";
+import Loader from 'src/components/loader/Loader';
 
 const HomePage: React.FC = () => {
-  const { categories } = useFetchCategories();
-  const { products: allProducts } = useFetchProducts();
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const { products: categoryProducts } = useFetchProductsByCategory(selectedCategory);
-  const { upperSwiperProducts, setHeroProducts, lowerSwiperProducts, setFeaturedProducts, categoriesProducts } = useInitialHomePageData();
+  const { categories, allProducts, selectedCategory, setSelectedCategory, categoryProducts, upperSwiperProducts, setHeroProducts, lowerSwiperProducts, setFeaturedProducts, categoriesProducts, loading, error } = useHome();
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const swapUpperItems = (direction: 'left' | 'right') => {
@@ -69,22 +63,19 @@ const HomePage: React.FC = () => {
     setFeaturedProducts(newItems);
   };
 
+  const numbers = [57, 11, 33, 59];
+
+  if (loading) return <p><Loader /></p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <>
       <Header />
       <div className="px-4 md:px-8 lg:px-27 py-4">
         {/* Hero Swiper */}
         <section className="lg:h-[395px]">
-          <Swiper
-            slidesPerView={"auto"}
-            onClick={() => swapUpperItems('left')}
-            modules={[Navigation, Pagination]}
-            navigation
-            className="mySwiper"
-            spaceBetween={10}
-            loop={false}
-            pagination={{ clickable: true }}
-          >
+          <Swiper slidesPerView={"auto"} onClick={() => swapUpperItems('left')} modules={[Navigation, Pagination]} navigation
+            className="mySwiper" spaceBetween={10} loop={false} pagination={{ clickable: true }}>
             {upperSwiperProducts.map(product => (
               <SwiperSlide key={product.id}>
                 <div className="flex flex-col md:flex-row items-center justify-center relative p-8">
@@ -138,23 +129,18 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* Popular Products */}
+        {/* Categories Section */}
         <section className="mt-16">
           <div className="flex flex-col sm:flex-row sm:justify-between items-center">
             <p className="font-bold text-2xl text-customBlue mb-4 sm:mb-0">Popular products</p>
             <div className="flex flex-col sm:flex-row items-center gap-4 flex-wrap sm:justify-end sm:ml-auto">
-              <button
-                className={`rounded-2xl px-6 py-2 font-semibold text-sm border ${selectedCategory === "all" ? "bg-customBlue text-white" : "border-customBlue text-categoryBtn hover:text-white hover:bg-customBlue"}`}
-                onClick={() => setSelectedCategory("all")}
-              >
+              <button className={`rounded-2xl px-6 py-2 font-semibold text-sm border ${selectedCategory === "all" ? "bg-customBlue text-white" : "border-customBlue text-categoryBtn hover:text-white hover:bg-customBlue"}`}
+                onClick={() => setSelectedCategory("all")}>
                 All
               </button>
               {categories.map((category) => (
-                <button
-                  key={category}
-                  className={`rounded-2xl px-6 py-2 font-semibold text-sm border ${selectedCategory === category ? "bg-customBlue text-white" : "border-customBlue text-categoryBtn hover:text-white hover:bg-customBlue"}`}
-                  onClick={() => setSelectedCategory(category)}
-                >
+                <button key={category} className={`rounded-2xl px-6 py-2 font-semibold text-sm border ${selectedCategory === category ? "bg-customBlue text-white" : "border-customBlue text-categoryBtn hover:text-white hover:bg-customBlue"}`}
+                  onClick={() => setSelectedCategory(category)}>
                   {category}
                 </button>
               ))}
@@ -164,79 +150,74 @@ const HomePage: React.FC = () => {
         <section className="mt-10 px-2 sm:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
             {(selectedCategory === 'all' ? allProducts : categoryProducts).map(product => (
-              < ProductCard
-                key={product.id} product={product}
-              />
+              < ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
-      </div>
-      {/* Sale Section */}
-      <Sale />
-
-      <div className="px-4 md:px-8 lg:px-27">
-        {/* CATEGORY SECTION */}
-        <section className="flex-col sm:flex-row justify-between mt-12 gap-6 hidden sm:flex">
-          {categoriesProducts.length > 0 && (
-            <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
-              <div className="flex flex-col sm:flex-row justify-around items-center h-full">
-                <img className="object-cover h-auto w-auto sm:w-48" src={categoriesProducts[0].image} alt={categoriesProducts[0].title} />
-                <div className="p-4 leading-normal">
-                  <p className="font-semibold text-lg text-customBlue">{categoriesProducts[0].title}</p>
-                  <p className="font-semibold text-gray-600 mt-4">${categoriesProducts[0].price}</p>
-                  <div className="flex gap-2 mt-4">
-                    {[...Array(5)].map((_, index) => (
-                      <img key={index} src={vector} alt="star" />
-                    ))}
-                  </div>
-                  <div className="flex mt-6 gap-2">
-                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">57</button>
-                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">11</button>
-                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">33</button>
-                    <button className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow">59</button>
-                  </div>
-                  <div className="flex justify-between items-center mt-7">
-                    <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
-                      <p className="text-black font-semibold">Add to cart</p>
-                      <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
-                        <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
-                      </div>
-                    </div>
-                    <div className="rounded-2xl bg-iconLightBlue px-5 py-3 ml-2 text-center cursor-pointer">
-                      <img src={eye} alt="eye" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-          <div className="flex flex-col items-center sm:items-start gap-4">
-            {categoriesProducts.slice(1).map((product) => (
-              <div key={product.id} className="rounded-2xl border border-productCardBorder h-48 w-full sm:w-96 mb-4 sm:mb-0">
-                <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-2">
-                  <img className="object-cover mt-2 w-20 h-20 sm:w-32 sm:h-32" src={product.image} alt={product.title} />
+        <Sale />
+        <div className="px-4 md:px-8 lg:px-27">
+          {/* CATEGORY SECTION */}
+          <section className="flex-col sm:flex-row justify-between mt-12 gap-6 hidden sm:flex">
+            {categoriesProducts.length > 0 && (
+              <div className="rounded-2xl border border-productCardBorder w-full sm:w-3/4 mb-6 sm:mb-0 sm:mr-6 hidden sm:inline-block">
+                <div className="flex flex-col sm:flex-row justify-around items-center h-full">
+                  <img className="object-cover h-auto w-auto sm:w-48" src={categoriesProducts[0].image} alt={categoriesProducts[0].title} />
                   <div className="p-4 leading-normal">
-                    <p className="font-semibold text-sm text-customBlue truncate w-40">{product.title}</p>
-                    <p className="font-semibold text-gray-600 mt-2">${product.price}</p>
-                    <div className="flex gap-2 mt-2">
+                    <p className="font-semibold text-lg text-customBlue truncate w-60">{categoriesProducts[0].title}</p>
+                    <p className="font-semibold text-gray-600 mt-4">${categoriesProducts[0].price}</p>
+                    <div className="flex gap-2 mt-4">
                       {[...Array(5)].map((_, index) => (
                         <img key={index} src={vector} alt="star" />
                       ))}
                     </div>
+                    <div className="flex mt-6 gap-2">
+                      {numbers.map((num, index) => (
+                        <button
+                          key={index}
+                          className="rounded-full h-14 w-14 font-semibold bg-sizeColor text-customYellow"
+                        >
+                          {num}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex justify-between items-center mt-7">
+                      <div className="flex justify-between gap-4 rounded-2xl px-5 py-3 cursor-pointer bg-iconLightBlue">
+                        <p className="text-black font-semibold">Add to cart</p>
+                        <div className="bg-customYellow h-6 w-6 rounded-full p-0.5 text-center">
+                          <button><img alt="cart" src={cart} className="w-6 h-6" /></button>
+                        </div>
+                      </div>
+                      <div className="rounded-2xl bg-iconLightBlue px-5 py-3 ml-2 text-center cursor-pointer">
+                        <img src={eye} alt="eye" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
+            )}
+            <div className="flex flex-col items-center sm:items-start gap-4">
+              {categoriesProducts.slice(1).map((product) => (
+                <div key={product.id} className="rounded-2xl border border-productCardBorder h-48 w-full sm:w-96 mb-4 sm:mb-0">
+                  <div className="flex flex-col sm:flex-row justify-around items-center p-4 gap-2">
+                    <img className="object-cover mt-2 w-20 h-20 sm:w-32 sm:h-32" src={product.image} alt={product.title} />
+                    <div className="p-4 leading-normal">
+                      <p className="font-semibold text-sm text-customBlue truncate w-40">{product.title}</p>
+                      <p className="font-semibold text-gray-600 mt-2">${product.price}</p>
+                      <div className="flex gap-2 mt-2">
+                        {[...Array(5)].map((_, index) => (
+                          <img key={index} src={vector} alt="star" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+        <Brands />
+        <News />
       </div>
-      {/* Brands */}
-      <Brands />
-
-      {/* News */}
-      <News />
-
-      {/* Footer */}
       <Footer />
     </>
   );

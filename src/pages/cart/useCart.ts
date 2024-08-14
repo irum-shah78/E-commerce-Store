@@ -5,7 +5,7 @@ import { RootState } from '../../store/store';
 
 const useCartActions = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartItems = useSelector((state: RootState) => state.cart?.items ?? []);
 
   const handleClearCart = () => {
     try {

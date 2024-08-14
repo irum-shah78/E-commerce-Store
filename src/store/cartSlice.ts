@@ -30,7 +30,7 @@ const cartSlice = createSlice({
       state.items = [];
     },
     updateCart: (state, action: PayloadAction<CartItemType[]>) => {
-      state.items = action.payload;
+      state.items = action.payload ?? [];
     },
   },
 });

@@ -9,17 +9,13 @@ import facebook from "../../assets/icons/facebook.svg";
 import whatsApp from "../../assets/icons/whatsapp.svg";
 import vector from "../../assets/icons/Vector.svg";
 import Loader from 'src/components/loader/Loader';
-import useProductDetails from './hooks/useProductDetails';
-import useCategoryProducts from './hooks/useCategoryProducts';
 import useAddToCart from '../../hooks/useAddToCart';
-import useQuantity from './hooks/useQuantity';
 import Reviews from 'src/components/reviews/Reviews';
+import useProduct from "./useProduct"
 
 const ProductDetails: React.FC = () => {
-  const { product, loading, error } = useProductDetails();
-  const { categoryProducts, loading: categoryLoading, error: categoryError } = useCategoryProducts();
+  const { product, categoryProducts, quantity, loading, error, increaseQuantity, decreaseQuantity, setQuantity, } = useProduct();
   const { addToCartHandler } = useAddToCart();
-  const { quantity, increaseQuantity, decreaseQuantity, setQuantity } = useQuantity();
 
   if (loading) return <Loader />;
   if (error) return <p>Error: {error}</p>;
@@ -41,7 +37,7 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1 p-4 lg:p-6">
+          <div className="flex-1 p-4 lg:px-6">
             <h1 className="text-xl md:text-2xl mb-2 text-customBlue">{product.title}</h1>
             <p className="text-lg mb-2 text-gray-700 font-semibold">${product.price}</p>
             <div className="flex items-center mb-2">
@@ -112,15 +108,12 @@ const ProductDetails: React.FC = () => {
           </div>
         </div>
 
-        {/* REVIEWS SECTION */}
         <Reviews />
 
         {/* RELATED PRODUCT */}
         <section className="flex flex-wrap justify-between mt-12 gap-6">
-          {categoryLoading ? (
-            <Loader />
-          ) : categoryError ? (
-            <p>Error: {categoryError}</p>
+          {categoryProducts.length === 0 ? (
+            <p>No related products found.</p>
           ) : (
             categoryProducts.map((product) => (
               <div key={product.id} className="rounded-2xl border border-productCardBorder w-full sm:w-[23%] mb-6 sm:mb-0 p-4">

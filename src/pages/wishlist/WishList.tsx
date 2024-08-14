@@ -9,7 +9,7 @@ import useAddToCart from '../../hooks/useAddToCart';
 import useWishlistActions from './useWishlistActions';
 
 const Wishlist = () => {
-  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const wishlistItems = useSelector((state: RootState) => state.wishlist?.items ?? []);
   const { addToCartHandler } = useAddToCart();
   const { removeFromWishlistHandler, clearWishlistHandler } = useWishlistActions();
 
