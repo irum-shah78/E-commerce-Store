@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
-import { addToWishlist } from '../../store/wishlistSlice';
+import { addToWishlist } from '../../store/slices/wishlistSlice';
 import { ProductCardPropsType } from '../../types/types';
 
 const useWishlistHandler = () => {

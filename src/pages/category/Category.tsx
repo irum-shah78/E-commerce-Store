@@ -4,44 +4,13 @@ import ProductCard from '../../components/productCard/ProductCard';
 import Loader from 'src/components/loader/Loader';
 import useCategory from './useCategory';
 import Sale from 'src/components/sale/Sale';
+import { colors } from 'src/constants/colors';
+import { sizes } from 'src/constants/sizes';
+import { otherCategories } from 'src/constants/categories';
 
 const CategoryPage: React.FC = () => {
-  const {
-    selectedCategories,
-    allCategoriesChecked,
-    handleCategoryChange,
-    handleReset,
-    categories,
-    categoriesLoading,
-    categoriesError,
-    products = [],
-    productsLoading,
-    productsError
-  } = useCategory();
+  const { selectedCategories, allCategoriesChecked, handleCategoryChange, handleReset, categories, categoriesLoading, categoriesError, products = [], productsLoading, productsError } = useCategory();
 
-  const colors = [
-    'bg-yellow-600',
-    'bg-red-600',
-    'bg-teal-950',
-    'bg-gray-500',
-    'bg-green-800',
-    'bg-blue-700',
-    'bg-purple-700',
-    'bg-orange-600'
-  ];
-
-  const sizes = [
-    { size: 'M', quantity: 5 },
-    { size: 'S', quantity: 5 },
-    { size: 'X', quantity: 5 },
-    { size: 'XX', quantity: 5 },
-  ];
-
-  const otherCategories = [
-    { name: 'Electronics', quantity: 5 },
-    { name: 'Dresses', quantity: 5 },
-    { name: 'Jewelry', quantity: 5 },
-  ];
   return (
     <>
       <Header />

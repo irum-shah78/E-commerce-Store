@@ -11,18 +11,7 @@ import cart from "../../assets/icons/cart.svg";
 import useHeaderState from './useHeader';
 
 const Header: React.FC = () => {
-  const {
-    isDropdownOpen,
-    toggleDropdown,
-    isCartOpen,
-    toggleCart,
-    cartItems,
-    isWishlistOpen,
-    toggleWishlist,
-    wishlistItems,
-    isMenuOpen,
-    toggleMenu,
-  } = useHeaderState();
+  const { isDropdownOpen, toggleDropdown, isCartOpen, toggleCart, cartItems, isWishlistOpen, toggleWishlist, wishlistItems, isMenuOpen, toggleMenu, } = useHeaderState();
 
   return (
     <header className='text-sm'>
@@ -149,32 +138,20 @@ const Header: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
-
           <div className={`flex-col md:flex-row items-center mt-4 md:mt-0 ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
-            <Link to="/" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
-              Home
-              <img src={arrowDown} alt='dropdown' className="mt-1 ms-3" />
-            </Link>
-
-            <Link to="/catalog" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
-              Catalog
-              <img src={arrowDown} alt='dropdown' className="mt-1 ms-3" />
-            </Link>
-
-            <Link to="/blog" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
-              Blog
-            </Link>
-
-            <Link to="/pages" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
-              Pages
-              <img src={arrowDown} alt='dropdown' className="mt-1 ms-3" />
-            </Link>
-
-            <Link to="/about" className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
-              About us
-            </Link>
+            {[
+              { to: "/", label: "Home", hasDropdown: true },
+              { to: "/catalog", label: "Catalog", hasDropdown: true },
+              { to: "/blog", label: "Blog", hasDropdown: false },
+              { to: "/pages", label: "Pages", hasDropdown: true },
+              { to: "/about", label: "About us", hasDropdown: false },
+            ].map(({ to, label, hasDropdown }, index) => (
+              <Link key={index} to={to} className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
+                {label}
+                {hasDropdown && <img src={arrowDown} alt="dropdown" className="mt-1 ms-3" />}
+              </Link>
+            ))}
           </div>
-
           <div className="flex items-end mt-4 md:mt-0">
             <p className='text-customBlue font-bold'>30 Days Free Return</p>
           </div>

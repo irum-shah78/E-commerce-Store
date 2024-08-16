@@ -15,6 +15,7 @@ const useHomePageData = () => {
   const [upperSwiperProducts, setHeroProducts] = useState<ProductType[]>([]);
   const [lowerSwiperProducts, setFeaturedProducts] = useState<ProductType[]>([]);
   const [categoriesProducts, setCategoryProductsForSwiper] = useState<ProductType[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -62,6 +63,45 @@ const useHomePageData = () => {
     fetchCategoryProducts();
   }, [selectedCategory, allProducts]);
 
+  const swapUpperItems = (direction: 'left' | 'right') => {
+    let newItems = [...upperSwiperProducts];
+
+    if (direction === 'left') {
+      if (currentIndex === 0) return;
+
+      const item = newItems.pop();
+      if (item) {
+        newItems.unshift(item);
+        setCurrentIndex(currentIndex - 1);
+      }
+    } else if (direction === 'right') {
+      if (currentIndex === newItems.length - 1) return;
+
+      const item = newItems.shift();
+      if (item) {
+        newItems.push(item);
+        setCurrentIndex(currentIndex + 1);
+      }
+    }
+    setHeroProducts(newItems);
+  };
+
+  const swapLowerItems = (direction: 'left' | 'right') => {
+    let newItems = [...lowerSwiperProducts];
+    if (direction === 'left') {
+      const item = newItems.pop();
+      if (item) {
+        newItems.unshift(item);
+      }
+    } else if (direction === 'right') {
+      const item = newItems.shift();
+      if (item) {
+        newItems.push(item);
+      }
+    }
+    setFeaturedProducts(newItems);
+  };
+
   return {
     categories,
     allProducts,
@@ -75,6 +115,8 @@ const useHomePageData = () => {
     categoriesProducts,
     loading,
     error,
+    swapUpperItems,
+    swapLowerItems,
   };
 };
 

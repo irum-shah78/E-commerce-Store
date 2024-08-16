@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addToCart } from '../store/cartSlice';
+import { addToCart } from '../store/slices/cartSlice';
 import toast from 'react-hot-toast';
 import { ProductType } from 'src/types/types';
 

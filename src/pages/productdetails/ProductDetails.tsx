@@ -11,7 +11,8 @@ import vector from "../../assets/icons/Vector.svg";
 import Loader from 'src/components/loader/Loader';
 import useAddToCart from '../../hooks/useAddToCart';
 import Reviews from 'src/components/reviews/Reviews';
-import useProduct from "./useProduct"
+import useProduct from "./useProduct";
+import { size, stars } from 'src/constants/sizes';
 
 const ProductDetails: React.FC = () => {
   const { product, categoryProducts, quantity, loading, error, increaseQuantity, decreaseQuantity, setQuantity, } = useProduct();
@@ -20,9 +21,6 @@ const ProductDetails: React.FC = () => {
   if (loading) return <Loader />;
   if (error) return <p>Error: {error}</p>;
   if (!product) return <Loader />;
-
-  const sizes = [30, 56, 42, 48];
-  const stars = Array(5).fill(0);
 
   return (
     <>
@@ -70,7 +68,7 @@ const ProductDetails: React.FC = () => {
               <label className="mb-1 font-semibold">Size:</label>
               <div className="inline-block">
                 <div className="flex space-x-2 ml-2">
-                  {sizes.map((size, index) => (
+                  {size.map((size, index) => (
                     <button key={index} className="px-2 py-1 border rounded bg-gray-200">
                       {size}
                     </button>

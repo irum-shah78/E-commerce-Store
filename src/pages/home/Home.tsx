@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from "../../components/header/Header";
 import ProductCard from '../../components/productCard/ProductCard';
 import Sale from '../../components/sale/Sale';
@@ -18,52 +18,11 @@ import Footer from "src/components/footer/Footer";
 import cart from "../../assets/icons/cart.svg";
 import eye from "../../assets/icons/eye.svg";
 import Loader from 'src/components/loader/Loader';
+import { numbers } from 'src/constants/sizes';
 
 const HomePage: React.FC = () => {
-  const { categories, allProducts, selectedCategory, setSelectedCategory, categoryProducts, upperSwiperProducts, setHeroProducts, lowerSwiperProducts, setFeaturedProducts, categoriesProducts, loading, error } = useHome();
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const swapUpperItems = (direction: 'left' | 'right') => {
-    let newItems = [...upperSwiperProducts];
-
-    if (direction === 'left') {
-      if (currentIndex === 0) return;
-
-      const item = newItems.pop();
-      if (item) {
-        newItems.unshift(item);
-        setCurrentIndex(currentIndex - 1);
-      }
-    } else if (direction === 'right') {
-      if (currentIndex === newItems.length - 1) return;
-
-      const item = newItems.shift();
-      if (item) {
-        newItems.push(item);
-        setCurrentIndex(currentIndex + 1);
-      }
-    }
-    setHeroProducts(newItems);
-  };
-
-  const swapLowerItems = (direction: 'left' | 'right') => {
-    let newItems = [...lowerSwiperProducts];
-    if (direction === 'left') {
-      const item = newItems.pop();
-      if (item) {
-        newItems.unshift(item);
-      }
-    } else if (direction === 'right') {
-      const item = newItems.shift();
-      if (item) {
-        newItems.push(item);
-      }
-    }
-    setFeaturedProducts(newItems);
-  };
-
-  const numbers = [57, 11, 33, 59];
+  const { categories, allProducts, selectedCategory, setSelectedCategory, categoryProducts, upperSwiperProducts, lowerSwiperProducts,
+    categoriesProducts, loading, error, swapUpperItems, swapLowerItems, } = useHome();
 
   if (loading) return <p><Loader /></p>;
   if (error) return <p>{error}</p>;

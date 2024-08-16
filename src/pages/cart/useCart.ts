@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart, removeFromCart, updateCart, updateQuantity } from '../../store/cartSlice';
+import { clearCart, removeFromCart, updateCart, updateQuantity } from '../../store/slices/cartSlice';
 import { toast } from 'react-hot-toast';
 import { RootState } from '../../store/store';
 
