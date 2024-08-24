@@ -25,7 +25,7 @@ const ProductDetails: React.FC = () => {
   return (
     <>
       <Header />
-      <section className='px-4 py-4 md:px-6 lg:px-32 md:py-8 lg:py-4 mt-14'>
+      <section className='px-4 py-4 md:px-6 lg:px-16 md:py-8 lg:py-4 mt-14'>
         {/* DETAILS SECTION */}
         <div className="flex flex-col lg:flex-row justify-between">
           <div className="w-full lg:w-1/2 px-2 lg:px-4">
@@ -109,12 +109,12 @@ const ProductDetails: React.FC = () => {
         <Reviews />
 
         {/* RELATED PRODUCT */}
-        <section className="flex flex-wrap justify-between mt-12 gap-6">
+        <section className="flex xl:flex-row lg:flex-row flex-col justify-between mt-12 gap-6">
           {categoryProducts?.length === 0 ? (
             <p>No related products found.</p>
           ) : (
             categoryProducts?.map((product) => (
-              <div key={product.id} className="rounded-2xl border border-productCardBorder w-full sm:w-[23%] mb-6 sm:mb-0 p-4">
+              <div key={product.id} className="rounded-2xl border border-productCardBorder w-full mb-6 sm:mb-0 p-4">
                 <div className="flex flex-col h-full">
                   <div className="flex justify-center w-full mb-4">
                     <img className="object-cover w-40 h-40" src={product?.image} alt={product?.title} />

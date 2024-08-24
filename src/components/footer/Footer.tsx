@@ -9,7 +9,7 @@ import whatsapp from "../../assets/icons/whatsapp.svg";
 const Footer = () => {
   return (
     <footer className="bg-customLightBlue">
-      <div className="px-4 md:px-8 lg:px-28 py-4">
+      <div className="px-4 md:px-8 lg:px-16 py-4">
         <div className="bg-white mt-4 flex flex-col lg:flex-row items-center justify-around h-auto lg:h-36 rounded-xl p-4 lg:p-0">
           <p className="font-bold text-xl md:text-2xl text-customBlue mb-4 lg:mb-0">Subscribe newsletter</p>
           <div className="relative flex items-center mb-4 lg:mb-0">

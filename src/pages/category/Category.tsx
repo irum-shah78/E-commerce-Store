@@ -14,9 +14,9 @@ const CategoryPage: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="category-page px-4 py-4 md:px-2 lg:px-24 md:py-6 mt-14">
-        <section className="flex flex-col sm:flex-col md:justify-between md:items-center lg:flex-row lg:items-center lg:mt-0">
-          <aside className="xl:w-80 md:w-full lg:w-52 text-sm mb-6 md:mb-0">
+      <div className="category-page px-4 py-4 md:px-6 lg:px-16 xl:px-24 md:py-6 mt-14">
+        <section className="flex flex-col xl:flex-row lg:flex-row md:flex-col md:justify-between">
+          <aside className="w-full xl:w-72 lg:w-64 md:w-full text-sm mb-6 md:mb-0">
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-semibold text-customBlue">Categories</h2>
               <button className="text-gray-500 hover:text-gray-700" onClick={handleReset}>Reset</button>
@@ -131,16 +131,13 @@ const CategoryPage: React.FC = () => {
             </ul>
             <hr className='mt-6 border-gray-300' />
           </aside>
-          {/* <main className="products flex-1 md:ml-3 flex flex-col items-center md:mt-4"> */}
-          <main className="products flex-1 md:ml-3 flex flex-col items-center mt-0 lg:mt-0 xl:mt-0 sm:px-4">
-            <div className='mx-auto mt-0'>
-              {productsLoading && <p className='text-center'><Loader /></p>}
-              {productsError && <p className='text-center'>{productsError}</p>}
-              <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
-                {Array.isArray(products) && products.map((product) => (
-                  <ProductCard key={product?.id} product={product} />
-                ))}
-              </div>
+          <main className="products flex-1 md:ml-3 flex flex-col items-center md:items-stretch md:mt-4">
+            {productsLoading && <p className='text-center'><Loader /></p>}
+            {productsError && <p className='text-center'>{productsError}</p>}
+            <div className="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-6">
+              {Array.isArray(products) && products.map((product) => (
+                <ProductCard key={product?.id} product={product} />
+              ))}
             </div>
           </main>
         </section>

@@ -30,7 +30,7 @@ const Brands = () => {
           <div className="flex flex-col lg:flex-row justify-between items-center gap-2">
             {reviews?.map((item, index) => (
               <div key={index} className="rounded-2xl border border-productCardBorder h-auto w-full sm:p-1">
-                <div className="flex justify-around items-center mt-4 sm:p-1">
+                <div className="flex justify-around items-center mt-4">
                   <div className="rounded-full p-2 border-dashed border-2 border-customYellow">
                     <img className="rounded-full" src={item?.img} alt="review" />
                   </div>
@@ -61,7 +61,7 @@ const Brands = () => {
         <section className="mt-12">
           <div className="flex flex-wrap justify-between bg-sizeColor py-10 gap-4 lg:gap-0">
             {brandss?.map((brand, index) => (
-              <div key={index} className="flex justify-center w-full sm:w-1/2 lg:w-full md:w-full sm:mt-4">
+              <div key={index} className="flex justify-center w-full sm:w-1/2 lg:w-auto sm:mt-4">
                 <img src={brand?.src} alt={brand?.alt} className="h-10 w-52 md:w-48" />
               </div>
             ))}

@@ -10,7 +10,7 @@ const News = () => {
           <p className="font-bold text-2xl text-customBlue">Latest news</p>
           <p className="text-customBlue">View all</p>
         </div>
-        <div className="flex flex-col lg:flex-col justify-between gap-6 mt-12">
+        <div className="flex flex-col xl:flex-row justify-between gap-6 mt-12">
           {blogs?.map((blog, index) => (
             <div key={index} className="rounded-2xl p-8 border border-productCardBorder w-full lg:w-auto">
               <div className="flex flex-col lg:flex-row justify-between items-center gap-6">

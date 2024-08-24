@@ -16,7 +16,7 @@ const Header: React.FC = () => {
 
   return (
     <header className='text-sm'>
-      <div className='flex flex-col md:flex-row justify-between items-center px-4 md:px-4 xl:px-27 lg:px-20 py-5'>
+      <div className='flex flex-col md:flex-row justify-between items-center px-4 md:px-4 xl:px-27 lg:px-16 py-5'>
         <div className='h-[24px]'>
           <p className='text-center md:text-left'>Need help? Call us: (+98) 0234 456 789</p>
         </div>
@@ -32,11 +32,11 @@ const Header: React.FC = () => {
         </div>
       </div>
       <nav>
-        <div className='bg-customBlue flex md:flex-row items-center justify-between px-4 md:px-4 v lg:px-20 py-6'>
+        <div className='bg-customBlue flex md:flex-row items-center justify-between px-4 md:px-4 v lg:px-16 py-6'>
           <Link to="/">
             <img alt='logo' src={logo} className="w-24 md:w-auto" />
           </Link>
-          <div className='hidden md:flex w-full md:w-64'>
+          <div className='hidden md:flex xl:w-96 lg:w-80 md:w-64'>
             <div className='relative w-full'>
               <input
                 type="search"
@@ -114,7 +114,7 @@ const Header: React.FC = () => {
       </nav>
 
       <nav className="bg-gray-200">
-        <div className="flex flex-col md:flex-row items-center justify-between px-2 md:px-2 xl:px-27 lg:px-20 py-3">
+        <div className="flex flex-col md:flex-row items-center justify-between px-2 md:px-2 xl:px-27 lg:px-16 py-3">
           <div className="relative">
             <button id="dropdownHoverButton"
               className="text-white bg-customYellow focus:outline-none font-semibold text-sm py-4 px-2 inline-flex items-center"
