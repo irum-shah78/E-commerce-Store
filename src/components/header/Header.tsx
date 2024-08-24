@@ -9,33 +9,34 @@ import user from "../../assets/icons/user.svg";
 import heart from "../../assets/icons/heart.svg";
 import cart from "../../assets/icons/cart.svg";
 import useHeaderState from './useHeader';
+import { pages } from 'src/constants/pages';
 
 const Header: React.FC = () => {
   const { isDropdownOpen, toggleDropdown, isCartOpen, toggleCart, cartItems, isWishlistOpen, toggleWishlist, wishlistItems, isMenuOpen, toggleMenu, } = useHeaderState();
 
   return (
     <header className='text-sm'>
-      <div className='flex flex-col md:flex-row justify-between items-center px-2 md:px-8 lg:px-28 py-5'>
+      <div className='flex flex-col md:flex-row justify-between items-center px-4 md:px-4 xl:px-27 lg:px-20 py-5'>
         <div className='h-[24px]'>
           <p className='text-center md:text-left'>Need help? Call us: (+98) 0234 456 789</p>
         </div>
         <div className='flex items-center justify-center md:flex-row cursor-pointer text-center gap-6'>
           <div className='flex text-nowrap items-center justify-center md:justify-end lg:gap-1 sm:gap-3'>
-            <img className="lg:px-3 w-5 md:w-10 sm:w-4" src={location} alt="location" />
+            <img className="w-5" src={location} alt="location" />
             <span className="sm:block">Our store</span>
           </div>
           <div className='flex text-nowrap items-center justify-center md:justify-end lg:gap-1 sm:gap-3'>
-            <img className="lg:px-3 w-5 md:w-10 sm:w-4" alt="track" src={track} />
+            <img className="w-5" alt="track" src={track} />
             <span className="sm:block">Track your order</span>
           </div>
         </div>
       </div>
       <nav>
-        <div className='bg-customBlue flex md:flex-row items-center justify-between px-4 md:px-8 lg:px-28 py-6'>
+        <div className='bg-customBlue flex md:flex-row items-center justify-between px-4 md:px-4 v lg:px-20 py-6'>
           <Link to="/">
             <img alt='logo' src={logo} className="w-24 md:w-auto" />
           </Link>
-          <div className='hidden md:flex w-full md:w-80'>
+          <div className='hidden md:flex w-full md:w-64'>
             <div className='relative w-full'>
               <input
                 type="search"
@@ -57,17 +58,17 @@ const Header: React.FC = () => {
             <div className='relative flex items-center gap-1' onClick={toggleWishlist}>
               <img alt='heart' src={heart} className="w-5 h-5" />
               <div className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>
-                {wishlistItems.length}
+                {wishlistItems?.length}
               </div>
               <span className='hidden sm:block pl-2'>Wishlist</span>
 
               {isWishlistOpen && (
                 <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10 mt-24'>
-                  {wishlistItems.length > 0 ? (
+                  {wishlistItems?.length > 0 ? (
                     <ul>
-                      {wishlistItems.map(item => (
+                      {wishlistItems?.map(item => (
                         <li key={item.id} className='flex justify-between p-2'>
-                          <span className='text-customBlue'>{item.title}</span>
+                          <span className='text-customBlue'>{item?.title}</span>
                         </li>
                       ))}
                     </ul>
@@ -84,18 +85,18 @@ const Header: React.FC = () => {
             <div className='relative flex items-center gap-1' onClick={toggleCart}>
               <img alt='cart' src={cart} className="w-5 h-5" />
               <span className='bg-customYellow h-4 w-4 rounded-full flex items-center justify-center text-white text-xs'>
-                {cartItems.length}
+                {cartItems?.length}
               </span>
               <span className='hidden sm:block pl-2'>Cart</span>
 
               {isCartOpen && (
                 <div className='absolute right-0 w-48 bg-white shadow-lg rounded-lg pb-4 z-10 mt-24'>
-                  {cartItems.length > 0 ? (
+                  {cartItems?.length > 0 ? (
                     <ul>
-                      {cartItems.map(item => (
-                        <li key={item.id} className='flex justify-between p-2'>
-                          <span className='text-customBlue'>{item.title}</span>
-                          <span className='text-black font-semibold'>{item.quantity}</span>
+                      {cartItems?.map(item => (
+                        <li key={item?.id} className='flex justify-between p-2'>
+                          <span className='text-customBlue'>{item?.title}</span>
+                          <span className='text-black font-semibold'>{item?.quantity}</span>
                         </li>
                       ))}
                     </ul>
@@ -113,14 +114,14 @@ const Header: React.FC = () => {
       </nav>
 
       <nav className="bg-gray-200">
-        <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-28 py-3">
+        <div className="flex flex-col md:flex-row items-center justify-between px-2 md:px-2 xl:px-27 lg:px-20 py-3">
           <div className="relative">
             <button id="dropdownHoverButton"
-              className="text-white bg-customYellow focus:outline-none font-semibold text-sm p-4 inline-flex items-center"
+              className="text-white bg-customYellow focus:outline-none font-semibold text-sm py-4 px-2 inline-flex items-center"
               type="button"
               onClick={toggleDropdown}>
               Browse Categories
-              <img src={arrowCategories} alt='dropdown' className="mt-1 ms-3" />
+              <img src={arrowCategories} alt='dropdown' className="mt-1 ms-2 " />
             </button>
             {isDropdownOpen && (
               <ul className="absolute left-0 w-full bg-white shadow-lg rounded-lg p-2 z-10">
@@ -139,13 +140,7 @@ const Header: React.FC = () => {
             </svg>
           </button>
           <div className={`flex-col md:flex-row items-center mt-4 md:mt-0 ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
-            {[
-              { to: "/", label: "Home", hasDropdown: true },
-              { to: "/catalog", label: "Catalog", hasDropdown: true },
-              { to: "/blog", label: "Blog", hasDropdown: false },
-              { to: "/pages", label: "Pages", hasDropdown: true },
-              { to: "/about", label: "About us", hasDropdown: false },
-            ].map(({ to, label, hasDropdown }, index) => (
+            {pages?.map(({ to, label, hasDropdown }, index) => (
               <Link key={index} to={to} className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
                 {label}
                 {hasDropdown && <img src={arrowDown} alt="dropdown" className="mt-1 ms-3" />}

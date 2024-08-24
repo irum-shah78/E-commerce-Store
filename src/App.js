@@ -5,6 +5,7 @@ import CategoryPage from './pages/category/Category.tsx';
 import ProductDetailsPage from './pages/productdetails/ProductDetails.tsx';
 import CartPage from './pages/cart/Cart.tsx';
 import Wishlist from './pages/wishlist/WishList.tsx';
+import NotFoundPage from './pages/notfound/NotFound.tsx';
 
 const App = () => {
   return (
@@ -14,11 +15,11 @@ const App = () => {
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path='/wishlist' element={<Wishlist />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
 };
 
 export default App;
-

@@ -4,8 +4,8 @@ import {
   fetchProducts,
   fetchProductsByCategory,
   fetchLimitedProducts,
-} from '../../helper/api';
-import { ProductType } from '../../types/types';
+} from '../helper/api';
+import { ProductType } from '../types/types';
 
 const useHomePageData = () => {
   const [categories, setCategories] = useState<string[]>([]);

@@ -21,7 +21,7 @@ const Wishlist = () => {
           <span className="mr-2 text-customBlue">My Wishlist</span>
           <img src={favorite} alt="heart icon" className="w-6 h-6" />
         </h1>
-        {wishlistItems.length > 0 ? (
+        {wishlistItems?.length > 0 ? (
           <>
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white">
@@ -33,14 +33,14 @@ const Wishlist = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {wishlistItems.map((item) => (
-                    <tr key={item.id} className="border-b">
+                  {wishlistItems?.map((item) => (
+                    <tr key={item?.id} className="border-b">
                       <td className="px-6 py-4 whitespace-nowrap flex items-center">
-                        <img src={item.image} alt={item.title} className="w-12 h-12 object-cover" />
-                        <span className="ml-4 text-sm font-semibold text-customBlue">{item.title}</span>
+                        <img src={item?.image} alt={item?.title} className="w-12 h-12 object-cover" />
+                        <span className="ml-4 text-sm font-semibold text-customBlue">{item?.title}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm font-semibold text-customBlue">${item.price}</span>
+                        <span className="text-sm font-semibold text-customBlue">${item?.price}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button onClick={() => removeFromWishlistHandler(item.id)}

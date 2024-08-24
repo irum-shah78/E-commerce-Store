@@ -20,7 +20,7 @@ const CartPage: React.FC = () => {
             <table className="bg-white w-full min-w-full lg:min-w-min" style={{ borderSpacing: '0' }}>
               <thead>
                 <tr className="bg-sky-100">
-                  {headers.map((header, index) => (
+                  {headers?.map((header, index) => (
                     <th key={index} className="text-start px-2 py-2">
                       {header}
                     </th>
@@ -28,28 +28,28 @@ const CartPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {cartItems.map((item) => (
-                  <tr key={item.id}>
+                {cartItems?.map((item) => (
+                  <tr key={item?.id}>
                     <td className="py-4 px-2 flex items-center space-x-2">
-                      <img src={item.image} alt={item.title} className="w-12 h-12" />
+                      <img src={item?.image} alt={item?.title} className="w-12 h-12" />
                       <div className='w-32'>
-                        <p className='truncate w-24'>{item.title}</p>
+                        <p className='truncate w-24'>{item?.title}</p>
                       </div>
                     </td>
-                    <td className="py-4 px-2 whitespace-nowrap">${item.price.toFixed(2)}</td>
+                    <td className="py-4 px-2 whitespace-nowrap">${item?.price.toFixed(2)}</td>
                     <td className="py-4 px-2 whitespace-nowrap">
                       <div className="flex items-center space-x-1">
-                        <button className="px-2 border border-gray-400 bg-gray-200" onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
-                        <input type="number" value={item.quantity} onChange={(e) =>
-                          handleQuantityChange(item.id, parseInt(e.target.value))}
+                        <button className="px-2 border border-gray-400 bg-gray-200" onClick={() => handleQuantityChange(item?.id, item?.quantity - 1)}>-</button>
+                        <input type="number" value={item?.quantity} onChange={(e) =>
+                          handleQuantityChange(item?.id, parseInt(e?.target?.value))}
                           className="w-10 text-center mx-1 border border-gray-400 bg-gray-200" min="1" />
                         <button className="px-2 border border-gray-400 bg-gray-200"
-                          onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
+                          onClick={() => handleQuantityChange(item?.id, item?.quantity + 1)}>+</button>
                       </div>
                     </td>
-                    <td className="py-4 px-2 whitespace-nowrap">${(item.price * item.quantity).toFixed(2)}</td>
+                    <td className="py-4 px-2 whitespace-nowrap">${(item?.price * item?.quantity).toFixed(2)}</td>
                     <td className="py-4 px-2 whitespace-nowrap">
-                      <button className="ml-4" onClick={() => handleRemove(item.id)}><img src={closeCircle} alt="remove" /></button>
+                      <button className="ml-4" onClick={() => handleRemove(item?.id)}><img src={closeCircle} alt="remove" /></button>
                     </td>
                   </tr>
                 ))}

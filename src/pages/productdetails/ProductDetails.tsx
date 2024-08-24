@@ -31,16 +31,16 @@ const ProductDetails: React.FC = () => {
           <div className="w-full lg:w-1/2 px-2 lg:px-4">
             <div className="overflow-hidden flex justify-center lg:justify-start">
               <div className="w-full lg:w-full p-4 border-2 border-gray-400 rounded-lg flex items-center justify-center">
-                <img className="w-48 h-48 md:w-96 md:h-96" src={product.image} alt={product.title} />
+                <img className="w-48 h-48 md:w-96 md:h-96" src={product?.image} alt={product?.title} />
               </div>
             </div>
           </div>
           <div className="flex-1 p-4 lg:px-6">
-            <h1 className="text-xl md:text-2xl mb-2 text-customBlue">{product.title}</h1>
-            <p className="text-lg mb-2 text-gray-700 font-semibold">${product.price}</p>
+            <h1 className="text-xl md:text-2xl mb-2 text-customBlue">{product?.title}</h1>
+            <p className="text-lg mb-2 text-gray-700 font-semibold">${product?.price}</p>
             <div className="flex items-center mb-2">
               <div className="text-yellow-400 flex gap-2">
-                {stars.map((_, index) => (
+                {stars?.map((_, index) => (
                   <img key={index} src={star} alt="star" />
                 ))}
               </div>
@@ -68,7 +68,7 @@ const ProductDetails: React.FC = () => {
               <label className="mb-1 font-semibold">Size:</label>
               <div className="inline-block">
                 <div className="flex space-x-2 ml-2">
-                  {size.map((size, index) => (
+                  {size?.map((size, index) => (
                     <button key={index} className="px-2 py-1 border rounded bg-gray-200">
                       {size}
                     </button>
@@ -110,18 +110,18 @@ const ProductDetails: React.FC = () => {
 
         {/* RELATED PRODUCT */}
         <section className="flex flex-wrap justify-between mt-12 gap-6">
-          {categoryProducts.length === 0 ? (
+          {categoryProducts?.length === 0 ? (
             <p>No related products found.</p>
           ) : (
-            categoryProducts.map((product) => (
+            categoryProducts?.map((product) => (
               <div key={product.id} className="rounded-2xl border border-productCardBorder w-full sm:w-[23%] mb-6 sm:mb-0 p-4">
                 <div className="flex flex-col h-full">
                   <div className="flex justify-center w-full mb-4">
-                    <img className="object-cover w-40 h-40" src={product.image} alt={product.title} />
+                    <img className="object-cover w-40 h-40" src={product?.image} alt={product?.title} />
                   </div>
                   <div className="leading-normal">
-                    <p className="font-semibold text-base text-customBlue truncate w-40">{product.title}</p>
-                    <p className="font-semibold text-base text-gray-600 mt-2">${product.price}</p>
+                    <p className="font-semibold text-base text-customBlue truncate w-40">{product?.title}</p>
+                    <p className="font-semibold text-base text-gray-600 mt-2">${product?.price}</p>
                     <div className="flex gap-2 mt-2">
                       {[...Array(5)].map((_, starIndex) => (
                         <img key={starIndex} src={vector} alt="star" />
