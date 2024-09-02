@@ -16,7 +16,7 @@ const Swiper = () => {
                     <img src={leftArrow} alt="left-arrow" className="w-6 h-6" />
                   </div>
                 )}
-                <img className="object-cover w-32 h-24 ms-2" src={product?.image} alt={product?.title} />
+                <img className="w-32 h-24 ms-2" src={product?.image} alt={product?.title} />
                 <div className="flex flex-col justify-between p-4 leading-normal">
                   <p className="font-bold text-lg text-customBlue truncate lg:w-40 w-32">{product?.title}</p>
                   <p className="text-sm mt-2 text-customBlue">${product?.price}</p>

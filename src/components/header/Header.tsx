@@ -136,14 +136,14 @@ const Header: React.FC = () => {
 
           <button className="md:hidden text-black" onClick={toggleMenu}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
           <div className={`flex-col md:flex-row items-center mt-4 md:mt-0 ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
             {pages?.map(({ to, label, hasDropdown }, index) => (
-              <Link key={index} to={to} className="text-black bg-transparent focus:outline-none text-sm p-4 inline-flex items-center hover:text-customYellow">
+              <Link key={index} to={to} className="text-black bg-transparent focus:outline-none text-sm p-3 inline-flex items-center hover:text-customYellow">
                 {label}
-                {hasDropdown && <img src={arrowDown} alt="dropdown" className="mt-1 ms-3" />}
+                {hasDropdown && <img src={arrowDown} alt="dropdown" className="mt-1 ms-2" />}
               </Link>
             ))}
           </div>

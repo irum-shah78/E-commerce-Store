@@ -117,7 +117,7 @@ const ProductDetails: React.FC = () => {
               <div key={product.id} className="rounded-2xl border border-productCardBorder w-full mb-6 sm:mb-0 p-4">
                 <div className="flex flex-col h-full">
                   <div className="flex justify-center w-full mb-4">
-                    <img className="object-cover w-40 h-40" src={product?.image} alt={product?.title} />
+                    <img className="w-40 h-40" src={product?.image} alt={product?.title} />
                   </div>
                   <div className="leading-normal">
                     <p className="font-semibold text-base text-customBlue truncate w-40">{product?.title}</p>
