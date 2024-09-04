@@ -113,8 +113,8 @@ const Header: React.FC = () => {
         </div>
       </nav>
 
-      <nav className="bg-gray-200">
-        <div className="flex flex-col md:flex-row items-center justify-between px-2 md:px-2 xl:px-27 lg:px-16 py-3">
+      <nav className="bg-gray-200 h-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between px-2 md:px-2 xl:px-27 lg:px-16">
           <div className="relative">
             <button id="dropdownHoverButton"
               className="text-white bg-customYellow focus:outline-none font-semibold text-sm py-4 px-2 inline-flex items-center"

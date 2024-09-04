@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="relative flex items-center mb-4 lg:mb-0">
             <input
               type="email"
-              className="rounded-xl px-8 py-3 bg-customYellow text-white placeholder-white placeholder-opacity-70 text-sm focus:outline-none"
+              className="px-8 py-3 rounded-[20px] xl:w-[388px] xl:h-[60px] bg-customYellow text-white placeholder-white placeholder:ps-4 text-sm focus:outline-none"
               placeholder="Email address"
             />
             <img src={share} alt="email" className="absolute right-4 cursor-pointer" />

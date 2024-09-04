@@ -20,10 +20,10 @@ const Slider = () => {
                     <p className="text-2xl md:text-4xl font-bold text-customBlue text-center md:text-left truncate w-4/5">{product?.title}</p>
                     <div className="flex flex-col md:flex-row gap-4 mt-4 justify-center md:justify-start">
                       <Link to={`/category/all`} className="w-full md:w-auto">
-                        <button className="rounded-xl text-white text-xs px-6 py-4 bg-customYellow w-full">Shop now</button>
+                        <button className="rounded-[20px] text-white text-[16px] px-6 py-4 bg-customYellow w-full xl:w-[144px] xl:h-[61px]">Shop now</button>
                       </Link>
                       <Link to={`/product/${product?.id}`} className="w-full md:w-auto">
-                        <button className="rounded-xl text-xs px-6 py-4 text-customBlue border border-customBlue w-full">View more</button>
+                        <button className="rounded-[20px] text-[16px]  px-6 py-4 text-customBlue border border-customBlue w-full xl:w-[144px] xl:h-[61px]">View more</button>
                       </Link>
                     </div>
                   </div>

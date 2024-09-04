@@ -63,19 +63,23 @@ const ProductDetails: React.FC = () => {
                 </div>
               </div>
             </div>
-
             <div className="mb-4 text-sm">
               <label className="mb-1 font-semibold">Size:</label>
               <div className="inline-block">
                 <div className="flex space-x-2 ml-2">
                   {size?.map((size, index) => (
-                    <button key={index} className="px-2 py-1 border rounded bg-gray-200">
+                    <button
+                      key={index}
+                      className={`w-[63px] h-[32px] gap-[10px] border rounded bg-gray-200 ${size === 30 ? 'border border-black' : 'border-gray-300'
+                        }`}
+                    >
                       {size}
                     </button>
                   ))}
                 </div>
               </div>
             </div>
+
             <div className="mb-4">
               <label className="mb-1 text-sm font-semibold">Quantity:</label>
               <div className="inline-block">
@@ -87,11 +91,11 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
-              <button className="px-4 py-2 md:px-8 md:py-3 bg-customYellow text-white rounded-full text-sm font-semibold" onClick={() => addToCartHandler(product, quantity)}>Add to cart</button>
-              <button className="px-4 py-2 md:px-8 md:py-3 bg-customYellow text-white rounded-full text-sm font-semibold">Buy it now</button>
-              <div className="rounded-full border bg-gray-300 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center cursor-pointer">
-                <img src={favorite} alt="heart" className='h-5 w-5 md:h-6 md:w-6' />
+            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4 xl:gap-[20px]">
+              <button className="px-4 py-2 md:px-8 md:py-3 xl:w-[243px] xl:h-[70px] bg-customYellow text-white rounded-[32px] xl:text-[20px] font-semibold" onClick={() => addToCartHandler(product, quantity)}>Add to cart</button>
+              <button className="px-4 py-2 md:px-8 md:py-3 xl:w-[243px] xl:h-[70px] bg-customYellow text-white rounded-[32px] xl:text-[20px] font-semibold">Buy it now</button>
+              <div className="rounded-full border bg-gray-300 w-10 h-10 md:w-14 md:h-14 xl:h-[72px] xl:w-[74px] flex items-center justify-center cursor-pointer">
+                <img src={favorite} alt="heart" className='h-5 w-5 md:h-6 md:w-6 xl:h-[36px] xl:w-[36px]' />
               </div>
             </div>
 

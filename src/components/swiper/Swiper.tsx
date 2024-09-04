@@ -7,7 +7,7 @@ const Swiper = () => {
     <>
       <div className="px-4 md:px-8 lg:px-27 py-4">
         <section>
-          <div className="flex flex-col items-center mt-14 lg:flex-row lg:justify-center gap-4">
+          <div className="flex flex-col items-center mt-14 lg:flex-row lg:justify-center xl:gap-[39px] gap-4">
             {lowerSwiperProducts?.map((product, index) => (
               <div key={product?.id} className="relative flex items-center justify-around rounded-xl gap-3 w-full lg:w-96 h-36 border border-cardBorderColor mb-4">
                 {index === 0 && (
