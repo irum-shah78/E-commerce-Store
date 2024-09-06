@@ -11,7 +11,7 @@ const Swiper = () => {
             {lowerSwiperProducts?.map((product, index) => (
               <div key={product?.id} className="relative flex items-center justify-around rounded-xl gap-3 w-full lg:w-96 h-36 border border-cardBorderColor mb-4">
                 {index === 0 && (
-                  <div className="absolute rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0 lg:left-[-40px] lg:top-1/2 lg:transform lg:-translate-y-1/2 lg:translate-x-0"
+                  <div className="absolute rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0 lg:left-[-18px] lg:top-1/2 lg:transform lg:-translate-y-1/2 lg:translate-x-0"
                     onClick={() => swapLowerItems('left')}>
                     <img src={leftArrow} alt="left-arrow" className="w-6 h-6" />
                   </div>
@@ -22,7 +22,7 @@ const Swiper = () => {
                   <p className="text-sm mt-2 text-customBlue">${product?.price}</p>
                 </div>
                 {index === lowerSwiperProducts?.length - 1 && (
-                  <div className="absolute rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg left-1/2 transform -translate-x-1/2 translate-y-1/2 bottom-0 lg:left-auto lg:right-[-60px] lg:top-1/2 lg:transform lg:-translate-y-1/2"
+                  <div className="absolute rounded-full w-8 h-8 text-center p-1 cursor-pointer bg-customArrowBg left-1/2 transform -translate-x-1/2 translate-y-1/2 bottom-0 lg:left-auto lg:right-[-35px] lg:top-1/2 lg:transform lg:-translate-y-1/2"
                     onClick={() => swapLowerItems('right')}>
                     <img src={rightArrow} alt="right-arrow" className="w-6 h-6" />
                   </div>
